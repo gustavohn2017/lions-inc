@@ -1,14 +1,33 @@
-import React from 'react';
+"use client";
+
+import React, { useState } from 'react';
 import NavbarItem from './NavbarItem';
 
 const Navbar = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
-    <nav className="flex justify-between items-center p-4 bg-gray-800 text-white">
+    <nav className="flex flex-wrap justify-between items-center p-4 bg-gray-800 text-white relative">
       <div className="text-xl font-bold">Brand</div>
-      <div className="flex space-x-4">
-        <NavbarItem name="Home" link="/" />
-        <NavbarItem name="About" link="/about" />
-        <NavbarItem name="Contact" link="/contact" />
+      <div className="md:hidden">
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className="text-white hover:text-gray-400 transition duration-300"
+        >
+          {isOpen ? '✕' : '☰'}
+        </button>
+      </div>
+      <div
+        className={`w-full md:w-auto md:flex transition-all duration-300 ease-in-out overflow-hidden ${
+          isOpen ? 'max-h-[500px]' : 'max-h-0'
+        } md:max-h-full`}
+      >
+        <div className="flex flex-col items-center md:flex-row md:space-x-4 space-y-4 md:space-y-0 mt-4 md:mt-0">
+          <NavbarItem name="Home" link="/" />
+          <NavbarItem name="Quem somos" link="/about" />
+          <NavbarItem name="Contato" link="/contact" />
+          <NavbarItem name="Produtos e Serviços" link="/contact" />
+        </div>
       </div>
     </nav>
   );
