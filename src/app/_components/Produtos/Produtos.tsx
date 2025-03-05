@@ -26,33 +26,40 @@ const Produtos = () => {
   };
 
   return (
-    <section className="p-20">
-      <div>
-        <h1>Produtos e Serviços</h1>
+    <section className="p-4 md:p-20 flex flex-col items-center">
+      <div className="text-center">
+        <h1 className="text-2xl font-bold">Produtos e Serviços</h1>
       </div>
 
-      <Tabs defaultValue="Tab1" className="w-[600px]">
-        <TabsList className="grid w-full grid-cols-4">
-          {Object.keys(produtos).map((tab) => (
-            <TabsTrigger key={tab} value={tab}>
-              {tab}
-            </TabsTrigger>
+      <div className="w-full md:w-[600px] mt-8">
+        <Tabs defaultValue="Tab1" className="w-full">
+          <TabsList className="flex justify-center border rounded-md p-2"> {/* Centralização e flex */}
+            {Object.keys(produtos).map((tab) => (
+              <TabsTrigger
+                key={tab}
+                value={tab}
+                className="text-sm md:text-base p-2 rounded-md transition-colors duration-200 hover:bg-gray-100 data-[state=active]:bg-gray-300 mx-2" // Adicionado mx-2 para espaçamento horizontal
+                style={{ minWidth: '120px' }} // Largura mínima das abas
+              >
+                {tab}
+              </TabsTrigger>
+            ))}
+          </TabsList>
+          {Object.entries(produtos).map(([tab, conteudo]) => (
+            <TabsContent key={tab} value={tab}>
+              <div className="p-2 md:p-4">
+                <h2 className="text-lg md:text-xl font-semibold mb-2">{conteudo.titulo}</h2>
+                <p className="text-gray-700 mb-4 text-sm md:text-base">{conteudo.descricao}</p>
+                <ul className="list-disc list-inside text-sm md:text-base">
+                  {conteudo.recursos.map((recurso, index) => (
+                    <li key={index}>{recurso}</li>
+                  ))}
+                </ul>
+              </div>
+            </TabsContent>
           ))}
-        </TabsList>
-        {Object.entries(produtos).map(([tab, conteudo]) => (
-          <TabsContent key={tab} value={tab}>
-            <div className="p-4">
-              <h2 className="text-xl font-semibold mb-2">{conteudo.titulo}</h2>
-              <p className="text-gray-700 mb-4">{conteudo.descricao}</p>
-              <ul className="list-disc list-inside">
-                {conteudo.recursos.map((recurso, index) => (
-                  <li key={index}>{recurso}</li>
-                ))}
-              </ul>
-            </div>
-          </TabsContent>
-        ))}
-      </Tabs>
+        </Tabs>
+      </div>
     </section>
   );
 };
