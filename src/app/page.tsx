@@ -10,7 +10,6 @@ export default function Home() {
       <Hero />
       <Sobre />
       <Produtos/>
-      <div>Conteúdo da página</div>
     </>
   );
 }

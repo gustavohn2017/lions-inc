@@ -54,14 +54,14 @@ const Produtos = () => {
                 </div>
 
                 {/* Card para telas maiores */}
-                <div className="hidden md:block bg-gray-100 rounded-lg shadow-md p-6">
-                    <Tabs defaultValue="Tab1" className="w-full">
-                        <TabsList className="flex justify-center border-b border-gray-200">
+                <div className="hidden md:block bg-gray-100 rounded-lg shadow-md p-6 justify-center"> {/* Adicionado flex justify-center aqui */}
+                    <Tabs defaultValue="Tab1" className="w-full"> {/* Manteve w-full aqui */}
+                        <TabsList className="flex justify-center border-b border-gray-200 w-full"> {/* Adicionado w-full aqui */}
                             {Object.keys(produtos).map((tab) => (
                                 <TabsTrigger
                                     key={tab}
                                     value={tab}
-                                    className="text-sm md:text-base p-2 rounded-t-md transition-colors duration-200 hover:bg-gray-200 data-[state=active]:bg-white mx-2"
+                                    className="text-sm md:text-base px-4 py-2 rounded-t-md transition-colors duration-200 hover:bg-gray-200 data-[state=active]:bg-white mx-2 text-gray-600 hover:text-gray-800 font-semibold"
                                 >
                                     {tab}
                                 </TabsTrigger>
