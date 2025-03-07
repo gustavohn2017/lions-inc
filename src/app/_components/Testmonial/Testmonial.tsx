@@ -19,6 +19,26 @@ const testimonials = [
     media: "https://placehold.co/200x200",
     mediaType: "image",
   },
+
+  {
+    id: 3,
+    name: "Jane Doe",
+    avatar: "https://randomuser.me/api/portraits/women/3.jpg",
+    rating: 5,
+    comment: "Graças à lions, pude realizar meu sonho de uma casa nova, sem burocracias e com as menores taxas no mercado.",
+    media: "https://placehold.co/200x200",
+    mediaType: "image",
+  },
+
+  {
+    id: 4,
+    name: "André Alves",
+    avatar: "https://randomuser.me/api/portraits/men/4.jpg",
+    rating: 5,
+    comment: "Com a lions, consegui comprar meu carro novo sem dor de cabeça. Recomendo!",
+    media: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+    mediaType: "video",
+  },
 ];
 
 const Testimonial: React.FC = () => {
