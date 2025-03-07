@@ -3,6 +3,7 @@ import Navbar from './_components/Navbar/Navbar';
 import Sobre from './_components/Sobre/Sobre';
 import Produtos from './_components/Produtos/Produtos';
 import Testmonial from './_components/Testmonial/Testmonial';
+import Footer from './_components/Footer/Footer';
 
 export default function Home() {
   return (
@@ -12,6 +13,7 @@ export default function Home() {
       <Sobre />
       <Produtos/>
       <Testmonial/>
+      <Footer/>
     </>
 
     
