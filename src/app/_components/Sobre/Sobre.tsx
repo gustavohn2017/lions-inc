@@ -14,7 +14,7 @@ const Sobre = () => {
       <img
         src='https://placehold.co/280x300'
         alt='Placeholder'
-        className='mt-4 md:mt-0 md:ml-4 rounded-lg shadow-lg w-full md:w-auto'
+        className='mt-4 md:mt-0 md:ml-4 rounded-lg shadow-lg w-full md:w-auto rover:scale-110 duration-300 '
       />
     </section>
   );

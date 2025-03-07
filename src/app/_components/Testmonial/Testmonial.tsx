@@ -1,132 +1,89 @@
-'use client';
+import React from "react";
 
-import Image from 'next/image';
-import { useState } from 'react';
+const testimonials = [
+  {
+    id: 1,
+    name: "João Silva",
+    avatar: "https://randomuser.me/api/portraits/men/1.jpg",
+    rating: 5,
+    comment: "lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. ",
+    media: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+    mediaType: "video",
+  },
+  {
+    id: 2,
+    name: "Maria Souza",
+    avatar: "https://randomuser.me/api/portraits/women/2.jpg",
+    rating: 4,
+    comment: "Atendimento rápido e eficiente. Recomendo!",
+    media: "https://placehold.co/200x200",
+    mediaType: "image",
+  },
+];
 
-const Testimonial = () => {
-  const [testimonials] = useState([
-    {
-      id: 1,
-      name: 'Maria Silva',
-      avatarUrl: '/avatar1.png', // Substitua pelo caminho da sua imagem ou URL
-      rating: 5,
-      comment:
-        'Excelente serviço! A equipe foi muito atenciosa e o produto superou minhas expectativas. Recomendo a todos!',
-      mediaType: 'image',
-      mediaUrl: '/product1.png', // Substitua pelo caminho da sua imagem ou URL
-    },
-    {
-      id: 2,
-      name: 'João Pedro',
-      avatarUrl: '/avatar2.png', // Substitua pelo caminho da sua imagem ou URL
-      rating: 4,
-      comment:
-        'Gostei bastante! O processo de compra foi fácil e a entrega rápida. Apenas alguns detalhes poderiam ser melhorados.',
-      mediaType: 'video',
-      mediaUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ', // Substitua pelo link do seu vídeo
-    },
-    {
-      id: 3,
-      name: 'Ana Clara',
-      avatarUrl: '/avatar3.png', // Substitua pelo caminho da sua imagem ou URL
-      rating: 5,
-      comment:
-        'Incrível! Produto de alta qualidade e atendimento impecável. Com certeza voltarei a comprar.',
-      mediaType: 'image',
-      mediaUrl: '/product2.png', // Substitua pelo caminho da sua imagem ou URL
-    },
-    {
-      id: 4,
-      name: 'Ricardo Souza',
-      avatarUrl: '/avatar4.png', // Substitua pelo caminho da sua imagem ou URL
-      rating: 3,
-      comment:
-        'Bom serviço, mas um pouco demorado. O produto é bom, mas esperava mais pela demora na entrega.',
-      mediaType: 'none', // Sem mídia
-      mediaUrl: '',
-    },
-  ]);
-
-  const renderRatingStars = (rating: number) => {
-    const stars = [];
-    for (let i = 0; i < 5; i++) {
-      if (i < rating) {
-        stars.push(<span key={i}>&#9733;</span>); // Estrela preenchida
-      } else {
-        stars.push(<span key={i}>&#9734;</span>); // Estrela vazia
-      }
-    }
-    return <div className="text-yellow-500">{stars}</div>;
-  };
-
-  const renderMedia = (testimonial: { mediaType: string; mediaUrl: string; name: string }) => {
-    if (testimonial.mediaType === 'image' && testimonial.mediaUrl) {
-      return (
-        <Image
-          src={testimonial.mediaUrl}
-          alt={`Imagem do produto de ${testimonial.name}`}
-          width={500}
-          height={300}
-          className="rounded-md object-cover w-full h-48"
-        />
-      );
-    } else if (testimonial.mediaType === 'video' && testimonial.mediaUrl) {
-      return (
-        <iframe
-          src={testimonial.mediaUrl}
-          title={`Vídeo depoimento de ${testimonial.name}`}
-          className="w-full h-48 rounded-md"
-          allowFullScreen
-        ></iframe>
-      );
-    }
-    return null;
-  };
-
+const Testimonial: React.FC = () => {
   return (
-    <div className="bg-gray-100 py-12">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl font-extrabold text-gray-900 text-center mb-8">
-          Depoimentos de Clientes
+    <section className="py-12 bg-gray-100">
+      <div className="max-w-6xl mx-auto px-4">
+        <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">
+          O que nossos clientes dizem
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {testimonials.map((testimonial) => (
             <div
               key={testimonial.id}
-              className="bg-white rounded-lg shadow-md overflow-hidden flex flex-col justify-between"
+              className="bg-white p-6 rounded-lg shadow-md flex flex-col items-center w-full h-auto"
             >
-              <div className="p-6">
-                <div className="flex items-center mb-4">
-                  <div className="mr-4">
-                    <Image
-                      src={testimonial.avatarUrl}
-                      alt={`Avatar de ${testimonial.name}`}
-                      width={48}
-                      height={48}
-                      className="rounded-full"
-                    />
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-semibold text-gray-800">
-                      {testimonial.name}
-                    </h3>
-                    <div className="text-sm text-gray-500">
-                      {renderRatingStars(testimonial.rating)}
-                    </div>
-                  </div>
+              {/* Avatar e Nome */}
+              <div className="flex flex-col items-center text-center">
+                <img
+                  src={testimonial.avatar}
+                  alt={testimonial.name}
+                  className="w-16 h-16 rounded-full mb-4"
+                />
+                <h3 className="text-lg font-semibold">{testimonial.name}</h3>
+                <div className="flex my-2">
+                  {Array.from({ length: 5 }).map((_, index) => (
+                    <span
+                      key={index}
+                      className={`text-yellow-500 text-xl ${
+                        index < testimonial.rating ? "opacity-100" : "opacity-30"
+                      }`}
+                    >
+                      ★
+                    </span>
+                  ))}
                 </div>
-                <p className="text-gray-700 mb-4">{testimonial.comment}</p>
+                <p className="text-gray-600 text-center">
+                  {testimonial.comment}
+                </p>
               </div>
-              {testimonial.mediaType !== 'none' && (
-                <div className="p-6 border-t border-gray-200">
-                  {renderMedia(testimonial)}
-                </div>
-              )}
+
+              {/* Linha Divisória */}
+              <div className="w-full border-t border-gray-300 my-4"></div>
+
+              {/* Área de Mídia */}
+              <div className="w-full flex justify-center">
+                {testimonial.mediaType === "video" ? (
+                  <iframe
+                    className="w-full h-40 rounded-lg"
+                    src={testimonial.media}
+                    title="Vídeo do depoimento"
+                    allowFullScreen
+                  ></iframe>
+                ) : (
+                  <img
+                    className="w-full h-40 rounded-lg object-cover"
+                    src={testimonial.media}
+                    alt="Imagem do depoimento"
+                  />
+                )}
+              </div>
             </div>
           ))}
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
