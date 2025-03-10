@@ -30,7 +30,7 @@ const Navbar = () => {
         <NavbarItem name="Home" link="/" />
         <NavbarItem name="Quem somos" link="/about" />
         <NavbarItem name="Contato" link="/contact" />
-        <NavbarItem name="Produtos e Serviços" link="/contact" />
+        <NavbarItem name="Produtos e Serviços" link="/produtos" />
       </div>
       </div>
     </nav>
