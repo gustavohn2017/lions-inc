@@ -5,7 +5,7 @@ const Footer = () => {
     <footer className="bg-gray-900 text-white py-6">
       <div className="container mx-auto flex flex-col items-center justify-between md:flex-row px-6">
         {/* Texto do Rodapé */}
-        <p className="text-sm text-gray-400">&copy; Copyright © 2022 - Lions Corporation Incorporadora e Serviços. | Todos os direitos reservados.</p>
+        <p className="text-sm text-gray-400">&copy; Copyright © 2022 - Lions - Incorporadora e Serviços. | Todos os direitos reservados.</p>
     
         {/* Ícones das redes sociais */}
         <div className="flex space-x-6 mt-4 md:mt-0">
