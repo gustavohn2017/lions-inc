@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { FaCheckSquare } from 'react-icons/fa';
 
 type Produto = {
     titulo: string;
@@ -64,7 +65,7 @@ const Produtos = () => {
                 </div>
 
                 <div className="hidden md:block justify-center w-full">
-                    <Tabs defaultValue="Tab1" className="w-full">
+                    <Tabs defaultValue="Tab1" className="w-full transition-all duration-500 ease-in-out">
                         <TabsList className="relative flex w-full p-1 rounded-xl bg-zinc-800 shadow-md">
                             {Object.keys(produtos).map((tab) => (
                                 <TabsTrigger
@@ -78,14 +79,21 @@ const Produtos = () => {
                         </TabsList>
                         {Object.entries(produtos).map(([tab, conteudo]) => (
                             <TabsContent key={tab} value={tab} className="mt-4 p-6">
-                                <div className="p-2 md:p-4">
-                                    <h2 className="text-xl font-semibold mb-2 text-white">{conteudo.titulo}</h2>
-                                    <p className="text-white mb-4 text-sm md:text-base">{conteudo.descricao}</p>
-                                    <ul className="list-disc list-inside text-sm md:text-base text-white">
-                                        {conteudo.recursos.map((recurso, index) => (
-                                            <li key={index}>{recurso}</li>
-                                        ))}
-                                    </ul>
+                                <div className="p-2 md:p-4 bg-zinc-600 rounded-md flex flex-col md:flex-row">
+                                    <div className="md:w-2/3">
+                                        <h1 className="text-xl font-bold mb-2 text-center text-white">{conteudo.titulo}</h1>
+                                        <p className="text-white mb-4 text-sm md:text-base">{conteudo.descricao}</p>
+                                        <ul className="list-none text-sm md:text-base text-white">
+                                            {conteudo.recursos.map((recurso, index) => (
+                                                <li key={index} className="flex items-center">
+                                                    <FaCheckSquare className="mr-2" /> {recurso}
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                    <div className="md:w-1/3 mt-4 md:mt-0 md:ml-4 flex justify-center">
+                                        <img src="https://placehold.co/300x300" alt={conteudo.titulo} className="rounded-md max-w-full h-auto" />
+                                    </div>
                                 </div>
                             </TabsContent>
                         ))}
@@ -105,6 +113,9 @@ const Produtos = () => {
                                             <li key={index}>{recurso}</li>
                                         ))}
                                     </ul>
+                                    <div className="mt-4 flex justify-center">
+                                        <img src="https://placehold.co/300x300" alt={conteudo.titulo} className="rounded-md max-w-full h-auto" />
+                                    </div>
                                 </div>
                             )
                         ))}
