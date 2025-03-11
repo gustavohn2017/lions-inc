@@ -18,23 +18,23 @@ const Produtos = () => {
     const produtos: ProdutosType = {
         Tab1: {
             titulo: "Consórcios",
-            descricao: "Consórcios são uma forma de adquirir bens ou serviços por meio de autofinanciamento coletivo.",
-            recursos: ["Planejamento financeiro", "Sem juros", "Diversas opções de crédito"],
+            descricao: "Consórcios são uma forma de adquirir bens ou serviços por meio de uma compra coletiva planejada.",
+            recursos: ["Planejamento financeiro", "Sem juros", "Diversas opções de bens"],
         },
         Tab2: {
             titulo: "Financiamentos",
             descricao: "Financiamentos são empréstimos concedidos para a aquisição de bens ou serviços, com pagamento parcelado.",
-            recursos: ["Taxas competitivas", "Prazos flexíveis", "Aprovação rápida"],
+            recursos: ["Taxas de juros competitivas", "Prazos flexíveis", "Facilidade de aprovação"],
         },
         Tab3: {
-            titulo: "Capital de Giro",
-            descricao: "Capital de giro para empresas é o recurso necessário para financiar as operações diárias de um negócio.",
-            recursos: ["Melhora do fluxo de caixa", "Facilidade de acesso", "Condições personalizadas"],
+            titulo: "Capital de Giro para Empresas",
+            descricao: "Capital de giro é o recurso necessário para manter as operações diárias de uma empresa.",
+            recursos: ["Manutenção de estoque", "Pagamento de fornecedores", "Gestão de fluxo de caixa"],
         },
         Tab4: {
-            titulo: "Consultoria Financeira",
-            descricao: "Consultoria financeira empresarial oferece orientação especializada para a gestão financeira do seu negócio.",
-            recursos: ["Análise de mercado", "Planejamento estratégico", "Apoio na tomada de decisões"],
+            titulo: "Consultoria Financeira Empresarial",
+            descricao: "Consultoria financeira empresarial oferece orientação especializada para a gestão financeira de empresas.",
+            recursos: ["Análise financeira", "Planejamento estratégico", "Redução de custos"],
         },
     };
 
@@ -56,7 +56,7 @@ const Produtos = () => {
                         <SelectContent className="bg-white border rounded-md">
                             {Object.keys(produtos).map((tab) => (
                                 <SelectItem key={tab} value={tab} className="flex justify-center">
-                                    {produtos[tab].titulo}
+                                    {tab}
                                 </SelectItem>
                             ))}
                         </SelectContent>
