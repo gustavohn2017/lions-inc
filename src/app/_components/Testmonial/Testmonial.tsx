@@ -83,7 +83,7 @@ const Testimonial: React.FC = () => {
               <div className="w-full border-t border-gray-300 my-4"></div>
 
               {/* Área de Mídia */}
-              <div className="w-full flex justify-center mt-auto">
+              <div className="w-full flex justify-center">
                 {testimonial.mediaType === "video" ? (
                   <iframe
                     className="w-full h-40 rounded-lg"
