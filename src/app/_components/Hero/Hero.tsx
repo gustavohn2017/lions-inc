@@ -54,6 +54,8 @@ export function Hero() {
               sizes='(max-width: 768px) 0vw, 50vw (max-width: 1023px) 50vw, 25vw'
             />
           </div>
+
+          
         </article>
       </div>
     </section>
