@@ -14,7 +14,7 @@ export function Hero() {
           alt="Logo"
           width={100}
           height={100}
-          className="absolute opacity-30 h-full w-full object-contain"
+          className="absolute opacity-25 h-full w-full object-contain"
           />
       </div>
 
