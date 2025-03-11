@@ -8,7 +8,7 @@ export function Hero() {
   return (
     <section className="relative bg-[#000000] text-white pb-20 md:pb-0 mb-6 overflow-hidden h-[20%]">
 
-      <div className="container justify-center flex h-full">
+      <div className="container md:hidden justify-center flex h-full">
         <Image
           src={LC}
           alt="Logo"
