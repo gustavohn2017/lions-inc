@@ -7,6 +7,18 @@ import LC from '../../../../public/assets/LC.png';
 export function Hero() {
   return (
     <section className="relative bg-[#000000] text-white pb-20 md:pb-0 mb-6 overflow-hidden h-[20%]">
+
+      <div className="container justify-center flex h-full">
+        <Image
+          src={LC}
+          alt="Logo"
+          width={100}
+          height={100}
+          className="absolute opacity-30 h-full w-full object-contain"
+          />
+      </div>
+
+
       <div className="container mx-auto pt-4 pb-4 relative z-10 flex flex-col md:flex-row items-center h-full px-4">
         {/* Conteúdo do lado esquerdo */}
         <article className="w-full md:w-1/2 relative p-[9px]">
