@@ -18,7 +18,6 @@ export function Hero() {
           />
       </div>
 
-
       <div className="container mx-auto pt-4 pb-4 relative z-10 flex flex-col md:flex-row items-center h-full px-4">
         {/* Conteúdo do lado esquerdo */}
         <article className="w-full md:w-1/2 relative p-[9px]">
@@ -51,11 +50,10 @@ export function Hero() {
               alt="Imagem de exemplo"
               className="object-contain w-full h-full opacity-30 md:opacity-100"
               width={250} // Reduzindo a largura da imagem              
-              sizes='(max-width: 768px) 0vw, 50vw (max-width: 1023px) 50vw, 25vw'
+              sizes='(max-width: 768px) 50vw, (max-width: 1023px) 50vw, 25vw'
+              style={{ objectFit: 'contain' }} // Adicionando object-fit: contain
             />
           </div>
-
-          
         </article>
       </div>
     </section>
