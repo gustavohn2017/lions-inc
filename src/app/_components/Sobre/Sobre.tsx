@@ -4,7 +4,7 @@ import SobreImage from '../../../../public/assets/todo preto2.png';
 
 const Sobre = () => {
   return (
-    <section className='mb-8 p-6 md:p-12 mx-4 md:mx-20 bg-white bg-opacity-30 backdrop-filter backdrop-blur-lg rounded-lg shadow-lg flex flex-col md:flex-row'>
+    <section className='mb-8 p-6 md:p-12 mx-4 md:mx-20 bg-[#858585] bg-opacity-30 backdrop-filter backdrop-blur-lg rounded-lg shadow-lg flex flex-col md:flex-row'>
       <div className='flex-1 justify-items-center'>
         <h1 className='text-2xl font-bold mb-4 p-3'>
           Sobre a Lions
@@ -15,10 +15,10 @@ const Sobre = () => {
           Nossos Valores estão atrelados a condutas profissionais como ética, transparência, comprometimento, segurança, relacionamentos benéficos, responsabilidade e parceria.
         </div>
       </div>
-      <div className='flex-1 flex justify-center items-center'>
+      <div className='flex-1 flex justify-end items-center'>
         <Image
           src={SobreImage}
-          alt='Placeholder'
+          alt='LogoLions'
           width={500} // Adjust the width as needed
           height={500} // Adjust the height as needed
           className='w-1/2 h-auto rounded-lg'
