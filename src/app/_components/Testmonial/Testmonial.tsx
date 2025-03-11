@@ -43,7 +43,7 @@ const testimonials = [
 
 const Testimonial: React.FC = () => {
   return (
-    <section className="py-12 bg-gray-100">
+    <section className="py-12 bg-[#c2c2c2]">
       <div className="max-w-6xl mx-auto px-4">
         <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">
           O que nossos clientes dizem
@@ -52,7 +52,7 @@ const Testimonial: React.FC = () => {
           {testimonials.map((testimonial) => (
             <div
               key={testimonial.id}
-              className="bg-white p-6 rounded-lg shadow-md flex flex-col items-center w-full h-auto"
+              className="bg-white p-6 rounded-lg shadow-md flex flex-col justify-between items-center w-full h-auto"
             >
               {/* Avatar e Nome */}
               <div className="flex flex-col items-center text-center">
@@ -83,7 +83,7 @@ const Testimonial: React.FC = () => {
               <div className="w-full border-t border-gray-300 my-4"></div>
 
               {/* Área de Mídia */}
-              <div className="w-full flex justify-center">
+              <div className="w-full flex justify-center mt-auto">
                 {testimonial.mediaType === "video" ? (
                   <iframe
                     className="w-full h-40 rounded-lg"

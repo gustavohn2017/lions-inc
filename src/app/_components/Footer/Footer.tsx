@@ -2,7 +2,7 @@ import { Facebook, Instagram, Linkedin, Youtube } from "lucide-react";
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-900 text-white py-6">
+    <footer className="bg-[#333] text-white py-6">
       <div className="container mx-auto flex flex-col items-center justify-between md:flex-row px-6">
         {/* Texto do Rodapé */}
         <p className="text-sm text-gray-400">© 2022 - Lions - Incorporadora e Serviços. | Todos os direitos reservados.</p>

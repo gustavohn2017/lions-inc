@@ -9,7 +9,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="flex flex-wrap justify-between items-center p-4 bg-gray-800 text-white relative">
+    <nav className="flex flex-wrap justify-between items-center p-4 bg-[#333] text-white relative">
       <div className="flex items-center">
       <Image src={branco} alt="logo Lions" className="h-8 w-fit" />
       </div>

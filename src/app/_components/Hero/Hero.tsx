@@ -49,9 +49,9 @@ export function Hero() {
               src={LC}
               alt="Imagem de exemplo"
               className="object-contain w-full h-full opacity-30 md:opacity-100"
-              width={250} // Reduzindo a largura da imagem              
+              width={250}         
               sizes='(max-width: 768px) 50vw, (max-width: 1023px) 50vw, 25vw'
-              style={{ objectFit: 'contain' }} // Adicionando object-fit: contain
+              style={{ objectFit: 'contain' }}
             />
           </div>
         </article>
