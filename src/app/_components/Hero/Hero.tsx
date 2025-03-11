@@ -6,7 +6,7 @@ import LC from '../../../../public/assets/LC.png';
 
 export function Hero() {
   return (
-    <section className="relative bg-[#000000] text-white pb-20 md:pb-0 mb-6 overflow-hidden">
+    <section className="relative bg-[#000000] text-white pb-20 md:pb-0 mb-6 overflow-hidden h-[20%]">
       <div className="container mx-auto pt-4 pb-4 relative z-10 flex flex-col md:flex-row items-center h-full px-4">
         {/* Conteúdo do lado esquerdo */}
         <article className="w-full md:w-1/2 relative p-[9px]">
@@ -32,15 +32,14 @@ export function Hero() {
         </article>
 
         {/* Imagem do lado direito (reduzida) */}
-        <article className="w-full md:w-1/2 relative p-[9px] flex justify-end">
-          <div className="relative w-[50%] h-auto">
+        <article className="w-[50%] relative p-[9px] flex justify-end">
+          <div className="hidden md:block container relative w-[50%] h-auto">
             <Image
               src={LC}
               alt="Imagem de exemplo"
               className="object-contain w-full h-full opacity-30 md:opacity-100"
-              layout="responsive"
-              width={250} // Reduzindo a largura da imagem
-              height={250} // Reduzindo a altura da imagem
+              width={250} // Reduzindo a largura da imagem              
+              sizes='(max-width: 768px) 0vw, 50vw (max-width: 1023px) 50vw, 25vw'
             />
           </div>
         </article>
