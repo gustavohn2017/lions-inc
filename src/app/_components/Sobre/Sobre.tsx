@@ -4,7 +4,7 @@ import SobreImage from '../../../../public/assets/todo preto2.png';
 
 const Sobre = () => {
   return (
-    <section className='mb-8 p-6 md:p-12 mx-4 md:mx-20 bg-[#c2c2c2] bg-opacity-30 backdrop-filter backdrop-blur-lg rounded-lg shadow-lg flex flex-col md:flex-row'>
+    <section className='p-12 bg-[#c2c2c2] bg-opacity-30 backdrop-filter backdrop-blur-lg rounded-lg shadow-lg flex flex-col md:flex-row'>
       <div className='flex-1 justify-items-center'>
         <h1 className='text-4xl font-bold mb-4 p-3'>
           Sobre a Lions
