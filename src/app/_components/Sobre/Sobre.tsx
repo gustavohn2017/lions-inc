@@ -15,22 +15,22 @@ const Sobre = () => {
           Nossos Valores estão atrelados a condutas profissionais como ética, transparência, comprometimento, segurança, relacionamentos benéficos, responsabilidade e parceria.
         </div>
       </div>
-      <div className='flex-1 flex justify-center md:hidden'>
+      <div className='flex-1 flex justify-center md:hidden mt-6 w-[50%]'>
         <Image
           src={SobreImage}
           alt='LogoLions'
-          width={500}
-          height={500}
-          className='w-full h-auto max-w-xs sm:max-w-sm md:max-w-md rounded-lg'
+          width={400}
+          height={400}
+          className='h-auto max-w-xs sm:max-w-sm md:max-w-md w-[50%] '
         />
       </div>
-      <div className='flex-1 hidden md:flex justify-center'>
+      <div className='flex-1 hidden md:flex justify-center mt-6 md:mt-0 md:pl-12 w-[50%]'>
         <Image
           src={SobreImage}
           alt='LogoLions'
-          width={500}
-          height={500}
-          className='w-full h-auto max-w-xs sm:max-w-sm md:max-w-md rounded-lg'
+          width={400}
+          height={400}
+          className='h-auto max-w-xs sm:max-w-sm md:max-w-md w-[50%]'
         />
       </div>
     </section>
