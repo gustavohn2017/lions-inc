@@ -42,9 +42,9 @@ const Produtos = () => {
     const [selectedTab, setSelectedTab] = useState("Tab1");
 
     return (
-        <section className="p-4 md:p-10 flex flex-col items-center w-screen bg-[#333]">
+        <section className="p-4 md:p-10 flex flex-col items-center w-full bg-[#333]">
             <div className="text-center">
-                <h1 className="text-2xl font-bold text-white">Produtos e Serviços</h1>
+                <h1 className="text-3xl font-bold text-white">Produtos e Serviços</h1>
             </div>
 
             <div className="w-full mt-8">
@@ -71,7 +71,7 @@ const Produtos = () => {
                                 <TabsTrigger
                                     key={tab}
                                     value={tab}
-                                    className="relative w-full h-10 rounded-md text-sm font-medium whitespace-nowrap transition-all focus-visible:relative focus-visible:z-10 data-[state=active]:bg-zinc-700 data-[state=active]:text-white text-white hover:text-white"
+                                    className="relative w-full h-12 rounded-md text-lg font-medium whitespace-nowrap transition-all focus-visible:relative focus-visible:z-10 data-[state=active]:bg-zinc-700 data-[state=active]:text-white text-white hover:text-white text-center flex items-center justify-center"
                                 >
                                     {produtos[tab].titulo}
                                 </TabsTrigger>
@@ -81,9 +81,9 @@ const Produtos = () => {
                             <TabsContent key={tab} value={tab} className="mt-4 p-6">
                                 <div className="p-2 md:p-4 bg-zinc-600 rounded-md flex flex-col md:flex-row">
                                     <div className="md:w-2/3">
-                                        <h1 className="text-xl font-bold mb-2 text-center text-white">{conteudo.titulo}</h1>
-                                        <p className="text-white mb-4 text-sm md:text-base text-justify">{conteudo.descricao}</p>
-                                        <ul className="list-none text-sm md:text-base text-white">
+                                        <h1 className="text-2xl font-bold mb-2 text-center text-white">{conteudo.titulo}</h1>
+                                        <p className="text-white mb-4 text-lg md:text-xl">{conteudo.descricao}</p>
+                                        <ul className="list-none text-lg md:text-xl text-white">
                                             {conteudo.recursos.map((recurso, index) => (
                                                 <li key={index} className="flex items-center">
                                                     <FaCheckSquare className="mr-2" /> {recurso}
@@ -92,7 +92,7 @@ const Produtos = () => {
                                         </ul>
                                     </div>
                                     <div className="md:w-1/3 mt-4 md:mt-0 md:ml-4 flex justify-center">
-                                        <img src="https://placehold.co/300x300" alt={conteudo.titulo} className="rounded-md max-w-full h-auto" />
+                                        <img src="https://placehold.co/300x300" alt={conteudo.titulo} className="rounded-md max-w-full h-auto object-cover" />
                                     </div>
                                 </div>
                             </TabsContent>
@@ -102,19 +102,21 @@ const Produtos = () => {
 
                 {/* Lista para dispositivos mobile. */}
                 <div className="md:hidden flex justify-center">
-                    <div className="w-full">
+                    <div className="w-full flex">
                         {Object.entries(produtos).map(([tab, conteudo]) => (
                             selectedTab === tab && (
-                                <div key={tab} className="p-6 mt-4">
-                                    <h2 className="text-xl font-semibold mb-2 text-center text-white">{conteudo.titulo}</h2>
-                                    <p className="text-white mb-4 text-sm md:text-base text-justify">{conteudo.descricao}</p>
-                                    <ul className="list-disc list-inside text-sm md:text-base text-white">
+                                <div key={tab} className="p-6 mt-4 justify-center pb-6 pt-6">
+                                    <h2 className="text-2xl font-semibold mb-2 text-center text-white">{conteudo.titulo}</h2>
+                                    <p className="text-white mb-4 text-lg md:text-xl">{conteudo.descricao}</p>
+                                    <ul className="list-none text-lg md:text-xl text-white">
                                         {conteudo.recursos.map((recurso, index) => (
-                                            <li key={index}>{recurso}</li>
+                                            <li key={index} className="flex items-center">
+                                                <FaCheckSquare className="mr-2" /> {recurso}
+                                            </li>
                                         ))}
                                     </ul>
                                     <div className="mt-4 flex justify-center">
-                                        <img src="https://placehold.co/300x300" alt={conteudo.titulo} className="rounded-md max-w-full h-auto" />
+                                        <img src="https://placehold.co/300x300" alt={conteudo.titulo} className="rounded-2xl mt-6 max-w-full h-auto object-contain" />
                                     </div>
                                 </div>
                             )
