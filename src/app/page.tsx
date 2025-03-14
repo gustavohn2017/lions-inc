@@ -5,6 +5,7 @@ import Produtos from './_components/Produtos/Produtos';
 import Testmonial from './_components/Testmonial/Testmonial';
 import ProductSection from './_components/ProductSection/ProductSection';
 import Footer from './_components/Footer/Footer';
+import Contato from './_components/Contato/Contato';
 
 export default function Home() {
   return (
@@ -15,6 +16,7 @@ export default function Home() {
       <Produtos/>
       <ProductSection/>
       <Testmonial/>
+      <Contato/>
       <Footer/>
     </>
 

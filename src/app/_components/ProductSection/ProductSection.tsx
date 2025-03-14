@@ -103,7 +103,7 @@ const ProductsSection = () => {
       <div className="container mx-auto px-4">
         <div className="container text-center">
             <h2 className="text-3xl font-bold  mb-12">Encontre a solução certa para você!</h2>
-            <p></p>
+            <p>Caso manter essa sessão, vou diminuir o espaço a ser consumido no dispositivo do usuário final ()</p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {products.map((product) => (
