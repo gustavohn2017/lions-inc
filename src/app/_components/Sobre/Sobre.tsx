@@ -26,19 +26,19 @@ const Sobre: React.FC = () => {
     {
       id: 'who',
       title: "Quem Somos",
-      content: "Somos uma empresa inovadora fundada em 2010, dedicada a fornecer soluções de alta qualidade para nossos clientes. Com uma equipe de profissionais qualificados e experientes, construímos uma reputação sólida baseada na excelência, integridade e comprometimento com resultados excepcionais em todos os projetos que realizamos.",
+      content: "A lions, fundada em 2022, lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet.",
       icon: <FaUsers className="text-5xl text-[#DAA520]" />
     },
     {
       id: 'vision',
       title: "Nossa Visão",
-      content: "Ser reconhecida como referência de excelência em nosso setor, promovendo inovação e soluções sustentáveis que impactam positivamente a sociedade e estabelecem novos padrões no mercado. Buscamos constantemente antecipar tendências e desenvolver tecnologias que transformam desafios em oportunidades.",
+      content: "Ser reconhecida como referência de excelência na prestação de serviços financeiros, com foco na satisfação do cliente e na geração de valor para a sociedade.",
       icon: <FaLightbulb className="text-5xl text-[#DAA520]" />
     },
     {
       id: 'mission',
       title: "Nossa Missão",
-      content: "Oferecer produtos e serviços de alta qualidade que atendam às necessidades de nossos clientes, enquanto mantemos um compromisso inabalável com a ética nos negócios, responsabilidade social e desenvolvimento sustentável em todas as nossas operações.",
+      content: "Oferecer serviços com a maior qualidade e atenção ao cliente, garantindo a satisfação de suas necessidades e expectativas. ",
       icon: <FaBullseye className="text-5xl text-[#DAA520]" />
     }
   ];
