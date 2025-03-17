@@ -83,7 +83,7 @@ const Sobre: React.FC = () => {
         animate="visible"
       >
         <h2 className="text-3xl md:text-4xl text-[#DAA520] font-bold text-center mb-12">
-          Conheça Nossa Empresa
+          Sobre a Lions Bank
         </h2>
         
         {isMobile ? (

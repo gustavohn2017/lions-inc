@@ -3,7 +3,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 import Image from 'next/image';
-import LC from '../../../../public/assets/LC.png';
+import LC from '../../../../public/assets/logo_lions_bank.png';
 import './hero-animations.css';
 
 export function Hero() {
