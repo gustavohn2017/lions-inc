@@ -40,7 +40,7 @@ const Contato: React.FC = () => {
                     </div>
                     <div className="flex items-center justify-between">
                         <button
-                            className="bg-[#cfcfcf] hover:bg-[#b1f1c3] hover:text- text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                            className="bg-gray-800 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                             type="submit"
                         >
                             Enviar

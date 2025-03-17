@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { FaCheckSquare } from 'react-icons/fa';
+import { motion } from 'framer-motion';
 
 type Produto = {
     titulo: string;
@@ -41,91 +42,130 @@ const Produtos = () => {
 
     const [selectedTab, setSelectedTab] = useState("Tab1");
 
+    const tabVariants = {
+        hidden: { opacity: 0, y: 20 },
+        visible: {
+            opacity: 1,
+            y: 0,
+            transition: { duration: 0.6, ease: 'easeOut' }
+        }
+    };
+
     return (
-        <section className="p-4 md:p-10 flex flex-col items-center w-full bg-[#333]">
-            <div className="text-center">
-                <h1 className="text-3xl font-bold text-white">Produtos e Serviços</h1>
-            </div>
+        <section className="w-full py-16 bg-[#1E2124] flex flex-col items-center">
+            <div className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 className="text-4xl md:text-5xl font-bold text-[#DAA520] mb-12 text-center">{/* Golden title */}
+                    Produtos e Serviços
+                </h2>
 
-            <div className="w-full mt-8">
-                {/* Dropdown para telas menores */}
-                <div className="md:hidden flex justify-center">
-                    <Select value={selectedTab} onValueChange={setSelectedTab}>
-                        <SelectTrigger className="w-full bg-white border rounded-md text-center">
-                            <SelectValue placeholder="Selecione um produto/serviço" />
-                        </SelectTrigger>
-                        <SelectContent className="bg-white border rounded-md">
+                <div className="w-full mt-8">
+                    {/* Dropdown para telas menores */}
+                    <div className="md:hidden flex justify-center">
+                        <Select value={selectedTab} onValueChange={setSelectedTab}>
+                            <SelectTrigger className="w-full bg-[#242729] border-[#2C3033] text-[#DAA520] rounded-lg border shadow-lg">
+                                <SelectValue placeholder="Selecione um produto/serviço" />
+                            </SelectTrigger>
+                            <SelectContent className="bg-[#242729] border-[#2C3033] text-[#DAA520] rounded-lg">
+                                {Object.entries(produtos).map(([tab, conteudo]) => (
+                                    <SelectItem key={tab} value={tab} className="focus:bg-[#2C3033] hover:bg-[#2C3033] text-[#DAA520]">
+                                        {conteudo.titulo}
+                                    </SelectItem>
+                                ))}
+                            </SelectContent>
+                        </Select>
+                    </div>
+
+                    <div className="hidden md:block justify-center w-full">
+                        <Tabs defaultValue="Tab1" className="w-full transition-all duration-500 ease-in-out">
+                            <TabsList className="relative flex w-full p-1 rounded-xl bg-[#242729] shadow-xl overflow-hidden">
+                                {Object.keys(produtos).map((tab) => (
+                                    <TabsTrigger
+                                        key={tab}
+                                        value={tab}
+                                        className="relative w-full h-14 rounded-md text-lg font-medium whitespace-nowrap transition-all focus-visible:relative focus-visible:z-10 
+                                        data-[state=active]:bg-[#2C3033] data-[state=active]:text-[#DAA520] text-[#A0A0A0] hover:text-[#DAA520] text-center flex items-center justify-center group"
+                                    >
+                                        <span className="relative z-10">{produtos[tab].titulo}</span>
+                                        <span className="absolute bottom-0 left-0 w-full h-1 bg-[#DAA520] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
+                                        <span className="absolute bottom-0 left-0 w-full h-1 bg-[#DAA520] data-[state=active]:block hidden"></span>
+                                    </TabsTrigger>
+                                ))}
+                            </TabsList>
                             {Object.entries(produtos).map(([tab, conteudo]) => (
-                                <SelectItem key={tab} value={tab} className="flex justify-center">
-                                    {conteudo.titulo}
-                                </SelectItem>
+                                <TabsContent key={tab} value={tab} className="mt-6">
+                                    <motion.div
+                                        initial="hidden"
+                                        animate="visible"
+                                        variants={tabVariants}
+                                        className="p-6 md:p-8 bg-[#242729] rounded-xl shadow-2xl flex flex-col md:flex-row"
+                                    >
+                                        <div className="md:w-2/3">
+                                            <h3 className="text-2xl md:text-3xl font-semibold mb-6 text-[#DAA520] border-l-4 border-[#DAA520] pl-4">
+                                                {conteudo.titulo}
+                                            </h3>
+                                            <p className="text-[#A0A0A0] mb-6 text-lg leading-relaxed">
+                                                {conteudo.descricao}
+                                            </p>
+                                            <ul className="space-y-3">
+                                                {conteudo.recursos.map((recurso, index) => (
+                                                    <li key={index} className="flex items-center text-[#A0A0A0] text-lg">
+                                                        <FaCheckSquare className="mr-3 text-[#DAA520]" /> {recurso}
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                        <div className="md:w-1/3 mt-6 md:mt-0 md:ml-6 flex justify-center items-center">
+                                            <img
+                                                src="https://placehold.co/300x300"
+                                                alt={conteudo.titulo}
+                                                className="rounded-lg shadow-lg border-2 border-[#DAA520] max-w-full h-auto object-cover transform transition-transform duration-300 hover:scale-105"
+                                            />
+                                        </div>
+                                    </motion.div>
+                                </TabsContent>
                             ))}
-                        </SelectContent>
-                    </Select>
-                </div>
+                        </Tabs>
+                    </div>
 
-                <div className="hidden md:block justify-center w-full">
-                    <Tabs defaultValue="Tab1" className="w-full transition-all duration-500 ease-in-out">
-                        <TabsList className="relative flex w-full p-1 rounded-xl bg-zinc-800 shadow-md">
-                            {Object.keys(produtos).map((tab) => (
-                                <TabsTrigger
-                                    key={tab}
-                                    value={tab}
-                                    className="relative w-full h-12 rounded-md text-lg font-medium whitespace-nowrap transition-all focus-visible:relative focus-visible:z-10 data-[state=active]:bg-zinc-700 data-[state=active]:text-white text-white hover:text-white text-center flex items-center justify-center"
-                                >
-                                    {produtos[tab].titulo}
-                                </TabsTrigger>
-                            ))}
-                        </TabsList>
-                        {Object.entries(produtos).map(([tab, conteudo]) => (
-                            <TabsContent key={tab} value={tab} className="mt-4 p-6">
-                                <div className="p-2 md:p-4 bg-zinc-600 rounded-md flex flex-col md:flex-row">
-                                    <div className="md:w-2/3">
-                                        <h1 className="text-2xl font-bold mb-2 text-center text-white">{conteudo.titulo}</h1>
-                                        <p className="text-white mb-4 text-lg md:text-xl">{conteudo.descricao}</p>
-                                        <ul className="list-none text-lg md:text-xl text-white">
-                                            {conteudo.recursos.map((recurso, index) => (
-                                                <li key={index} className="flex items-center">
-                                                    <FaCheckSquare className="mr-2" /> {recurso}
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    </div>
-                                    <div className="md:w-1/3 mt-4 md:mt-0 md:ml-4 flex justify-center">
-                                        <img src="https://placehold.co/300x300" alt={conteudo.titulo} className="rounded-md max-w-full h-auto object-cover" />
-                                    </div>
-                                </div>
-                            </TabsContent>
-                        ))}
-                    </Tabs>
-                </div>
-
-                {/* Lista para dispositivos mobile. */}
-                <div className="md:hidden flex justify-center">
-                    <div className="w-full flex">
+                    {/* Mobile version */}
+                    <div className="md:hidden w-full">
                         {Object.entries(produtos).map(([tab, conteudo]) => (
                             selectedTab === tab && (
-                                <div key={tab} className="p-6 mt-4 justify-center pb-6 pt-6">
-                                    <h2 className="text-2xl font-semibold mb-2 text-center text-white">{conteudo.titulo}</h2>
-                                    <p className="text-white mb-4 text-lg md:text-xl">{conteudo.descricao}</p>
-                                    <ul className="list-none text-lg md:text-xl text-white">
+                                <motion.div
+                                    key={tab}
+                                    initial="hidden"
+                                    animate="visible"
+                                    variants={tabVariants}
+                                    className="mt-6 p-6 bg-[#242729] rounded-xl shadow-2xl"
+                                >
+                                    <h3 className="text-2xl font-semibold mb-6 text-[#DAA520] border-l-4 border-[#DAA520] pl-4">
+                                        {conteudo.titulo}
+                                    </h3>
+                                    <p className="text-[#A0A0A0] mb-6 text-base leading-relaxed">
+                                        {conteudo.descricao}
+                                    </p>
+                                    <ul className="space-y-3 mb-6">
                                         {conteudo.recursos.map((recurso, index) => (
-                                            <li key={index} className="flex items-center">
-                                                <FaCheckSquare className="mr-2" /> {recurso}
+                                            <li key={index} className="flex items-center text-[#A0A0A0]">
+                                                <FaCheckSquare className="mr-3 text-[#DAA520]" /> {recurso}
                                             </li>
                                         ))}
                                     </ul>
-                                    <div className="mt-4 flex justify-center">
-                                        <img src="https://placehold.co/300x300" alt={conteudo.titulo} className="rounded-2xl mt-6 max-w-full h-auto object-contain" />
+                                    <div className="flex justify-center mt-4">
+                                        <img
+                                            src="https://placehold.co/300x300"
+                                            alt={conteudo.titulo}
+                                            className="rounded-lg shadow-lg border-2 border-[#DAA520] max-w-full h-auto object-cover"
+                                        />
                                     </div>
-                                </div>
+                                </motion.div>
                             )
                         ))}
                     </div>
-                </div>
-            </div>
-        </section>
-    );
-};
-
-export default Produtos;
+                            </div>
+                        </div>
+                    </section>
+                );
+            };
+            
+            export default Produtos;
