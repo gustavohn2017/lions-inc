@@ -28,7 +28,7 @@ export function Hero() {
           {/* Left Content */}
           <div className="flex flex-col space-y-4 max-w-xl mx-auto lg:mx-0 hero-content-animate">
             <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#DAA520] leading-tight">
-              Lions Incorporadora e Serviços
+              Lions Bank Invest
             </h1>
             
             <p className="text-base sm:text-lg text-gray-300">
