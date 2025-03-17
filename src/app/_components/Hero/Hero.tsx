@@ -1,4 +1,5 @@
 "use client";
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 import Image from 'next/image';
@@ -6,55 +7,81 @@ import LC from '../../../../public/assets/LC.png';
 
 export function Hero() {
   return (
-    <section className="relative bg-[#000000] text-white md:pb-0 overflow-hidden h-[20%]">
-
-      <div className="container md:hidden justify-center flex h-full">
+    <section className="relative bg-[#1E2124] text-white overflow-hidden min-h-[320px] md:min-h-[380px] lg:min-h-[320px]">
+      {/* Background Pattern - Mobile and Tablet */}
+      <div className="absolute inset-0 md:hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-[#1E2124]/90 to-[#1E2124] z-10" />
         <Image
           src={LC}
-          alt="Logo"
-          width={100}
-          height={100}
-          className="absolute opacity-25 h-full w-full object-contain"
-          />
+          alt="Background Logo"
+          fill
+          className="opacity-30 object-contain p-4"
+          priority
+          sizes="100vw"
+        />
       </div>
 
-      <div className="container mx-auto pt-4 pb-4 relative z-10 flex flex-col md:flex-row items-center h-full px-4">
-        {/* Conteúdo do lado esquerdo */}
-        <article className="w-full md:w-1/2 relative p-[9px]">
-          <div className='mt-20 md:mt-0 relative z-20'>
-            <h1 className="text-3xl md:text-4xl font-bold mb-4 leading-tight">
+      {/* Main Content Container */}
+      <div className="container mx-auto relative z-20 px-4 sm:px-6 lg:px-8 h-full">
+        <div className="grid lg:grid-cols-2 gap-4 lg:gap-6 items-center py-6 lg:py-8 min-h-[320px] md:min-h-[380px] lg:min-h-[320px]">
+          {/* Left Content */}
+          <div className="flex flex-col space-y-4 max-w-xl mx-auto lg:mx-0">
+            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#DAA520] leading-tight">
               Lions Incorporadora e Serviços
             </h1>
-            <p className="text-lg lg:text-2xl mb-6">
-              Todo o nosso trabalho é realizado com garantia e qualidade superior! Oferecemos orçamentos sem compromisso.
+            
+            <p className="text-base sm:text-lg text-gray-300">
+              Todo o nosso trabalho é realizado com garantia e qualidade superior! 
+              Oferecemos orçamentos sem compromisso.
             </p>
-          </div>
-          <div className="mt-12 relative z-20">
-            <a className="w-fit mt-6 bg-gray-600 text-white p-4 rounded-md" href="#">
-              Conheça os nossos Serviços!
-            </a>
-          </div>
-          <div className="mt-12 mb-6 relative z-20">
-            <a className="w-fit bg-gray-600 text-white p-4 rounded-md flex items-center" href="#">
-              <FontAwesomeIcon icon={faWhatsapp} className="mr-2 h-5 max-w-8" />
-              Contato via WhatsApp
-            </a>
-          </div>
-        </article>
 
-        {/* Imagem do lado direito (reduzida) */}
-        <article className="w-[50%] relative p-[9px] flex justify-end">
-          <div className="hidden md:block container relative w-[50%] h-auto">
-            <Image
-              src={LC}
-              alt="Imagem de exemplo"
-              className="object-contain w-full h-full opacity-30 md:opacity-100"
-              width={250}         
-              sizes='(max-width: 768px) 50vw, (max-width: 1023px) 50vw, 25vw'
-              style={{ objectFit: 'contain' }}
-            />
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-3 pt-2">
+              <a 
+                href="#servicos" 
+                className="flex-1 sm:flex-none text-center px-5 py-2.5 bg-[#2C3033] hover:bg-[#363B40] 
+                text-[#DAA520] rounded-lg transition-all duration-300 text-sm font-medium
+                hover:shadow-lg hover:-translate-y-0.5"
+              >
+                Conheça os nossos Serviços
+              </a>
+              
+              <a 
+                href="https://wa.me/yourwhatsappnumber" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="flex-1 sm:flex-none flex items-center justify-center px-5 py-2.5 
+                bg-[#075e54] hover:bg-[#128c7e] text-white rounded-lg transition-all 
+                duration-300 text-sm font-medium hover:shadow-lg hover:-translate-y-0.5 group"
+              >
+                <FontAwesomeIcon 
+                  icon={faWhatsapp} 
+                  className="mr-2 h-4 group-hover:scale-110 transition-transform duration-300" 
+                />
+                Contato via WhatsApp
+              </a>
+            </div>
           </div>
-        </article>
+
+          {/* Right Image - Desktop Only */}
+          <div className="hidden lg:flex justify-center lg:justify-end">
+            <div className="relative w-full max-w-xs">
+              <div className="relative aspect-square">
+                <Image
+                  src={LC}
+                  alt="Logo Lions"
+                  fill
+                  className="object-contain opacity-85 transition-all duration-500 hover:opacity-100"
+                  priority
+                  sizes="(max-width: 1024px) 0vw, 300px"
+                  style={{ 
+                    filter: 'drop-shadow(0 0 20px rgba(218, 165, 32, 0.1))',
+                  }}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );
