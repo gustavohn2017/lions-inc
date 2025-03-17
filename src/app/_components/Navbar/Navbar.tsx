@@ -20,7 +20,7 @@ const Navbar = () => {
       <div className="md:hidden">
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="text-[#DAA520] hover:text-[#FFD700] transition duration-300"
+          className="text-[#AF8E41] hover:text-[#FFD700] transition duration-300"
           aria-label="Toggle menu"
         >
           {isOpen ? '✕' : '☰'}

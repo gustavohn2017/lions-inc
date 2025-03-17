@@ -27,7 +27,7 @@ export function Hero() {
         <div className="grid lg:grid-cols-2 gap-4 lg:gap-6 items-center py-6 lg:py-8 min-h-[320px] md:min-h-[380px] lg:min-h-[320px]">
           {/* Left Content */}
           <div className="flex flex-col space-y-4 max-w-xl mx-auto lg:mx-0 hero-content-animate">
-            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#DAA520] leading-tight">
+            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#AF8E41] leading-tight">
               Lions Bank Invest
             </h1>
             
@@ -41,7 +41,7 @@ export function Hero() {
               <a 
                 href="#servicos" 
                 className="flex-1 sm:flex-none text-center px-5 py-2.5 bg-[#2C3033] hover:bg-[#363B40] 
-                text-[#DAA520] rounded-lg transition-all duration-300 text-sm font-medium
+                text-[#AF8E41] rounded-lg transition-all duration-300 text-sm font-medium
                 hover:shadow-lg hover:-translate-y-0.5"
               >
                 Conheça os nossos Serviços

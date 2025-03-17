@@ -27,19 +27,19 @@ const Sobre: React.FC = () => {
       id: 'who',
       title: "Quem Somos",
       content: "A lions, fundada em 2022, lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet.",
-      icon: <FaUsers className="text-5xl text-[#DAA520]" />
+      icon: <FaUsers className="text-5xl text-[#AF8E41]" />
     },
     {
       id: 'vision',
       title: "Nossa Visão",
       content: "Ser reconhecida como referência de excelência na prestação de serviços financeiros, com foco na satisfação do cliente e na geração de valor para a sociedade.",
-      icon: <FaLightbulb className="text-5xl text-[#DAA520]" />
+      icon: <FaLightbulb className="text-5xl text-[#AF8E41]" />
     },
     {
       id: 'mission',
       title: "Nossa Missão",
       content: "Oferecer serviços com a maior qualidade e atenção ao cliente, garantindo a satisfação de suas necessidades e expectativas. ",
-      icon: <FaBullseye className="text-5xl text-[#DAA520]" />
+      icon: <FaBullseye className="text-5xl text-[#AF8E41]" />
     }
   ];
 
@@ -82,7 +82,7 @@ const Sobre: React.FC = () => {
         initial="hidden"
         animate="visible"
       >
-        <h2 className="text-3xl md:text-4xl text-[#DAA520] font-bold text-center mb-12">
+        <h2 className="text-3xl md:text-4xl text-[#AF8E41] font-bold text-center mb-12">
           Sobre a Lions Bank
         </h2>
         
@@ -100,7 +100,7 @@ const Sobre: React.FC = () => {
                         <div className="mb-6 transform hover:scale-110 transition-transform">
                           {item.icon}
                         </div>
-                        <h3 className="text-2xl font-semibold text-[#DAA520] mb-4 text-center">
+                        <h3 className="text-2xl font-semibold text-[#AF8E41] mb-4 text-center">
                           {item.title}
                         </h3>
                         <div className="overflow-y-auto flex-1 scrollbar-hide">
@@ -119,7 +119,7 @@ const Sobre: React.FC = () => {
               <button 
                 onClick={() => sliderRef.current?.slickPrev()}
                 disabled={activeSlide === 0}
-                className="p-2 text-[#DAA520] disabled:opacity-30 transition-opacity focus:outline-none"
+                className="p-2 text-[#AF8E41] disabled:opacity-30 transition-opacity focus:outline-none"
                 aria-label="Previous slide"
               >
                 <FaChevronLeft size={24} />
@@ -132,8 +132,8 @@ const Sobre: React.FC = () => {
                     onClick={() => sliderRef.current?.slickGoTo(index)}
                     className={`w-2.5 h-2.5 rounded-full transition-all duration-300 focus:outline-none ${
                       activeSlide === index 
-                        ? 'bg-[#DAA520] scale-125' 
-                        : 'bg-[#DAA520] opacity-30'
+                        ? 'bg-[#AF8E41] scale-125' 
+                        : 'bg-[#AF8E41] opacity-30'
                     }`}
                     aria-label={`Go to slide ${index + 1}`}
                   />
@@ -143,7 +143,7 @@ const Sobre: React.FC = () => {
               <button 
                 onClick={() => sliderRef.current?.slickNext()}
                 disabled={activeSlide === content.length - 1}
-                className="p-2 text-[#DAA520] disabled:opacity-30 transition-opacity focus:outline-none"
+                className="p-2 text-[#AF8E41] disabled:opacity-30 transition-opacity focus:outline-none"
                 aria-label="Next slide"
               >
                 <FaChevronRight size={24} />
@@ -162,7 +162,7 @@ const Sobre: React.FC = () => {
                   <div className="mb-6 transform hover:scale-110 transition-transform">
                     {item.icon}
                   </div>
-                  <h3 className="text-2xl font-semibold text-[#DAA520] mb-4 text-center">
+                  <h3 className="text-2xl font-semibold text-[#AF8E41] mb-4 text-center">
                     {item.title}
                   </h3>
                   <div className="overflow-y-auto flex-1 scrollbar-hide">
