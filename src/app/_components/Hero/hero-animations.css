@@ -1,0 +1,28 @@
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-content-animate {
+  opacity: 0;
+  animation: fadeInUp 1s ease-out forwards;
+}
+
+.hero-image-animate {
+  opacity: 0;
+  animation: fadeInUp 1s ease-out 0.2s forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-content-animate,
+  .hero-image-animate {
+    animation: none;
+    opacity: 1;
+  }
+}

@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 import Image from 'next/image';
 import LC from '../../../../public/assets/LC.png';
+import './hero-animations.css';
 
 export function Hero() {
   return (
@@ -15,7 +16,7 @@ export function Hero() {
           src={LC}
           alt="Background Logo"
           fill
-          className="opacity-30 object-contain p-4"
+          className="opacity-30 object-contain p-4 hero-image-animate"
           priority
           sizes="100vw"
         />
@@ -25,7 +26,7 @@ export function Hero() {
       <div className="container mx-auto relative z-20 px-4 sm:px-6 lg:px-8 h-full">
         <div className="grid lg:grid-cols-2 gap-4 lg:gap-6 items-center py-6 lg:py-8 min-h-[320px] md:min-h-[380px] lg:min-h-[320px]">
           {/* Left Content */}
-          <div className="flex flex-col space-y-4 max-w-xl mx-auto lg:mx-0">
+          <div className="flex flex-col space-y-4 max-w-xl mx-auto lg:mx-0 hero-content-animate">
             <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#DAA520] leading-tight">
               Lions Incorporadora e Serviços
             </h1>
@@ -56,7 +57,7 @@ export function Hero() {
               >
                 <FontAwesomeIcon 
                   icon={faWhatsapp} 
-                  className="mr-2 h-4 group-hover:scale-110 transition-transform duration-300" 
+                  className="mr-2 h-4 transition-transform duration-300 group-hover:scale-110" 
                 />
                 Contato via WhatsApp
               </a>
@@ -71,7 +72,7 @@ export function Hero() {
                   src={LC}
                   alt="Logo Lions"
                   fill
-                  className="object-contain opacity-85 transition-all duration-500 hover:opacity-100"
+                  className="object-contain opacity-85 hero-image-animate"
                   priority
                   sizes="(max-width: 1024px) 0vw, 300px"
                   style={{ 

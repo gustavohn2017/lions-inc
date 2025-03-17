@@ -47,32 +47,6 @@
   --sidebar-ring: oklch(0.87 0 0);
 }
 
-/* Slider custom styles */
-.slick-slider {
-  overflow: hidden;
-}
-
-.slick-slide {
-  height: auto;
-}
-
-.slick-track {
-  display: flex !important;
-}
-
-.slick-slide > div {
-  height: 100%;
-}
-
-.slick-slide:focus {
-  outline: none;
-}
-
-/* Smooth transitions */
-.slick-slide > div {
-  transition: all 0.3s ease;
-}
-
 .dark {
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
