@@ -1,7 +1,19 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  reactStrictMode: true,
+  images: {
+    domains: ['localhost'],
+  },
+  webpack: (config) => {
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      '@': '/src',
+      '@components': '/src/app/_components',
+      '@assets': '/public/assets',
+    };
+    return config;
+  },
 };
 
 export default nextConfig;

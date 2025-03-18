@@ -2,11 +2,7 @@
 
 import React from 'react';
 import Link from "next/link";
-import Image from "next/image";
 
-// Importe o motion manualmente se estiver usando o Framer Motion
-// Se você não tiver o Framer Motion instalado, remova essas importações e o componente motion
-import { motion } from "framer-motion";
 
 // Dados dos produtos
 const products = [

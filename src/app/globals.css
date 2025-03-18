@@ -1,14 +1,23 @@
 @import "tailwindcss";
 @tailwind utilities;
 
-
 @plugin "tailwindcss-animate";
+
+@font-face {
+  font-family: 'Capricho';
+  src: url('/fonts/Capricho-Bold.woff2') format('woff2'),
+       url('/fonts/Capricho-Bold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
 
 @custom-variant dark (&:is(.dark *));
 
 @theme {
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-capricho: 'Capricho', sans-serif;
 }
 
 :root {
@@ -127,5 +136,21 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@layer components {
+  .font-capricho {
+    font-family: var(--font-capricho);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    letter-spacing: 0.5px;
+  }
+
+  .hero-title {
+    background: linear-gradient(to right, #AF8E41, #C6A052);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    position: relative;
   }
 }

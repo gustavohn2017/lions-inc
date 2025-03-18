@@ -3,6 +3,18 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
 
+import { Cormorant_Garamond, Inter } from 'next/font/google';
+
+const cormorant = Cormorant_Garamond({
+  subsets: ['latin'],
+  variable: '--font-cormorant',
+  weight: ['600', '700'],
+});
+
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+});
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],

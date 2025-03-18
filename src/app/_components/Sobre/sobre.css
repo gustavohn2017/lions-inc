@@ -1,0 +1,58 @@
+.title-main {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+.title-main::after {
+  content: '';
+  position: absolute;
+  bottom: -0.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 2px;
+  background: linear-gradient(90deg, 
+    transparent,
+    #AF8E41,
+    #C6A052,
+    #AF8E41,
+    transparent
+  );
+}
+
+.title-card {
+  position: relative;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+}
+
+.title-card::after {
+  content: '';
+  position: absolute;
+  bottom: -0.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 2px;
+  background: linear-gradient(90deg, 
+    transparent,
+    #AF8E41,
+    transparent
+  );
+  transition: width 0.3s ease;
+}
+
+.title-card:hover::after {
+  width: 60px;
+}
+
+@media (max-width: 768px) {
+  .title-main {
+    font-size: 2.5rem;
+  }
+  
+  .title-card {
+    font-size: 1.75rem;
+  }
+}

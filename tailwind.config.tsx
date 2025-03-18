@@ -18,6 +18,9 @@ const config = {
       },
     },
     extend: {
+      fontFamily: {
+        'capricho': ['Capricho', 'sans-serif'],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -51,6 +54,11 @@ const config = {
         card: {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
+        },
+        gold: {
+          light: '#C6A052',
+          DEFAULT: '#AF8E41',
+          dark: '#8B7134',
         },
       },
       borderRadius: {

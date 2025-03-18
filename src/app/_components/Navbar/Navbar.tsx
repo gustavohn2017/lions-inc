@@ -2,13 +2,13 @@
 import React, { useState } from 'react';
 import NavbarItem from './NavbarItem';
 import Image from 'next/image';
-import logo_lions_bank from '../../../../public/assets/logo_lions_bank.png';
+import logo_lions_bank from '@assets/logo_lions_bank.png';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="flex flex-wrap justify-between items-center px-4 py-3 bg-[#1E2124] text-[#DAA520] relative shadow-md">
+    <nav className="flex flex-wrap justify-between items-center px-4 py-3 bg-[#1E2124] text-[#AF8E41] relative shadow-md">
       <div className="flex items-center">
         <Image 
           src={logo_lions_bank} 
