@@ -3,6 +3,8 @@
 
 @plugin "tailwindcss-animate";
 
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&display=swap');
+
 @font-face {
   font-family: 'Capricho';
   src: url('/fonts/Capricho-Bold.woff2') format('woff2'),
@@ -146,11 +148,24 @@
     letter-spacing: 0.5px;
   }
 
+  .font-cormorant {
+    font-family: 'Cormorant Garamond', serif;
+  }
+
   .hero-title {
     background: linear-gradient(to right, #AF8E41, #C6A052);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
     position: relative;
+  }
+
+  .testimonial-title {
+    font-family: 'Cormorant Garamond', serif;
+    background: linear-gradient(135deg, #AF8E41 0%, #C6A052 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.15);
   }
 }

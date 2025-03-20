@@ -90,7 +90,11 @@ const config = {
         "fade-out": {
           from: { opacity: "1" },
           to: { opacity: "0" },
-        }
+        },
+        "underline": {
+          "0%": { transform: "scaleX(0)" },
+          "100%": { transform: "scaleX(1)" }
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -99,6 +103,7 @@ const config = {
         "slide-to-left": "slide-to-left 0.3s ease-out",
         "fade-in": "fade-in 0.3s ease-out",
         "fade-out": "fade-out 0.3s ease-out",
+        "underline": "underline 0.3s ease-out forwards",
       },
     },
   },

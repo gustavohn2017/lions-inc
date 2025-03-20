@@ -43,25 +43,27 @@ const testimonials = [
 
 const Testimonial: React.FC = () => {
   return (
-    <section className="py-12 bg-[#c2c2c2]">
+    <section className="py-12 bg-gradient-to-br from-[#1E2028] to-[#262A34]">
       <div className="max-w-6xl mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">
+        <h2 className="hero-title text-4xl font-bold text-center mb-8">
           O que nossos clientes dizem
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {testimonials.map((testimonial) => (
             <div
               key={testimonial.id}
-              className="bg-white p-6 rounded-lg shadow-md flex flex-col justify-between items-center w-full h-auto"
+              className="bg-white/10 backdrop-blur-sm p-6 rounded-lg shadow-md flex flex-col justify-between items-center w-full h-auto border border-gray-700/30"
             >
               {/* Avatar e Nome */}
               <div className="flex flex-col items-center text-center">
                 <img
                   src={testimonial.avatar}
                   alt={testimonial.name}
-                  className="w-16 h-16 rounded-full mb-4"
+                  className="w-16 h-16 rounded-full mb-4 border-2 border-[#AF8E41]"
                 />
-                <h3 className="text-lg font-semibold">{testimonial.name}</h3>
+                <h3 className="text-xl font-cormorant font-bold text-[#C6A052]">
+                  {testimonial.name}
+                </h3>
                 <div className="flex my-2">
                   {Array.from({ length: 5 }).map((_, index) => (
                     <span
@@ -74,7 +76,7 @@ const Testimonial: React.FC = () => {
                     </span>
                   ))}
                 </div>
-                <p className="text-gray-600 text-center">
+                <p className="text-gray-300 text-center mt-3">
                   {testimonial.comment}
                 </p>
               </div>

@@ -3,8 +3,8 @@
 import React, { useState } from 'react';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { FaCheckSquare } from 'react-icons/fa';
 import { motion } from 'framer-motion';
+import './produtos.css';
 
 type Produto = {
     titulo: string;
@@ -34,7 +34,7 @@ const Produtos = () => {
             recursos: ["Manutenção de estoque", "Pagamento de fornecedores", "Gestão de fluxo de caixa"],
         },
         Tab4: {
-            titulo: "Consultoria Financeira Empresarial",
+            titulo: "Consultoria Financeira Empresarial", 
             descricao: "Consultoria financeira empresarial oferece orientação especializada para a gestão financeira de empresas.",
             recursos: ["Análise financeira", "Planejamento estratégico", "Redução de custos"],
         },
@@ -42,130 +42,201 @@ const Produtos = () => {
 
     const [selectedTab, setSelectedTab] = useState("Tab1");
 
-    const tabVariants = {
-        hidden: { opacity: 0, y: 20 },
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: { staggerChildren: 0.2, duration: 0.5 }
+        }
+    };
+
+    const itemVariants = {
+        hidden: { opacity: 0, y: 10 },
         visible: {
             opacity: 1,
             y: 0,
-            transition: { duration: 0.6, ease: 'easeOut' }
+            transition: {
+                duration: 0.4,
+                ease: "easeOut"
+            }
         }
     };
 
     return (
-        <section className="w-full py-16 bg-[#1E2124] flex flex-col items-center">
-            <div className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 className="text-4xl md:text-5xl font-bold text-[#AF8E41] mb-12 text-center">{/* Golden title */}
-                    Produtos e Serviços
-                </h2>
+        <section className="bg-gradient-to-b from-[#1A1D20] to-[#242729] py-10 px-4 sm:px-6 lg:px-8">
+            <motion.div
+                className="max-w-6xl mx-auto"
+                variants={containerVariants}
+                initial="hidden"
+                animate="visible"
+            >
+                <motion.div className="text-center mb-8" variants={itemVariants}>
+                    <h2 className="text-4xl md:text-5xl text-[#AF8E41] font-bold mb-4 font-['Cormorant_Garamond'] tracking-wider">
+                        PRODUTOS E SERVIÇOS
+                    </h2>
+                    <div className="w-24 h-0.5 bg-gradient-to-r from-transparent via-[#AF8E41] to-transparent mx-auto mb-4"></div>
+                    <p className="text-gray-400 text-base md:text-lg max-w-2xl mx-auto font-light">
+                        Soluções financeiras personalizadas para impulsionar seu sucesso
+                    </p>
+                </motion.div>
 
-                <div className="w-full mt-8">
-                    {/* Dropdown para telas menores */}
-                    <div className="md:hidden flex justify-center">
-                        <Select value={selectedTab} onValueChange={setSelectedTab}>
-                            <SelectTrigger className="w-full bg-[#242729] border-[#2C3033] text-[#AF8E41] rounded-lg border shadow-lg">
-                                <SelectValue placeholder="Selecione um produto/serviço" />
-                            </SelectTrigger>
-                            <SelectContent className="bg-[#242729] border-[#2C3033] text-[#AF8E41] rounded-lg">
-                                {Object.entries(produtos).map(([tab, conteudo]) => (
-                                    <SelectItem key={tab} value={tab} className="focus:bg-[#2C3033] hover:bg-[#2C3033] text-[#AF8E41]">
-                                        {conteudo.titulo}
-                                    </SelectItem>
-                                ))}
-                            </SelectContent>
-                        </Select>
-                    </div>
+                {/* Mobile Select */}
+                <div className="md:hidden w-full max-w-sm mx-auto mb-6">
+                    <Select value={selectedTab} onValueChange={setSelectedTab}>
+                        <SelectTrigger 
+                            className="w-full bg-[#2A2D31] border-[#AF8E41]/30 text-[#AF8E41] 
+                                     text-lg rounded-lg py-3 shadow hover:border-[#AF8E41]/50
+                                     transition-all duration-200 font-['Cormorant_Garamond']"
+                        >
+                            <SelectValue placeholder="Escolha uma solução" />
+                        </SelectTrigger>
+                        <SelectContent className="bg-[#2A2D31] border-[#AF8E41]/30">
+                            {Object.entries(produtos).map(([tab, conteudo]) => (
+                                <SelectItem 
+                                    key={tab} 
+                                    value={tab}
+                                    className="text-gray-300 hover:text-[#AF8E41] focus:text-[#AF8E41]
+                                             font-['Cormorant_Garamond'] text-lg"
+                                >
+                                    {conteudo.titulo}
+                                </SelectItem>
+                            ))}
+                        </SelectContent>
+                    </Select>
+                </div>
 
-                    <div className="hidden md:block justify-center w-full">
-                        <Tabs defaultValue="Tab1" className="w-full transition-all duration-500 ease-in-out">
-                            <TabsList className="relative flex w-full p-1 rounded-xl bg-[#242729] shadow-xl overflow-hidden">
+                {/* Desktop Version */}
+                <div className="hidden md:block">
+                    <Tabs defaultValue="Tab1" className="w-full">
+                        <motion.div variants={itemVariants} className="flex justify-center mb-20">
+                            <TabsList className="grid grid-cols-4 w-full max-w-5xl p-2 bg-transparent 
+                                             rounded-xl border-0 shadow-none gap-3">
                                 {Object.keys(produtos).map((tab) => (
                                     <TabsTrigger
                                         key={tab}
                                         value={tab}
-                                        className="relative w-full h-14 rounded-md text-lg font-medium whitespace-nowrap transition-all focus-visible:relative focus-visible:z-10 
-                                        data-[state=active]:bg-[#2C3033] data-[state=active]:text-[#AF8E41] text-[#A0A0A0] hover:text-[#AF8E41] text-center flex items-center justify-center group"
+                                        className="relative px-4 py-4 text-base font-['Cormorant_Garamond'] text-gray-400
+                                                 bg-[#1E2124]/70 rounded-md overflow-hidden whitespace-normal text-center
+                                                 transition-all duration-300 h-[4.5rem] w-full flex items-center justify-center
+                                                 hover:text-[#AF8E41] hover:border-[#AF8E41]/30 hover:bg-[#1E2124]/90
+                                                 data-[state=active]:text-[#AF8E41] data-[state=active]:bg-[#2A2D31]
+                                                 data-[state=active]:font-semibold data-[state=active]:shadow-lg
+                                                 data-[state=active]:shadow-[#AF8E41]/10 data-[state=active]:border-[#AF8E41]/40
+                                                 border border-[#AF8E41]/20 shadow-sm
+                                                 after:content-[''] after:absolute after:bottom-1 after:left-1/2 after:transform 
+                                                 after:-translate-x-1/2 after:w-0 data-[state=active]:after:w-2/3 after:h-0.5 
+                                                 after:bg-[#AF8E41] after:transition-all after:duration-300 after:rounded-full"
                                     >
-                                        <span className="relative z-10">{produtos[tab].titulo}</span>
-                                        <span className="absolute bottom-0 left-0 w-full h-1 bg-[#AF8E41] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
-                                        <span className="absolute bottom-0 left-0 w-full h-1 bg-[#AF8E41] data-[state=active]:block hidden"></span>
+                                        <span className="line-clamp-2">{produtos[tab].titulo}</span>
                                     </TabsTrigger>
                                 ))}
                             </TabsList>
+                        </motion.div>
+
+                        <div className="w-full mx-auto">
                             {Object.entries(produtos).map(([tab, conteudo]) => (
-                                <TabsContent key={tab} value={tab} className="mt-6">
+                                <TabsContent key={tab} value={tab} className="w-full">
                                     <motion.div
-                                        initial="hidden"
-                                        animate="visible"
-                                        variants={tabVariants}
-                                        className="p-6 md:p-8 bg-[#242729] rounded-xl shadow-2xl flex flex-col md:flex-row"
+                                        variants={itemVariants}
+                                        className="flex flex-col md:flex-row gap-6 bg-[#2A2D31] p-6 md:p-8 rounded-lg
+                                                 shadow-md border border-[#AF8E41]/20
+                                                 transition-all duration-300"
                                     >
-                                        <div className="md:w-2/3">
-                                            <h3 className="text-2xl md:text-3xl font-semibold mb-6 text-[#AF8E41] border-l-4 border-[#AF8E41] pl-4">
+                                        <div className="flex-1 space-y-4">
+                                            <h3 className="text-3xl text-[#AF8E41] font-['Cormorant_Garamond'] 
+                                                       tracking-wide pb-2 border-b border-[#AF8E41]/20">
                                                 {conteudo.titulo}
                                             </h3>
-                                            <p className="text-[#A0A0A0] mb-6 text-lg leading-relaxed">
+                                            <p className="text-gray-300 text-base leading-relaxed">
                                                 {conteudo.descricao}
                                             </p>
-                                            <ul className="space-y-3">
+                                            <ul className="space-y-3 pt-2">
                                                 {conteudo.recursos.map((recurso, index) => (
-                                                    <li key={index} className="flex items-center text-[#A0A0A0] text-lg">
-                                                        <FaCheckSquare className="mr-3 text-[#AF8E41]" /> {recurso}
-                                                    </li>
+                                                    <motion.li
+                                                        key={index}
+                                                        initial={{ opacity: 0, x: -10 }}
+                                                        animate={{ opacity: 1, x: 0 }}
+                                                        transition={{ delay: index * 0.1 + 0.2 }}
+                                                        className="flex items-center text-gray-400 text-sm group"
+                                                    >
+                                                        <span className="w-1.5 h-1.5 bg-[#AF8E41] rounded-full mr-3
+                                                                     group-hover:scale-125 transition-all duration-200"></span>
+                                                        <span className="group-hover:text-[#AF8E41] transition-colors duration-200">
+                                                            {recurso}
+                                                        </span>
+                                                    </motion.li>
                                                 ))}
                                             </ul>
                                         </div>
-                                        <div className="md:w-1/3 mt-6 md:mt-0 md:ml-6 flex justify-center items-center">
-                                            <img
-                                                src="https://placehold.co/300x300"
-                                                alt={conteudo.titulo}
-                                                className="rounded-lg shadow-lg border-2 border-[#AF8E41] max-w-full h-auto object-cover transform transition-transform duration-300 hover:scale-105"
-                                            />
+                                        <div className="md:w-1/3 max-w-[220px] mx-auto">
+                                            <motion.div
+                                                variants={itemVariants}
+                                                className="rounded-lg overflow-hidden shadow-md
+                                                         border border-[#AF8E41]/20"
+                                            >
+                                                <img
+                                                    src="https://placehold.co/220x180"
+                                                    alt={conteudo.titulo}
+                                                    className="w-full h-auto object-cover transition-all
+                                                             duration-300 hover:scale-105"
+                                                />
+                                            </motion.div>
                                         </div>
                                     </motion.div>
                                 </TabsContent>
                             ))}
-                        </Tabs>
-                    </div>
+                        </div>
+                    </Tabs>
+                </div>
 
-                    {/* Mobile version */}
-                    <div className="md:hidden w-full">
-                        {Object.entries(produtos).map(([tab, conteudo]) => (
-                            selectedTab === tab && (
-                                <motion.div
-                                    key={tab}
-                                    initial="hidden"
-                                    animate="visible"
-                                    variants={tabVariants}
-                                    className="mt-6 p-6 bg-[#242729] rounded-xl shadow-2xl"
-                                >
-                                    <h3 className="text-2xl font-semibold mb-6 text-[#AF8E41] border-l-4 border-[#AF8E41] pl-4">
+                {/* Mobile Content */}
+                <div className="md:hidden w-full mx-auto">
+                    {Object.entries(produtos).map(([tab, conteudo]) => (
+                        selectedTab === tab && (
+                            <motion.div
+                                key={tab}
+                                variants={itemVariants}
+                                className="bg-[#2A2D31] p-5 rounded-lg space-y-4
+                                         shadow-md border border-[#AF8E41]/20"
+                            >
+                                <div className="text-center mb-3">
+                                    <motion.div
+                                        variants={itemVariants}
+                                        className="rounded-lg overflow-hidden mb-4 max-w-[200px] mx-auto
+                                                 border border-[#AF8E41]/20"
+                                    >
+                                        <img
+                                            src="https://placehold.co/200x150"
+                                            alt={conteudo.titulo}
+                                            className="w-full h-auto object-cover"
+                                        />
+                                    </motion.div>
+                                    <h3 className="text-2xl text-[#AF8E41] font-['Cormorant_Garamond'] tracking-wide">
                                         {conteudo.titulo}
                                     </h3>
-                                    <p className="text-[#A0A0A0] mb-6 text-base leading-relaxed">
-                                        {conteudo.descricao}
-                                    </p>
-                                    <ul className="space-y-3 mb-6">
-                                        {conteudo.recursos.map((recurso, index) => (
-                                            <li key={index} className="flex items-center text-[#A0A0A0]">
-                                                <FaCheckSquare className="mr-3 text-[#AF8E41]" /> {recurso}
-                                            </li>
-                                        ))}
-                                    </ul>
-                                    <div className="flex justify-center mt-4">
-                                        <img
-                                            src="https://placehold.co/300x300"
-                                            alt={conteudo.titulo}
-                                            className="rounded-lg shadow-lg border-2 border-[#AF8E41] max-w-full h-auto object-cover"
-                                        />
-                                    </div>
-                                </motion.div>
-                            )
-                        ))}
-                    </div>
-                            </div>
-                        </div>
-                    </section>
-                );
-            };
-            
-            export default Produtos;
+                                </div>
+                                <p className="text-gray-300 text-sm leading-relaxed">
+                                    {conteudo.descricao}
+                                </p>
+                                <ul className="space-y-2 pt-3 border-t border-[#AF8E41]/10">
+                                    {conteudo.recursos.map((recurso, index) => (
+                                        <motion.li
+                                            key={index}
+                                            variants={itemVariants}
+                                            className="flex items-center text-gray-400 text-sm group"
+                                        >
+                                            <span className="w-1.5 h-1.5 bg-[#AF8E41] rounded-full mr-3"></span>
+                                            <span>{recurso}</span>
+                                        </motion.li>
+                                    ))}
+                                </ul>
+                            </motion.div>
+                        )
+                    ))}
+                </div>
+            </motion.div>
+        </section>
+    );
+};
+
+export default Produtos;

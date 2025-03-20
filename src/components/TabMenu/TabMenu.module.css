@@ -1,0 +1,155 @@
+.tabMenuContainer {
+  width: 100%;
+  padding: 2rem 0;
+  background-color: #f5f7fa;
+  display: flex;
+  justify-content: center;
+}
+
+.tabMenuWrapper {
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 1.5rem;
+}
+
+.title {
+  font-size: 2.2rem;
+  margin-bottom: 2rem;
+  color: #2d3748;
+  text-align: center;
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+}
+
+.title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, #4299e1, #805ad5, #4299e1);
+  background-size: 200% 100%;
+  animation: gradientFlow 3s ease infinite, slideIn 1.2s ease forwards;
+  transform: translateX(-100%);
+}
+
+.tabsWrapper {
+  width: 100%;
+  max-width: 800px;
+}
+
+.tabsHeader {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.tabButton {
+  background: none;
+  border: none;
+  font-size: 1.1rem;
+  padding: 0.7rem 1.2rem;
+  cursor: pointer;
+  position: relative;
+  color: #4a5568;
+  transition: all 0.3s ease;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.tabButton::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, #4299e1, #805ad5);
+  transform: scaleX(0);
+  transition: transform 0.4s ease;
+  transform-origin: right;
+}
+
+.tabButton:hover {
+  color: #2b6cb0;
+}
+
+.tabButton:hover::before {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.tabButton.active {
+  color: #fff;
+  background: linear-gradient(135deg, #4299e1, #667eea);
+  box-shadow: 0 4px 10px rgba(66, 153, 225, 0.3);
+}
+
+.tabButton.active::before {
+  transform: scaleX(0);
+}
+
+.tabContent {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 12px;
+  min-height: 120px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  text-align: center;
+  line-height: 1.7;
+  color: #4a5568;
+  position: relative;
+  overflow: hidden;
+  animation: fadeIn 0.5s ease-out forwards;
+  border-left: 3px solid #4299e1;
+}
+
+.tabContent::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, #4299e1, #805ad5);
+}
+
+@keyframes gradientFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes slideIn {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 768px) {
+  .tabsHeader {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .tabButton {
+    width: 100%;
+    max-width: 250px;
+  }
+  
+  .title {
+    font-size: 1.8rem;
+  }
+}
