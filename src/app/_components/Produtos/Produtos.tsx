@@ -11,6 +11,7 @@ type Produto = {
     titulo: string;
     descricao: string;
     recursos: string[];
+    imagem: string; // Add image property
 };
 
 type ProdutosType = {
@@ -23,21 +24,25 @@ const Produtos = () => {
             titulo: "Consórcios",
             descricao: "Consórcios são uma forma inteligente e econômica de adquirir bens ou serviços por meio de uma compra coletiva planejada, sem a incidência de juros. Ideal para quem busca disciplina financeira e planejamento a médio e longo prazo.",
             recursos: ["Planejamento financeiro personalizado", "Compra sem incidência de juros", "Diversas opções de bens e créditos", "Parcelas acessíveis e ajustáveis"],
+            imagem: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?q=80&w=440&auto=format&fit=crop",
         },
         Tab2: {
             titulo: "Financiamentos",
             descricao: "Nossos financiamentos são soluções de crédito estratégicas concebidas para a aquisição de bens ou serviços, com condições de pagamento flexíveis e taxas competitivas. Oferecemos análise personalizada para encontrar a melhor condição para seu perfil.",
             recursos: ["Taxas de juros altamente competitivas", "Prazos flexíveis de até 60 meses", "Aprovação rápida e desburocratizada", "Atendimento consultivo personalizado"],
+            imagem: "https://images.unsplash.com/photo-1565514020179-026b5f8dbcf5?q=80&w=440&auto=format&fit=crop",
         },
         Tab3: {
             titulo: "Capital de Giro para Empresas",
             descricao: "O capital de giro é o recurso financeiro essencial para manter as operações diárias de sua empresa com fluidez. Nossa solução oferece acesso rápido aos recursos necessários para enfrentar sazonalidades e aproveitar oportunidades de crescimento.",
             recursos: ["Manutenção estratégica de estoque", "Fluxo de caixa otimizado", "Pagamento pontual a fornecedores", "Aproveitamento de oportunidades de mercado"],
+            imagem: "https://images.unsplash.com/photo-1591696205602-2f950c417cb9?q=80&w=440&auto=format&fit=crop",
         },
         Tab4: {
             titulo: "Consultoria Financeira Empresarial", 
             descricao: "Nossa consultoria financeira empresarial proporciona orientação especializada e estratégica para a gestão financeira eficiente de seu negócio. Desenvolvemos análises aprofundadas e estratégias personalizadas para maximizar resultados e minimizar riscos.",
             recursos: ["Análise financeira detalhada e diagnóstica", "Planejamento estratégico orientado a resultados", "Otimização e redução efetiva de custos", "Estratégias de crescimento sustentável"],
+            imagem: "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=440&auto=format&fit=crop",
         },
     };
 
@@ -176,7 +181,7 @@ const Produtos = () => {
                                                          border border-[#AF8E41]/20"
                                             >
                                                 <img
-                                                    src="https://placehold.co/220x180"
+                                                    src={conteudo.imagem}
                                                     alt={conteudo.titulo}
                                                     className="w-full h-auto object-cover transition-all
                                                              duration-300 hover:scale-105"
@@ -207,7 +212,7 @@ const Produtos = () => {
                                                  border border-[#AF8E41]/20"
                                     >
                                         <img
-                                            src="https://placehold.co/200x150"
+                                            src={conteudo.imagem}
                                             alt={conteudo.titulo}
                                             className="w-full h-auto object-cover"
                                         />

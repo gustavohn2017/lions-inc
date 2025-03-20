@@ -20,98 +20,98 @@ const products = [
     id: 1,
     title: "Crédito com garantia imobiliária",
     description: "Utilize seu imóvel como garantia para obter crédito com taxas reduzidas e condições flexíveis de pagamento.",
-    image: "https://placehold.co/200x150",
+    image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&auto=format&fit=crop&q=80",
     category: "credit"
   },
   {
     id: 2,
     title: "Crédito pelo fundo imobiliário",
     description: "Acesse recursos financeiros por meio de fundos imobiliários com condições exclusivas para investidores.",
-    image: "https://placehold.co/200x150",
+    image: "https://images.unsplash.com/photo-1542856391-010fb87dcfed?w=800&auto=format&fit=crop&q=80",
     category: "credit"
   },
   {
     id: 3,
     title: "Avaliação de imóveis",
     description: "Determine o valor justo do seu imóvel com nossa avaliação profissional e certificada.",
-    image: "https://placehold.co/200x150",
+    image: "https://images.unsplash.com/photo-1582407947304-fd86f028f716?w=800&auto=format&fit=crop&q=80",
     category: "evaluation"
   },
   {
     id: 4,
     title: "Assessoria imobiliária",
     description: "Suporte completo para transações imobiliárias, desde a negociação até a finalização do contrato.",
-    image: "https://placehold.co/200x150",
+    image: "https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?w=800&auto=format&fit=crop&q=80",
     category: "advisory"
   },
   {
     id: 5,
     title: "GERIC da C.E.F",
     description: "Gerenciamento de risco de crédito junto à Caixa Econômica Federal para aprovação facilitada de financiamentos.",
-    image: "https://placehold.co/200x150",
+    image: "https://images.unsplash.com/photo-1434626881859-194d67b2b86f?w=800&auto=format&fit=crop&q=80",
     category: "credit"
   },
   {
     id: 6,
     title: "Financiamento de Obras",
     description: "Recursos financeiros para construtoras e incorporadoras viabilizarem seus empreendimentos.",
-    image: "https://placehold.co/200x150",
+    image: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=800&auto=format&fit=crop&q=80",
     category: "financing"
   },
   {
     id: 7,
     title: "Antecipação de recebíveis futuros",
     description: "Converta receitas futuras em capital imediato para sua empresa com condições competitivas.",
-    image: "https://placehold.co/200x150",
+    image: "https://images.unsplash.com/photo-1579621970588-a35d0e7ab9b6?w=800&auto=format&fit=crop&q=80",
     category: "credit"
   },
   {
     id: 8,
     title: "Administração de carteiras de clientes",
     description: "Potencialize resultados com gestão otimizada de relacionamentos e investimentos.",
-    image: "https://placehold.co/200x150",
+    image: "https://images.unsplash.com/photo-1553484771-371a605b060b?w=800&auto=format&fit=crop&q=80",
     category: "advisory"
   },
   {
     id: 9,
     title: "Expansão de patrimônio",
     description: "Estratégias personalizadas para crescimento patrimonial com segurança e rentabilidade.",
-    image: "https://placehold.co/200x150",
+    image: "https://images.unsplash.com/photo-1460472178825-e5240623afd5?w=800&auto=format&fit=crop&q=80",
     category: "advisory"
   },
   {
     id: 10,
     title: "Assessoria financeira - PJ",
     description: "Consultoria especializada em planejamento financeiro empresarial e otimização de recursos.",
-    image: "https://placehold.co/200x150",
+    image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&auto=format&fit=crop&q=80",
     category: "advisory"
   },
   {
     id: 11,
     title: "Portabilidade de dívidas",
     description: "Transfira suas dívidas e reduza juros, melhorando seu fluxo de caixa com condições vantajosas.",
-    image: "https://placehold.co/200x150",
+    image: "https://images.unsplash.com/photo-1563986768494-4dee2763ff3f?w=800&auto=format&fit=crop&q=80",
     category: "credit"
   },
   {
     id: 12,
     title: "Empréstimos",
     description: "Soluções de crédito ágeis com taxas competitivas para atender suas necessidades financeiras.",
-    image: "https://placehold.co/200x150",
+    image: "https://images.unsplash.com/photo-1607863680198-23d4b2565df0?w=800&auto=format&fit=crop&q=80",
     category: "credit"
   },
   {
     id: 13,
     title: "Créditos pelo BNDES",
     description: "Acesso facilitado às linhas do BNDES com suporte na elaboração e aprovação de projetos.",
-    image: "https://placehold.co/200x150",
+    image: "https://images.unsplash.com/photo-1601597111158-2fceff292cdc?w=800&auto=format&fit=crop&q=80",
     category: "credit"
   },
   {
     id: 14,
     title: "Crédito pelo fundo de investimento",
     description: "Oportunidades exclusivas de crédito através de fundos de investimento nacionais e internacionais.",
-    image: "https://placehold.co/200x150",
+    image: "https://images.unsplash.com/photo-1621501103258-3e135c8c1753?w=800&auto=format&fit=crop&q=80",
     category: "credit"
   },
 ];
