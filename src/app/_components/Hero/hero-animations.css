@@ -32,6 +32,13 @@
   animation: fadeInUp 1s ease-out 0.2s forwards;
 }
 
+/* Test class to disable animations for testing */
+.hero-test-no-animation {
+  opacity: 1 !important;
+  animation: none !important;
+  transform: none !important;
+}
+
 .hero-title {
   font-family: 'Cormorant Garamond', serif;
   font-weight: 700;
@@ -46,6 +53,11 @@
   position: relative;
   margin-bottom: 1.5rem;
   transition: all 0.3s ease;
+}
+
+/* Test class to visualize title boundaries */
+.hero-test-outline .hero-title {
+  outline: 1px dashed rgba(255, 0, 0, 0.5);
 }
 
 .hero-title::after {
