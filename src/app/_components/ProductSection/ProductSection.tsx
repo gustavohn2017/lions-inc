@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import Link from "next/link";
 import { motion } from 'framer-motion';
-import { ArrowRight, Search } from "lucide-react";
+import { ArrowRight, Search, ChevronLeft, ChevronRight } from "lucide-react";
 
 // Categorias de soluções
 const categories = [
@@ -176,6 +176,64 @@ const ProductsSection = () => {
   const nextPage = () => setCurrentPage(prev => Math.min(prev + 1, totalPages));
   const prevPage = () => setCurrentPage(prev => Math.max(prev - 1, 1));
 
+  // Função para renderizar uma paginação limitada com elipses
+  const renderPaginationButtons = () => {
+    const pageNumbers = [];
+    
+    if (totalPages <= 5) {
+      // Se tivermos 5 ou menos páginas, mostramos todas
+      for (let i = 1; i <= totalPages; i++) {
+        pageNumbers.push(i);
+      }
+    } else {
+      // Sempre mostrar a primeira página
+      pageNumbers.push(1);
+      
+      // Lógica para páginas do meio
+      if (currentPage <= 3) {
+        // Se estiver nas primeiras páginas
+        pageNumbers.push(2, 3);
+        pageNumbers.push("ellipsis1");
+      } else if (currentPage >= totalPages - 2) {
+        // Se estiver nas últimas páginas
+        pageNumbers.push("ellipsis1");
+        pageNumbers.push(totalPages - 2, totalPages - 1);
+      } else {
+        // Se estiver no meio
+        pageNumbers.push("ellipsis1");
+        pageNumbers.push(currentPage);
+        pageNumbers.push("ellipsis2");
+      }
+      
+      // Sempre mostrar a última página
+      pageNumbers.push(totalPages);
+    }
+    
+    return pageNumbers.map((number, index) => {
+      if (number === "ellipsis1" || number === "ellipsis2") {
+        return (
+          <span key={`ellipsis-${index}`} className="w-6 h-8 flex items-center justify-center text-gray-400">
+            ...
+          </span>
+        );
+      }
+      
+      return (
+        <button
+          key={number}
+          onClick={() => paginate(number as number)}
+          className={`w-6 h-6 sm:w-8 sm:h-8 rounded-full flex items-center justify-center ${
+            currentPage === number
+              ? "bg-[#AF8E41] text-black font-medium"
+              : "bg-[#2A2D31] text-gray-300 hover:bg-[#AF8E41]/20"
+          }`}
+        >
+          {number}
+        </button>
+      );
+    });
+  };
+
   // Product Card Component
   interface Product {
     id: number;
@@ -305,48 +363,40 @@ const ProductsSection = () => {
               ))}
             </motion.div>
             
-            {/* Pagination Controls */}
+            {/* Pagination Controls - Updated for mobile responsiveness */}
             {totalPages > 1 && (
-              <motion.div className="mt-8 flex justify-center items-center space-x-2" variants={itemVariants}>
-                <button 
-                  onClick={prevPage} 
-                  disabled={currentPage === 1}
-                  className={`px-3 py-1 rounded border ${
-                    currentPage === 1 
-                      ? "border-gray-600 text-gray-600 cursor-not-allowed" 
-                      : "border-[#AF8E41]/30 text-[#AF8E41] hover:bg-[#AF8E41]/10"
-                  }`}
-                >
-                  Anterior
-                </button>
-                
-                <div className="flex space-x-1">
-                  {Array.from({ length: totalPages }, (_, i) => i + 1).map(number => (
-                    <button
-                      key={number}
-                      onClick={() => paginate(number)}
-                      className={`w-8 h-8 rounded-full ${
-                        currentPage === number
-                          ? "bg-[#AF8E41] text-black font-medium"
-                          : "bg-[#2A2D31] text-gray-300 hover:bg-[#AF8E41]/20"
-                      }`}
-                    >
-                      {number}
-                    </button>
-                  ))}
+              <motion.div className="mt-8 flex justify-center items-center" variants={itemVariants}>
+                <div className="flex items-center space-x-1 sm:space-x-2">
+                  <button 
+                    onClick={prevPage} 
+                    disabled={currentPage === 1}
+                    aria-label="Página anterior"
+                    className={`w-8 h-8 flex items-center justify-center rounded border ${
+                      currentPage === 1 
+                        ? "border-gray-600 text-gray-600 cursor-not-allowed" 
+                        : "border-[#AF8E41]/30 text-[#AF8E41] hover:bg-[#AF8E41]/10"
+                    }`}
+                  >
+                    <ChevronLeft className="h-4 w-4" />
+                  </button>
+                  
+                  <div className="flex space-x-1 mx-1">
+                    {renderPaginationButtons()}
+                  </div>
+                  
+                  <button 
+                    onClick={nextPage} 
+                    disabled={currentPage === totalPages}
+                    aria-label="Próxima página"
+                    className={`w-8 h-8 flex items-center justify-center rounded border ${
+                      currentPage === totalPages 
+                        ? "border-gray-600 text-gray-600 cursor-not-allowed" 
+                        : "border-[#AF8E41]/30 text-[#AF8E41] hover:bg-[#AF8E41]/10"
+                    }`}
+                  >
+                    <ChevronRight className="h-4 w-4" />
+                  </button>
                 </div>
-                
-                <button 
-                  onClick={nextPage} 
-                  disabled={currentPage === totalPages}
-                  className={`px-3 py-1 rounded border ${
-                    currentPage === totalPages 
-                      ? "border-gray-600 text-gray-600 cursor-not-allowed" 
-                      : "border-[#AF8E41]/30 text-[#AF8E41] hover:bg-[#AF8E41]/10"
-                  }`}
-                >
-                  Próximo
-                </button>
               </motion.div>
             )}
           </>
