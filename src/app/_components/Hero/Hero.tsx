@@ -102,7 +102,7 @@ export function Hero() {
             </div>
           </div>
 
-          {/* Right Side - Logo as Background Image */}
+          {/* Right Side - Logo as Background Image - Only visible on desktop */}
           <div className="relative md:w-2/5 mt-6 md:mt-0 md:ml-auto hidden lg:block">
             <div 
               className="w-full h-[220px] lg:h-[260px] bg-contain bg-center bg-no-repeat hero-image-animate"
@@ -117,8 +117,12 @@ export function Hero() {
 
       {/* Mobile & Tablet Logo Background - Only visible on mobile and tablet */}
       <div 
-        className="absolute inset-0 lg:hidden z-10 opacity-30 bg-contain bg-center bg-no-repeat hero-background-image"
-        style={{ backgroundImage: `url(${logo_lions_bank.src})` }}
+        className="absolute inset-0 lg:hidden z-10 bg-no-repeat hero-background-image"
+        style={{ 
+          backgroundImage: `url(${logo_lions_bank.src})`,
+          backgroundSize: '70%', // Reduced size to prevent cropping
+          backgroundPosition: 'center center' // Centered positioning
+        }}
       >
         <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-black/20" />
       </div>

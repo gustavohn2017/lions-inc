@@ -46,6 +46,13 @@
   animation: fadeIn 0.8s ease-out 0.5s forwards;
 }
 
+/* Added specific styling for the background image on mobile/tablet */
+@media (max-width: 1023px) {
+  .hero-background-image {
+    opacity: 0.3 !important; /* Setting fixed transparency for small screens */
+  }
+}
+
 /* Test class to disable animations for testing */
 .hero-test-no-animation {
   opacity: 1 !important;
