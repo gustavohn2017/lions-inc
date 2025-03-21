@@ -1,0 +1,87 @@
+/* Responsive Utilities for Lions Inc */
+
+/* Prevent text overflow */
+.text-no-break {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.text-wrap {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+/* Responsive image containers */
+.img-container {
+  width: 100%;
+  height: auto;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.img-container img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  padding: 0;
+}
+
+/* Responsive font sizing utilities */
+.responsive-text-sm {
+  font-size: clamp(0.875rem, 2vw, 1rem);
+  line-height: 1.4;
+}
+
+.responsive-text-md {
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  line-height: 1.5;
+}
+
+.responsive-text-lg {
+  font-size: clamp(1.25rem, 3vw, 1.5rem);
+  line-height: 1.4;
+}
+
+.responsive-text-xl {
+  font-size: clamp(1.5rem, 3.5vw, 2rem);
+  line-height: 1.3;
+}
+
+/* Fluid spacing utilities */
+.fluid-margin {
+  margin: clamp(1rem, 3vw, 2rem);
+}
+
+.fluid-padding {
+  padding: clamp(1rem, 3vw, 2rem);
+}
+
+/* Grid layout helpers */
+.responsive-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: clamp(1rem, 3vw, 2rem);
+}
+
+/* Visibility helpers */
+@media (max-width: 767px) {
+  .hide-mobile {
+    display: none !important;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .hide-tablet {
+    display: none !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hide-desktop {
+    display: none !important;
+  }
+}

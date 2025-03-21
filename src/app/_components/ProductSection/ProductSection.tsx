@@ -262,10 +262,10 @@ const ProductsSection = () => {
         className="bg-[#2A2D31] rounded-lg overflow-hidden border border-[#AF8E41]/20 shadow-md 
                 hover:shadow-lg hover:border-[#AF8E41]/40 transition-all duration-300 h-full flex flex-col"
       >
-        <div className="p-5 flex flex-col h-full">
-          <div className="flex flex-col mb-4">
+        <div className="p-4 flex flex-col h-full">
+          <div className="flex flex-col mb-3">
             <div className="w-full mb-3">
-              <div className="rounded-md overflow-hidden border border-[#AF8E41]/20 relative" style={{minHeight: "150px"}}>
+              <div className="rounded-md overflow-hidden border border-[#AF8E41]/20 relative" style={{minHeight: "140px"}}>
                 {imageLoading && (
                   <div className="absolute inset-0 flex items-center justify-center bg-[#1A1D20]/50">
                     <div className="w-8 h-8 border-2 border-[#AF8E41] border-t-transparent rounded-full animate-spin"></div>
@@ -274,26 +274,26 @@ const ProductsSection = () => {
                 <img
                   src={imageError ? "/fallback-image.jpg" : product.image}
                   alt={product.title}
-                  className={`w-full h-auto aspect-[3/2] object-cover ${imageLoading ? 'opacity-0' : 'opacity-100'} transition-opacity duration-300`}
+                  className={`w-full h-full aspect-[3/2] object-cover ${imageLoading ? 'opacity-0' : 'opacity-100'} transition-opacity duration-300`}
                   onError={handleImageError}
                   onLoad={handleImageLoad}
                 />
               </div>
             </div>
             <div className="w-full">
-              <h3 className="text-lg md:text-xl text-[#AF8E41] font-['Cormorant_Garamond'] tracking-wide font-bold mb-2">
+              <h3 className="text-base md:text-lg text-[#AF8E41] font-['Cormorant_Garamond'] tracking-wide font-bold mb-2 line-clamp-2">
                 {product.title}
               </h3>
-              <p className="text-gray-300 text-sm md:text-base">
+              <p className="text-gray-300 text-xs md:text-sm line-clamp-3">
                 {product.description}
               </p>
             </div>
           </div>
           <Link 
             href="#contato" 
-            className="inline-flex items-center text-[#AF8E41] hover:text-[#C6A052] font-semibold transition-colors text-sm mt-auto self-end"
+            className="inline-flex items-center text-[#AF8E41] hover:text-[#C6A052] font-semibold transition-colors text-xs md:text-sm mt-auto self-end"
           >
-            Tenho interesse <ArrowRight className="ml-1 h-4 w-4" />
+            Tenho interesse <ArrowRight className="ml-1 h-3.5 w-3.5" />
           </Link>
         </div>
       </motion.div>
@@ -301,32 +301,32 @@ const ProductsSection = () => {
   };
 
   return (
-    <section className="bg-gradient-to-b from-[#1A1D20] to-[#242729] py-12 px-4 sm:px-6 lg:px-8">
+    <section className="bg-gradient-to-b from-[#1A1D20] to-[#242729] py-8 sm:py-12 px-4 sm:px-6 lg:px-8">
       <motion.div
         className="max-w-6xl mx-auto"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
       >
-        <motion.div className="text-center mb-8" variants={itemVariants}>
-          <h2 className="text-3xl md:text-5xl text-[#AF8E41] font-bold mb-3 font-['Cormorant_Garamond'] tracking-wider">
+        <motion.div className="text-center mb-6 sm:mb-8" variants={itemVariants}>
+          <h2 className="text-2xl sm:text-3xl md:text-5xl text-[#AF8E41] font-bold mb-2 sm:mb-3 font-['Cormorant_Garamond'] tracking-wider">
             NOSSAS SOLUÇÕES {/* Changed from PRODUTOS to SOLUÇÕES */}
           </h2>
-          <div className="w-24 h-0.5 bg-gradient-to-r from-transparent via-[#AF8E41] to-transparent mx-auto mb-3"></div>
-          <p className="text-gray-400 text-base md:text-lg max-w-2xl mx-auto font-light">
+          <div className="w-16 sm:w-24 h-0.5 bg-gradient-to-r from-transparent via-[#AF8E41] to-transparent mx-auto mb-2 sm:mb-3"></div>
+          <p className="text-gray-400 text-sm md:text-base max-w-2xl mx-auto font-light">
             Encontre a solução financeira ideal para suas necessidades
           </p>
         </motion.div>
 
-        {/* Search and Filter Controls */}
-        <motion.div className="mb-6 flex flex-col md:flex-row justify-between items-center gap-4" variants={itemVariants}>
-          {/* Category Filters */}
-          <div className="flex flex-wrap justify-center md:justify-start gap-2">
+        {/* Search and Filter Controls - Improved responsive layout */}
+        <motion.div className="mb-6 flex flex-col md:flex-row justify-between items-center gap-3 md:gap-4" variants={itemVariants}>
+          {/* Category Filters - Scrollable on mobile */}
+          <div className="flex flex-nowrap overflow-x-auto md:flex-wrap justify-start md:justify-start gap-2 w-full md:w-auto pb-2 md:pb-0 hide-scrollbar">
             {categories.map(category => (
               <button
                 key={category.id}
                 onClick={() => setActiveCategory(category.id)}
-                className={`px-3 py-1 rounded-full text-sm transition-all duration-200 ${
+                className={`px-3 py-1 rounded-full text-xs sm:text-sm transition-all duration-200 whitespace-nowrap flex-shrink-0 ${
                   activeCategory === category.id
                     ? "bg-[#AF8E41] text-black font-medium"
                     : "bg-[#2A2D31] text-gray-300 hover:bg-[#AF8E41]/20"
@@ -338,13 +338,13 @@ const ProductsSection = () => {
           </div>
           
           {/* Search Input */}
-          <div className="relative w-full md:w-auto">
+          <div className="relative w-full md:w-auto mt-3 md:mt-0">
             <input
               type="text"
               placeholder="Buscar soluções..." /* Changed from produtos to soluções */
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="py-2 pl-9 pr-4 w-full md:w-64 bg-[#2A2D31] border border-[#AF8E41]/20 rounded-md text-gray-200 
+              className="py-2 pl-9 pr-3 w-full md:w-64 bg-[#2A2D31] border border-[#AF8E41]/20 rounded-md text-gray-200 
                        focus:outline-none focus:border-[#AF8E41]/50 text-sm"
             />
             <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-gray-400" />

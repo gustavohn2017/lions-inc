@@ -117,23 +117,23 @@ const Testimonial: React.FC = () => {
               <motion.div
                 key={testimonial.id}
                 variants={itemVariants}
-                className="bg-white/5 backdrop-blur-sm p-6 rounded-lg shadow-md flex flex-col justify-between items-center h-full border border-gray-700/30 hover:border-[#AF8E41]/30 transition-all duration-300"
+                className="bg-white/5 backdrop-blur-sm p-4 sm:p-6 rounded-lg shadow-md flex flex-col justify-between items-center h-full border border-gray-700/30 hover:border-[#AF8E41]/30 transition-all duration-300"
               >
                 {/* Avatar e Nome */}
                 <div className="flex flex-col items-center text-center">
                   <img
                     src={testimonial.avatar}
                     alt={testimonial.name}
-                    className="w-16 h-16 rounded-full mb-4 border-2 border-[#AF8E41] object-cover"
+                    className="w-14 h-14 sm:w-16 sm:h-16 rounded-full mb-3 sm:mb-4 border-2 border-[#AF8E41] object-cover"
                   />
-                  <h3 className="text-xl font-cormorant font-bold text-[#C6A052] mb-1">
+                  <h3 className="text-lg sm:text-xl font-cormorant font-bold text-[#C6A052] mb-1">
                     {testimonial.name}
                   </h3>
-                  <div className="flex my-2">
+                  <div className="flex my-1 sm:my-2">
                     {Array.from({ length: 5 }).map((_, index) => (
                       <span
                         key={index}
-                        className={`text-yellow-500 text-xl ${
+                        className={`text-yellow-500 text-base sm:text-lg ${
                           index < testimonial.rating ? "opacity-100" : "opacity-30"
                         }`}
                       >
@@ -141,15 +141,15 @@ const Testimonial: React.FC = () => {
                       </span>
                     ))}
                   </div>
-                  <p className="text-gray-300 text-center mt-2 text-sm sm:text-base">
+                  <p className="text-gray-300 text-center mt-1 sm:mt-2 text-xs sm:text-sm line-clamp-4 sm:line-clamp-none">
                     {testimonial.comment}
                   </p>
                 </div>
 
                 {/* Linha Divisória */}
-                <div className="w-full border-t border-gray-700/30 my-4"></div>
+                <div className="w-full border-t border-gray-700/30 my-3 sm:my-4"></div>
 
-                {/* Área de Mídia */}
+                {/* Área de Mídia - Responsive height */}
                 <div className="w-full">
                   {testimonial.mediaType === "video" ? (
                     <div className="aspect-video rounded-lg overflow-hidden">
@@ -207,9 +207,9 @@ const Testimonial: React.FC = () => {
                   {testimonials.map((testimonial) => (
                     <div 
                       key={testimonial.id}
-                      className="w-full flex-shrink-0"
+                      className="w-full flex-shrink-0 px-2"
                     >
-                      <div className="bg-white/5 backdrop-blur-sm p-6 rounded-lg shadow-md flex flex-col justify-between items-center min-h-[400px] border border-gray-700/30 mx-4">
+                      <div className="bg-white/5 backdrop-blur-sm p-4 rounded-lg shadow-md flex flex-col justify-between items-center min-h-[380px] border border-gray-700/30 mx-2">
                         <div className="flex flex-col items-center text-center">
                           <img
                             src={testimonial.avatar}

@@ -208,6 +208,64 @@
   }
 }
 
+/* Add the following to the end of your globals.css file */
+
+/* Hide scrollbar but keep functionality */
+.hide-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;     /* Firefox */
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;  /* Chrome, Safari and Opera */
+}
+
+/* Ensure images don't overflow containers */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Ensure text doesn't overflow */
+.text-ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Improve responsive typography */
+@media (max-width: 640px) {
+  h1, .text-h1 {
+    font-size: clamp(1.5rem, 5vw, 2.25rem);
+    line-height: 1.2;
+  }
+  
+  h2, .text-h2 {
+    font-size: clamp(1.25rem, 4vw, 1.875rem);
+    line-height: 1.2;
+  }
+  
+  h3, .text-h3 {
+    font-size: clamp(1rem, 3.5vw, 1.5rem);
+    line-height: 1.3;
+  }
+  
+  p, .text-body {
+    font-size: clamp(0.875rem, 2.5vw, 1rem);
+  }
+}
+
+/* Add responsive padding class utilities */
+.responsive-px {
+  padding-left: clamp(1rem, 5vw, 2rem);
+  padding-right: clamp(1rem, 5vw, 2rem);
+}
+
+.responsive-py {
+  padding-top: clamp(1.5rem, 5vw, 3rem);
+  padding-bottom: clamp(1.5rem, 5vw, 3rem);
+}
+
 @media print {
   .print-hide {
     display: none;

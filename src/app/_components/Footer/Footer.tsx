@@ -6,9 +6,9 @@ import logo_lions_bank from '@assets/logo_lions_bank.png';
 
 const Footer = () => {
   return (
-    <footer className="bg-[#1A1A1E] text-white pt-12 pb-6">
+    <footer className="bg-[#1A1A1E] text-white pt-8 sm:pt-12 pb-6">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+        <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 mb-6 sm:mb-8">
           {/* Column 1 - Logo and About */}
           <div className="flex flex-col">
             <div className="mb-3">
@@ -17,10 +17,10 @@ const Footer = () => {
                 alt="Lions Bank Logo" 
                 width={150} 
                 height={50}
-                className="w-32 sm:w-40"
+                className="w-28 xs:w-32 sm:w-40"
               />
             </div>
-            <p className="text-gray-400 text-sm mb-4">
+            <p className="text-gray-400 text-xs sm:text-sm mb-4">
               Oferecemos soluções financeiras personalizadas para atender às suas necessidades e ajudar a alcançar seus objetivos.
             </p>
             <div className="flex space-x-4 mt-auto">
@@ -31,7 +31,7 @@ const Footer = () => {
                 className="text-gray-400 hover:text-[#AF8E41] transition-colors"
                 aria-label="LinkedIn"
               >
-                <Linkedin size={18} />
+                <Linkedin size={16} className="sm:size-[18px]" />
               </a>
               <a
                 href="https://www.instagram.com"
@@ -65,35 +65,35 @@ const Footer = () => {
 
           {/* Column 2 - Quick Links */}
           <div>
-            <h3 className="text-lg font-medium mb-4 text-[#AF8E41]">Links Rápidos</h3>
-            <ul className="space-y-2">
+            <h3 className="text-base sm:text-lg font-medium mb-3 sm:mb-4 text-[#AF8E41]">Links Rápidos</h3>
+            <ul className="space-y-1.5 sm:space-y-2">
               <li>
-                <Link href="/" className="text-gray-400 hover:text-[#AF8E41] transition-colors text-sm">
+                <Link href="/" className="text-gray-400 hover:text-[#AF8E41] transition-colors text-xs sm:text-sm">
                   Home
                 </Link>
               </li>
               <li>
-                <Link href="/about" className="text-gray-400 hover:text-[#AF8E41] transition-colors text-sm">
+                <Link href="/about" className="text-gray-400 hover:text-[#AF8E41] transition-colors text-xs sm:text-sm">
                   Quem Somos
                 </Link>
               </li>
               <li>
-                <Link href="/produtos" className="text-gray-400 hover:text-[#AF8E41] transition-colors text-sm">
+                <Link href="/produtos" className="text-gray-400 hover:text-[#AF8E41] transition-colors text-xs sm:text-sm">
                   Produtos e Serviços
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="text-gray-400 hover:text-[#AF8E41] transition-colors text-sm">
+                <Link href="/contact" className="text-gray-400 hover:text-[#AF8E41] transition-colors text-xs sm:text-sm">
                   Contato
                 </Link>
               </li>
               <li>
-                <Link href="/terms" className="text-gray-400 hover:text-[#AF8E41] transition-colors text-sm">
+                <Link href="/terms" className="text-gray-400 hover:text-[#AF8E41] transition-colors text-xs sm:text-sm">
                   Termos de Uso
                 </Link>
               </li>
               <li>
-                <Link href="/privacy" className="text-gray-400 hover:text-[#AF8E41] transition-colors text-sm">
+                <Link href="/privacy" className="text-gray-400 hover:text-[#AF8E41] transition-colors text-xs sm:text-sm">
                   Política de Privacidade
                 </Link>
               </li>
@@ -155,11 +155,11 @@ const Footer = () => {
         </div>
 
         {/* Divider */}
-        <div className="h-px bg-gradient-to-r from-transparent via-gray-700 to-transparent my-6"></div>
+        <div className="h-px bg-gradient-to-r from-transparent via-gray-700 to-transparent my-5 sm:my-6"></div>
 
         {/* Copyright */}
         <div className="text-center">
-          <p className="text-gray-500 text-xs sm:text-sm">
+          <p className="text-gray-500 text-xxs xs:text-xs sm:text-sm">
             © {new Date().getFullYear()} Lions Bank - Todos os direitos reservados.
           </p>
         </div>

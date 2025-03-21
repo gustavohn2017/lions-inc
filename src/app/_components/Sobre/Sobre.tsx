@@ -88,24 +88,24 @@ const Sobre: React.FC = () => {
         </h2>
         
         {isMobile ? (
-          <div className="relative h-[500px]">
-            <div className="h-[400px] mb-8">
+          <div className="relative h-[460px] md:h-[500px]">
+            <div className="h-[380px] mb-8">
               <Slider ref={sliderRef} {...sliderSettings}>
                 {content.map((item) => (
-                  <div key={item.id} className="!h-[400px]">
+                  <div key={item.id} className="!h-[380px]">
                     <motion.div
                       variants={itemVariants}
-                      className="bg-[#2A2D31] rounded-lg shadow-lg p-8 h-full"
+                      className="bg-[#2A2D31] rounded-lg shadow-lg p-5 sm:p-8 h-full"
                     >
                       <div className="flex flex-col items-center h-full">
-                        <div className="mb-8 transform hover:scale-110 transition-transform duration-300">
+                        <div className="mb-6 transform hover:scale-110 transition-transform duration-300">
                           {item.icon}
                         </div>
-                        <h3 className="title-card text-3xl font-semibold text-[#AF8E41] mb-6 text-center font-['Cormorant_Garamond'] tracking-wide">
+                        <h3 className="title-card text-2xl sm:text-3xl font-semibold text-[#AF8E41] mb-4 sm:mb-6 text-center font-['Cormorant_Garamond'] tracking-wide">
                           {item.title}
                         </h3>
-                        <div className="overflow-y-auto flex-1 scrollbar-hide">
-                          <p className="text-gray-300 text-lg leading-relaxed text-center">
+                        <div className="overflow-y-auto flex-1 scrollbar-hide px-1 max-h-[200px]">
+                          <p className="text-gray-300 text-base sm:text-lg leading-relaxed text-center">
                             {item.content}
                           </p>
                         </div>
@@ -152,22 +152,22 @@ const Sobre: React.FC = () => {
             </div>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 h-[500px]">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 h-auto md:h-[500px]">
             {content.map((item) => (
               <motion.div
                 key={item.id}
                 variants={itemVariants}
                 className="bg-[#2A2D31] rounded-lg overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-2 h-full"
               >
-                <div className="p-8 flex flex-col items-center h-full">
-                  <div className="mb-8 transform hover:scale-110 transition-transform duration-300">
+                <div className="p-5 sm:p-8 flex flex-col items-center h-full">
+                  <div className="mb-6 transform hover:scale-110 transition-transform duration-300">
                     {item.icon}
                   </div>
-                  <h3 className="title-card text-3xl font-semibold text-[#AF8E41] mb-6 text-center font-['Cormorant_Garamond'] tracking-wide">
+                  <h3 className="title-card text-2xl sm:text-3xl font-semibold text-[#AF8E41] mb-4 sm:mb-6 text-center font-['Cormorant_Garamond'] tracking-wide">
                     {item.title}
                   </h3>
-                  <div className="overflow-y-auto flex-1 scrollbar-hide">
-                    <p className="text-gray-300 text-lg leading-relaxed text-center">
+                  <div className="overflow-y-auto flex-1 scrollbar-hide px-1">
+                    <p className="text-gray-300 text-base sm:text-lg leading-relaxed text-center">
                       {item.content}
                     </p>
                   </div>

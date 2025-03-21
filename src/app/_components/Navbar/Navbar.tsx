@@ -104,7 +104,7 @@ const Navbar: React.FC = () => {
           : 'bg-[#1A1A1E]'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8">
         <div className="flex justify-between items-center h-16 md:h-20">
           {/* Logo */}
           <div className="flex-shrink-0">
@@ -112,7 +112,7 @@ const Navbar: React.FC = () => {
               <Image 
                 src={logo_lions_bank} 
                 alt="Lions Bank" 
-                className="h-9 w-auto"
+                className="h-8 sm:h-9 w-auto"
                 height={36}
                 width={120}
                 priority
@@ -120,8 +120,8 @@ const Navbar: React.FC = () => {
             </a>
           </div>
           
-          {/* Desktop menu */}
-          <nav className="hidden md:flex items-center space-x-1">
+          {/* Desktop menu - improved padding */}
+          <nav className="hidden md:flex items-center space-x-0.5 lg:space-x-1">
             {navItems.map((item) => (
               <a
                 key={item.id}
@@ -131,7 +131,7 @@ const Navbar: React.FC = () => {
                   scrollToSection(item.id);
                 }}
                 className={`
-                  px-3 py-2 rounded-md text-sm font-medium transition-all duration-200
+                  px-2 lg:px-3 py-2 rounded-md text-xs lg:text-sm font-medium transition-all duration-200
                   ${item.isPrimary 
                     ? `bg-gradient-to-r from-[#AF8E41] to-[#C6A052] text-white shadow-sm 
                        hover:shadow-md hover:from-[#C6A052] hover:to-[#D6B062]` 
@@ -176,7 +176,7 @@ const Navbar: React.FC = () => {
         </div>
       </div>
       
-      {/* Mobile menu */}
+      {/* Mobile menu - improved spacing */}
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div
@@ -187,7 +187,7 @@ const Navbar: React.FC = () => {
             transition={{ duration: 0.2 }}
             className="md:hidden"
           >
-            <div className="px-4 pt-2 pb-4 space-y-1 bg-[#1E1E22] border-t border-[#333]/30">
+            <div className="px-3 pt-2 pb-3 space-y-1 bg-[#1E1E22] border-t border-[#333]/30">
               {navItems.map((item) => (
                 <a
                   key={item.id}
@@ -197,7 +197,7 @@ const Navbar: React.FC = () => {
                     scrollToSection(item.id);
                   }}
                   className={`
-                    block px-3 py-2.5 rounded-md text-base font-medium transition-all duration-200
+                    block px-3 py-2 rounded-md text-sm font-medium transition-all duration-200
                     ${item.isPrimary 
                       ? 'bg-gradient-to-r from-[#AF8E41] to-[#C6A052] text-white' 
                       : activeSection === item.id

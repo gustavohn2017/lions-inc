@@ -33,71 +33,71 @@ const Contato: React.FC = () => {
     };
 
     return (
-        <section id="contato" className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-[#242729] to-[#1A1D20]">
+        <section id="contato" className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-[#242729] to-[#1A1D20]">
             <div className="max-w-6xl mx-auto">
                 <motion.div 
-                    className="text-center mb-10"
+                    className="text-center mb-8 sm:mb-10"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5 }}
                 >
-                    <h2 className="text-3xl sm:text-4xl md:text-5xl text-[#AF8E41] font-bold mb-3 font-['Cormorant_Garamond'] tracking-wider">
+                    <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-[#AF8E41] font-bold mb-3 font-['Cormorant_Garamond'] tracking-wider">
                         ENTRE EM CONTATO
                     </h2>
-                    <div className="w-24 h-0.5 bg-gradient-to-r from-transparent via-[#AF8E41] to-transparent mx-auto mb-4"></div>
+                    <div className="w-20 sm:w-24 h-0.5 bg-gradient-to-r from-transparent via-[#AF8E41] to-transparent mx-auto mb-3 sm:mb-4"></div>
                     <p className="text-gray-400 text-sm sm:text-base max-w-2xl mx-auto">
                         Estamos prontos para atender suas necessidades financeiras e esclarecer todas as suas dúvidas
                     </p>
                 </motion.div>
 
-                <div className="flex flex-col lg:flex-row gap-8 lg:gap-12">
-                    {/* Contact Information */}
+                <div className="flex flex-col lg:flex-row gap-6 sm:gap-8 lg:gap-12">
+                    {/* Contact Information - Improved spacing */}
                     <motion.div 
-                        className="w-full lg:w-1/3 space-y-8"
+                        className="w-full lg:w-1/3 space-y-6 sm:space-y-8"
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.5, delay: 0.2 }}
                     >
-                        <div className="bg-[#2A2D31] p-6 sm:p-8 rounded-lg border border-[#AF8E41]/20 shadow-md">
-                            <h3 className="text-2xl text-[#AF8E41] font-['Cormorant_Garamond'] font-bold mb-6">
+                        <div className="bg-[#2A2D31] p-5 sm:p-6 md:p-8 rounded-lg border border-[#AF8E41]/20 shadow-md">
+                            <h3 className="text-xl sm:text-2xl text-[#AF8E41] font-['Cormorant_Garamond'] font-bold mb-5 sm:mb-6">
                                 Informações de Contato
                             </h3>
-                            <div className="space-y-5">
+                            <div className="space-y-4 sm:space-y-5">
                                 <div className="flex items-start">
-                                    <div className="bg-[#343941] p-2 rounded-md mr-4">
-                                        <MapPin className="h-5 w-5 text-[#AF8E41]" />
+                                    <div className="bg-[#343941] p-2 rounded-md mr-3 sm:mr-4">
+                                        <MapPin className="h-4 w-4 sm:h-5 sm:w-5 text-[#AF8E41]" />
                                     </div>
                                     <div>
-                                        <h4 className="text-white text-sm font-medium mb-1">Localização</h4>
-                                        <p className="text-gray-400 text-sm">Av. Paulista, 1000 - Bela Vista, São Paulo - SP</p>
+                                        <h4 className="text-white text-xs sm:text-sm font-medium mb-1">Localização</h4>
+                                        <p className="text-gray-400 text-xs sm:text-sm">Av. Paulista, 1000 - Bela Vista, São Paulo - SP</p>
                                     </div>
                                 </div>
                                 
                                 <div className="flex items-start">
-                                    <div className="bg-[#343941] p-2 rounded-md mr-4">
-                                        <Phone className="h-5 w-5 text-[#AF8E41]" />
+                                    <div className="bg-[#343941] p-2 rounded-md mr-3 sm:mr-4">
+                                        <Phone className="h-4 w-4 sm:h-5 sm:w-5 text-[#AF8E41]" />
                                     </div>
                                     <div>
-                                        <h4 className="text-white text-sm font-medium mb-1">Telefone</h4>
-                                        <p className="text-gray-400 text-sm">(11) 99999-9999</p>
+                                        <h4 className="text-white text-xs sm:text-sm font-medium mb-1">Telefone</h4>
+                                        <p className="text-gray-400 text-xs sm:text-sm">(11) 99999-9999</p>
                                     </div>
                                 </div>
                                 
                                 <div className="flex items-start">
-                                    <div className="bg-[#343941] p-2 rounded-md mr-4">
-                                        <Mail className="h-5 w-5 text-[#AF8E41]" />
+                                    <div className="bg-[#343941] p-2 rounded-md mr-3 sm:mr-4">
+                                        <Mail className="h-4 w-4 sm:h-5 sm:w-5 text-[#AF8E41]" />
                                     </div>
                                     <div>
-                                        <h4 className="text-white text-sm font-medium mb-1">E-mail</h4>
-                                        <p className="text-gray-400 text-sm">contato@lionsbank.com.br</p>
+                                        <h4 className="text-white text-xs sm:text-sm font-medium mb-1">E-mail</h4>
+                                        <p className="text-gray-400 text-xs sm:text-sm">contato@lionsbank.com.br</p>
                                     </div>
                                 </div>
                             </div>
                             
-                            <div className="mt-8 pt-6 border-t border-[#AF8E41]/20">
-                                <h4 className="text-white text-sm font-medium mb-3">Horário de Atendimento</h4>
-                                <p className="text-gray-400 text-sm mb-1">Segunda - Sexta: 9h às 18h</p>
-                                <p className="text-gray-400 text-sm">Sábado: 9h às 13h</p>
+                            <div className="mt-6 sm:mt-8 pt-4 sm:pt-6 border-t border-[#AF8E41]/20">
+                                <h4 className="text-white text-xs sm:text-sm font-medium mb-2 sm:mb-3">Horário de Atendimento</h4>
+                                <p className="text-gray-400 text-xs sm:text-sm mb-1">Segunda - Sexta: 9h às 18h</p>
+                                <p className="text-gray-400 text-xs sm:text-sm">Sábado: 9h às 13h</p>
                             </div>
                         </div>
                     </motion.div>
@@ -109,12 +109,12 @@ const Contato: React.FC = () => {
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.5, delay: 0.3 }}
                     >
-                        <div className="bg-[#2A2D31] p-6 sm:p-8 rounded-lg border border-[#AF8E41]/20 shadow-md">
-                            <h3 className="text-2xl text-[#AF8E41] font-['Cormorant_Garamond'] font-bold mb-6">
+                        <div className="bg-[#2A2D31] p-5 sm:p-6 md:p-8 rounded-lg border border-[#AF8E41]/20 shadow-md">
+                            <h3 className="text-xl sm:text-2xl text-[#AF8E41] font-['Cormorant_Garamond'] font-bold mb-5 sm:mb-6">
                                 Envie sua Mensagem
                             </h3>
                             
-                            <form onSubmit={handleSubmit} className="space-y-5">
+                            <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                                     <div>
                                         <label htmlFor="name" className="block text-white text-sm mb-2">Nome Completo *</label>

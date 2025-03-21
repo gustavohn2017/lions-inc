@@ -8,7 +8,7 @@ import './hero-animations.css';
 
 export function Hero() {
   return (
-    <section className="relative overflow-hidden min-h-[200px] sm:min-h-[220px] md:min-h-[260px] lg:min-h-[280px]">
+    <section className="relative overflow-hidden min-h-[200px] sm:min-h-[220px] md:min-h-[280px] lg:min-h-[320px]">
       {/* Background with Subtle Silver Stripes */}
       <div className="absolute inset-0">
         {/* Base Layer */}
@@ -64,7 +64,7 @@ export function Hero() {
         <div className="flex flex-col md:flex-row items-center w-full py-4 sm:py-5 md:py-6">
           {/* Left Content - Text and Buttons */}
           <div className="flex flex-col w-full md:w-3/5 items-center md:items-start hero-content-animate">
-            <h1 className="hero-title text-center md:text-left text-3xl sm:text-4xl md:text-5xl">
+            <h1 className="hero-title text-center md:text-left text-2xl xs:text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight">
               LIONS BANK INVEST
             </h1>
 
@@ -74,28 +74,28 @@ export function Hero() {
               Oferecemos orçamentos sem compromisso.
             </p>
 
-            {/* CTA Buttons */}
+            {/* CTA Buttons - More responsive layout */}
             <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 pt-1 md:pt-2 justify-center md:justify-start w-full sm:w-auto">
               <a
                 href="#servicos"
-                className="flex-1 sm:flex-initial text-center px-4 sm:px-5 py-2 
+                className="flex-1 sm:flex-initial text-center px-4 sm:px-5 py-2.5 
                 bg-gradient-to-r from-[#AF8E41] to-[#C6A052] hover:from-[#C6A052] hover:to-[#AF8E41]
-                text-white rounded-lg transition-all duration-300 text-xs sm:text-sm font-medium
+                text-white rounded-lg transition-all duration-300 text-sm font-medium
                 hover:shadow-[0_0_15px_rgba(175,142,65,0.25)] hover:-translate-y-0.5
-                border border-[#AF8E41]/10"
+                border border-[#AF8E41]/10 whitespace-nowrap"
               >
-                Conheça os nossos Serviços
+                Conheça os Serviços
               </a>
 
               <a
                 href="https://wa.me/5511999999999"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 sm:flex-initial flex items-center justify-center px-4 sm:px-5 py-2 bg-[#075e54] hover:bg-[#128c7e] text-white rounded-lg transition-all duration-300 text-xs sm:text-sm font-medium hover:shadow-md hover:-translate-y-0.5 group border border-emerald-700/10"
+                className="flex-1 sm:flex-initial flex items-center justify-center px-4 sm:px-5 py-2.5 bg-[#075e54] hover:bg-[#128c7e] text-white rounded-lg transition-all duration-300 text-sm font-medium hover:shadow-md hover:-translate-y-0.5 group border border-emerald-700/10 whitespace-nowrap"
               >
                 <FontAwesomeIcon
                   icon={faWhatsapp}
-                  className="mr-2 h-3 sm:h-4 transition-transform duration-300 group-hover:scale-110"
+                  className="mr-2 h-3.5 sm:h-4 transition-transform duration-300 group-hover:scale-110"
                 />
                 Contato via WhatsApp
               </a>
@@ -103,9 +103,9 @@ export function Hero() {
           </div>
 
           {/* Right Side - Logo as Background Image - Only visible on desktop */}
-          <div className="relative md:w-2/5 mt-6 md:mt-0 md:ml-auto hidden lg:block">
+          <div className="relative md:w-2/5 mt-6 md:mt-0 md:ml-auto hidden md:block">
             <div 
-              className="w-full h-[220px] lg:h-[260px] bg-contain bg-center bg-no-repeat hero-image-animate"
+              className="w-full h-[220px] lg:h-[280px] bg-contain bg-center bg-no-repeat hero-image-animate opacity-100"
               style={{ 
                 backgroundImage: `url(${logo_lions_bank.src})`,
                 backgroundPosition: 'center right'
@@ -115,13 +115,13 @@ export function Hero() {
         </div>
       </div>
 
-      {/* Mobile & Tablet Logo Background - Only visible on mobile and tablet */}
+      {/* Mobile & Tablet Logo Background - Only visible below md breakpoint */}
       <div 
-        className="absolute inset-0 lg:hidden z-10 bg-no-repeat hero-background-image"
+        className="absolute inset-0 md:hidden z-10 bg-no-repeat hero-background-image"
         style={{ 
           backgroundImage: `url(${logo_lions_bank.src})`,
-          backgroundSize: '70%', // Reduced size to prevent cropping
-          backgroundPosition: 'center center' // Centered positioning
+          backgroundSize: '65%', 
+          backgroundPosition: 'center center'
         }}
       >
         <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-black/20" />

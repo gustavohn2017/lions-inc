@@ -121,9 +121,9 @@ const Produtos = () => {
                                     <TabsTrigger
                                         key={tab}
                                         value={tab}
-                                        className="relative px-4 py-4 text-lg font-['Cormorant_Garamond'] text-gray-400
+                                        className="relative px-3 py-3 sm:px-4 sm:py-4 text-base sm:text-lg font-['Cormorant_Garamond'] text-gray-400
                                                  bg-[#1E2124]/70 rounded-md overflow-hidden whitespace-normal text-center
-                                                 transition-all duration-300 h-[5rem] w-full flex items-center justify-center
+                                                 transition-all duration-300 h-[4.5rem] sm:h-[5rem] w-full flex items-center justify-center
                                                  hover:text-[#AF8E41] hover:border-[#AF8E41]/30 hover:bg-[#1E2124]/90
                                                  data-[state=active]:text-[#AF8E41] data-[state=active]:bg-[#2A2D31]
                                                  data-[state=active]:font-bold data-[state=active]:shadow-lg
@@ -133,7 +133,7 @@ const Produtos = () => {
                                                  after:-translate-x-1/2 after:w-0 data-[state=active]:after:w-2/3 after:h-0.5 
                                                  after:bg-[#AF8E41] after:transition-all after:duration-300 after:rounded-full"
                                     >
-                                        <span className="line-clamp-2">{produtos[tab].titulo}</span>
+                                        <span className="line-clamp-2 text-center">{produtos[tab].titulo}</span>
                                     </TabsTrigger>
                                 ))}
                             </TabsList>
@@ -144,28 +144,28 @@ const Produtos = () => {
                                 <TabsContent key={tab} value={tab} className="w-full">
                                     <motion.div
                                         variants={itemVariants}
-                                        className="flex flex-col md:flex-row gap-6 bg-[#2A2D31] p-6 md:p-8 rounded-lg
+                                        className="flex flex-col md:flex-row gap-4 sm:gap-6 bg-[#2A2D31] p-4 sm:p-6 md:p-8 rounded-lg
                                                  shadow-md border border-[#AF8E41]/20
                                                  transition-all duration-300"
                                     >
-                                        <div className="flex-1 space-y-5">
-                                            <h3 className="text-3xl md:text-4xl text-[#AF8E41] font-['Cormorant_Garamond'] 
+                                        <div className="flex-1 space-y-4">
+                                            <h3 className="text-2xl sm:text-3xl md:text-4xl text-[#AF8E41] font-['Cormorant_Garamond'] 
                                                        tracking-wide pb-2 border-b border-[#AF8E41]/20 font-bold">
                                                 {conteudo.titulo}
                                             </h3>
-                                            <p className="text-gray-300 text-lg leading-relaxed">
+                                            <p className="text-gray-300 text-base sm:text-lg leading-relaxed">
                                                 {conteudo.descricao}
                                             </p>
-                                            <ul className="space-y-4 pt-3">
+                                            <ul className="space-y-3 sm:space-y-4 pt-3">
                                                 {conteudo.recursos.map((recurso, index) => (
                                                     <motion.li
                                                         key={index}
                                                         initial={{ opacity: 0, x: -10 }}
                                                         animate={{ opacity: 1, x: 0 }}
                                                         transition={{ delay: index * 0.1 + 0.2 }}
-                                                        className="flex items-start text-gray-300 text-base md:text-lg group"
+                                                        className="flex items-start text-gray-300 text-sm sm:text-base md:text-lg group"
                                                     >
-                                                        <CheckCircle className="w-5 h-5 text-[#AF8E41] mt-0.5 mr-3 flex-shrink-0
+                                                        <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-[#AF8E41] mt-0.5 mr-2 sm:mr-3 flex-shrink-0
                                                                     group-hover:scale-110 transition-all duration-200" />
                                                         <span className="group-hover:text-[#AF8E41] transition-colors duration-200">
                                                             {recurso}
@@ -174,7 +174,7 @@ const Produtos = () => {
                                                 ))}
                                             </ul>
                                         </div>
-                                        <div className="md:w-1/3 max-w-[220px] mx-auto md:self-end mt-6 md:mt-0">
+                                        <div className="md:w-1/3 max-w-[180px] sm:max-w-[220px] mx-auto md:self-end mt-4 sm:mt-6 md:mt-0">
                                             <motion.div
                                                 variants={itemVariants}
                                                 className="rounded-lg overflow-hidden shadow-md
