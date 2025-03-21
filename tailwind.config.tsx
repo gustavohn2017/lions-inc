@@ -86,37 +86,6 @@ const config = {
         "fade-in": {
           from: { opacity: "0" },
           to: { opacity: "1" },
-        },dark: '#8B7134',
-        "fade-out": {
-          from: { opacity: "1" },
-          to: { opacity: "0" },
-        },: "var(--radius)",
-        "underline": {--radius) - 2px)",
-          "0%": { transform: "scaleX(0)" },
-          "100%": { transform: "scaleX(1)" }
-        },rames: {
-      },"accordion-down": {
-      animation: {height: "0" },
-        "accordion-down": "accordion-down 0.2s ease-out",ight)" },
-        "accordion-up": "accordion-up 0.2s ease-out",
-        "slide-from-left": "slide-from-left 0.3s ease-out",
-        "slide-to-left": "slide-to-left 0.3s ease-out",t-height)" },
-        "fade-in": "fade-in 0.3s ease-out",
-        "fade-out": "fade-out 0.3s ease-out",
-        "underline": "underline 0.3s ease-out forwards",
-      },  "0%": { transform: "translateX(-100%)" },
-    },    "100%": { transform: "translateX(0)" },
-  },    },
-  plugins: [
-    require("tailwindcss-animate"),transform: "translateX(0)" },
-    require("tailwind-scrollbar-hide"),          "100%": { transform: "translateX(-100%)" },
-  ],
-
-
-
-export default config} satisfies Config        "fade-in": {
-          from: { opacity: "0" },
-          to: { opacity: "1" },
         },
         "fade-out": {
           from: { opacity: "1" },
