@@ -45,39 +45,67 @@ const config = {
         'lg': '1.125rem',  // 18px
         'xl': '1.25rem',   // 20px
         '2xl': '1.5rem',   // 24px
+        '3xl': '1.875rem', // 30px
+        '4xl': '2.25rem',  // 36px
+        '5xl': '3rem',     // 48px
+      },
+      colors: {
+        border: "hsl(var(--border))",
+        input: "hsl(var(--input))",
+        ring: "hsl(var(--ring))",
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
+        primary: {
+          DEFAULT: "hsl(var(--primary))",
+          foreground: "hsl(var(--primary-foreground))",
+        },
+        secondary: {
+          DEFAULT: "hsl(var(--secondary))",
+          foreground: "hsl(var(--secondary-foreground))",
+        },
+        destructive: {
+          DEFAULT: "hsl(var(--destructive))",
+          foreground: "hsl(var(--destructive-foreground))",
+        },
+        muted: {
+          DEFAULT: "hsl(var(--muted))",
+          foreground: "hsl(var(--muted-foreground))",
+        },
+        accent: {
+          DEFAULT: "hsl(var(--accent))",
           foreground: "hsl(var(--accent-foreground))",
-        },xl': '2.25rem',  // 36px
-        popover: {em',     // 48px
+        },
+        popover: {
           DEFAULT: "hsl(var(--popover))",
           foreground: "hsl(var(--popover-foreground))",
-        },rder: "hsl(var(--border))",
-        card: {"hsl(var(--input))",
+        },
+        card: {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
-        },reground: "hsl(var(--foreground))",
-        gold: {: {
-          light: '#C6A052',(--primary))",
-          DEFAULT: '#AF8E41',r(--primary-foreground))",
+        },
+        gold: {
+          light: '#C6A052',
+          DEFAULT: '#AF8E41',
           dark: '#8B7134',
-        },condary: {
-      },  DEFAULT: "hsl(var(--secondary))",
-      borderRadius: { "hsl(var(--secondary-foreground))",
+        },
+      },
+      borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",e))",
-      },  foreground: "hsl(var(--destructive-foreground))",
+        sm: "calc(var(--radius) - 4px)",
+      },
       keyframes: {
         "accordion-down": {
-          from: { height: "0" },ted))",
+          from: { height: "0" },
           to: { height: "var(--radix-accordion-content-height)" },
         },
         "accordion-up": {
           from: { height: "var(--radix-accordion-content-height)" },
-          to: { height: "0" },(--accent-foreground))",
+          to: { height: "0" },
         },
         "slide-from-left": {
           "0%": { transform: "translateX(-100%)" },
-          "100%": { transform: "translateX(0)" },nd))",
+          "100%": { transform: "translateX(0)" },
         },
         "slide-to-left": {
           "0%": { transform: "translateX(0)" },
@@ -107,7 +135,10 @@ const config = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [
+    require("tailwindcss-animate"),
+    require("tailwind-scrollbar-hide"),
+  ],
 } satisfies Config
 
 export default config
