@@ -11,6 +11,15 @@
   }
 }
 
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 @keyframes borderFadeIn {
   from {
     width: 0;
@@ -29,24 +38,12 @@
 
 .hero-image-animate {
   opacity: 0;
-  animation: fadeInUp 0.8s ease-out 0.2s forwards;
+  animation: fadeIn 0.8s ease-out 0.3s forwards;
 }
 
-/* Image opacity based on screen sizes */
-@media (max-width: 1023px) {
-  .hero-image-animate {
-    opacity: 0.4 !important;
-  }
-  
-  .hero-background-image {
-    z-index: 5;
-  }
-}
-
-@media (min-width: 1024px) {
-  .hero-image-animate {
-    opacity: 0.95;
-  }
+.hero-background-image {
+  opacity: 0;
+  animation: fadeIn 0.8s ease-out 0.5s forwards;
 }
 
 /* Test class to disable animations for testing */
@@ -132,10 +129,6 @@
     width: 80px;
     bottom: -6px;
   }
-
-  .hero-image-animate {
-    opacity: 0.9;
-  }
 }
 
 /* Larger screens */
@@ -163,6 +156,7 @@
 @media (prefers-reduced-motion: reduce) {
   .hero-content-animate,
   .hero-image-animate,
+  .hero-background-image,
   .hero-title,
   .hero-title::after {
     animation: none;

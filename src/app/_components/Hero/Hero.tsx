@@ -1,16 +1,14 @@
 "use client";
 
 import React from 'react';
-// ...existing code...
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
-import Image from 'next/image';
 import logo_lions_bank from '@assets/logo_lions_bank.png';
 import './hero-animations.css';
 
 export function Hero() {
   return (
-    <section className="relative overflow-hidden min-h-[180px] sm:min-h-[220px] md:min-h-[240px] lg:min-h-[260px]">
+    <section className="relative overflow-hidden min-h-[200px] sm:min-h-[220px] md:min-h-[260px] lg:min-h-[280px]">
       {/* Background with Subtle Silver Stripes */}
       <div className="absolute inset-0">
         {/* Base Layer */}
@@ -63,9 +61,9 @@ export function Hero() {
 
       {/* Main Content Container */}
       <div className="container mx-auto relative z-20 px-4 sm:px-6 lg:px-8 h-full flex items-center">
-        <div className="flex flex-col md:flex-row items-center justify-between w-full py-3 sm:py-4 md:py-6">
+        <div className="flex flex-col md:flex-row items-center w-full py-4 sm:py-5 md:py-6">
           {/* Left Content - Text and Buttons */}
-          <div className="flex flex-col w-full md:w-1/2 items-center md:items-start hero-content-animate">
+          <div className="flex flex-col w-full md:w-3/5 items-center md:items-start hero-content-animate">
             <h1 className="hero-title text-center md:text-left text-3xl sm:text-4xl md:text-5xl">
               LIONS BANK INVEST
             </h1>
@@ -93,10 +91,7 @@ export function Hero() {
                 href="https://wa.me/5511999999999"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 sm:flex-initial flex items-center justify-center px-4 sm:px-5 py-2 
-                bg-[#075e54] hover:bg-[#128c7e] text-white rounded-lg transition-all 
-                duration-300 text-xs sm:text-sm font-medium hover:shadow-md hover:-translate-y-0.5 group
-                border border-emerald-700/10"
+                className="flex-1 sm:flex-initial flex items-center justify-center px-4 sm:px-5 py-2 bg-[#075e54] hover:bg-[#128c7e] text-white rounded-lg transition-all duration-300 text-xs sm:text-sm font-medium hover:shadow-md hover:-translate-y-0.5 group border border-emerald-700/10"
               >
                 <FontAwesomeIcon
                   icon={faWhatsapp}
@@ -107,35 +102,25 @@ export function Hero() {
             </div>
           </div>
 
-          {/* Center Image */}
-          <div className="relative md:w-1/2 flex justify-center items-center mt-4 md:mt-0">
-            <div className="relative w-full max-w-[160px] sm:max-w-[180px] md:max-w-[220px] lg:max-w-[250px] aspect-square">
-              <Image
-                src={logo_lions_bank}
-                alt="Lions Bank Logo"
-                fill
-                className="object-contain hero-image-animate"
-                priority
-                sizes="(max-width: 640px) 160px, (max-width: 768px) 180px, (max-width: 1024px) 220px, 250px"
-              />
-            </div>
+          {/* Right Side - Logo as Background Image */}
+          <div className="relative md:w-2/5 mt-6 md:mt-0 md:ml-auto hidden md:block">
+            <div 
+              className="w-full h-[220px] lg:h-[260px] bg-contain bg-center bg-no-repeat hero-image-animate"
+              style={{ 
+                backgroundImage: `url(${logo_lions_bank.src})`,
+                backgroundPosition: 'center right'
+              }}
+            />
           </div>
         </div>
       </div>
 
-      {/* Mobile Background Logo - Lower Opacity */}
-      <div className="absolute inset-0 md:hidden hero-background-image">
-        <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-black/20 z-10" />
-        <div className="relative w-full h-full flex items-center justify-center">
-          <Image
-            src={logo_lions_bank}
-            alt="Background Logo"
-            fill
-            className="object-contain p-4 opacity-20"
-            priority
-            sizes="100vw"
-          />
-        </div>
+      {/* Mobile Logo Background - Only visible on mobile */}
+      <div 
+        className="absolute inset-0 md:hidden z-10 opacity-20 bg-contain bg-center bg-no-repeat hero-background-image"
+        style={{ backgroundImage: `url(${logo_lions_bank.src})` }}
+      >
+        <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-black/20" />
       </div>
     </section>
   );
