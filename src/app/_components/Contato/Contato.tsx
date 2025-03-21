@@ -1,61 +1,194 @@
-import React from 'react';
+"use client";
+
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
+import { Send, MapPin, Phone, Mail } from 'lucide-react';
 
 const Contato: React.FC = () => {
+    const [formState, setFormState] = useState({
+        name: '',
+        email: '',
+        phone: '',
+        message: ''
+    });
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        setFormState({
+            ...formState,
+            [e.target.name]: e.target.value
+        });
+    };
+
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        // Form submission logic would go here
+        console.log('Form submitted:', formState);
+        // Reset form after submission
+        setFormState({
+            name: '',
+            email: '',
+            phone: '',
+            message: ''
+        });
+    };
+
     return (
-        <div className="flex flex-col md:flex-row items-center justify-center min-h-screen bg-gray-100 p-4">
-            <section className="w-full md:w-1/2 p-4">
-                <h1 className="text-3xl font-bold mb-6">Contato</h1>
-                <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-                    <div className="mb-4">
-                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
-                            Nome:
-                        </label>
-                        <input
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            type="text"
-                            id="name"
-                            name="name"
-                        />
-                    </div>
-                    <div className="mb-4">
-                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
-                            Email:
-                        </label>
-                        <input
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            type="email"
-                            id="email"
-                            name="email"
-                        />
-                    </div>
-                    <div className="mb-6">
-                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="message">
-                            Mensagem:
-                        </label>
-                        <textarea
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="message"
-                            name="message"
-                        ></textarea>
-                    </div>
-                    <div className="flex items-center justify-between">
-                        <button
-                            className="bg-gray-800 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                            type="submit"
-                        >
-                            Enviar
-                        </button>
-                    </div>
-                </form>
-            </section>
-            <section className="w-full md:w-1/2 p-4">
-                <img
-                    className="rounded shadow-md"
-                    src="https://placehold.co/500x500"
-                    alt="Contato"
-                />
-            </section>
-        </div>
+        <section id="contato" className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-[#242729] to-[#1A1D20]">
+            <div className="max-w-6xl mx-auto">
+                <motion.div 
+                    className="text-center mb-10"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5 }}
+                >
+                    <h2 className="text-3xl sm:text-4xl md:text-5xl text-[#AF8E41] font-bold mb-3 font-['Cormorant_Garamond'] tracking-wider">
+                        ENTRE EM CONTATO
+                    </h2>
+                    <div className="w-24 h-0.5 bg-gradient-to-r from-transparent via-[#AF8E41] to-transparent mx-auto mb-4"></div>
+                    <p className="text-gray-400 text-sm sm:text-base max-w-2xl mx-auto">
+                        Estamos prontos para atender suas necessidades financeiras e esclarecer todas as suas dúvidas
+                    </p>
+                </motion.div>
+
+                <div className="flex flex-col lg:flex-row gap-8 lg:gap-12">
+                    {/* Contact Information */}
+                    <motion.div 
+                        className="w-full lg:w-1/3 space-y-8"
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.5, delay: 0.2 }}
+                    >
+                        <div className="bg-[#2A2D31] p-6 sm:p-8 rounded-lg border border-[#AF8E41]/20 shadow-md">
+                            <h3 className="text-2xl text-[#AF8E41] font-['Cormorant_Garamond'] font-bold mb-6">
+                                Informações de Contato
+                            </h3>
+                            <div className="space-y-5">
+                                <div className="flex items-start">
+                                    <div className="bg-[#343941] p-2 rounded-md mr-4">
+                                        <MapPin className="h-5 w-5 text-[#AF8E41]" />
+                                    </div>
+                                    <div>
+                                        <h4 className="text-white text-sm font-medium mb-1">Localização</h4>
+                                        <p className="text-gray-400 text-sm">Av. Paulista, 1000 - Bela Vista, São Paulo - SP</p>
+                                    </div>
+                                </div>
+                                
+                                <div className="flex items-start">
+                                    <div className="bg-[#343941] p-2 rounded-md mr-4">
+                                        <Phone className="h-5 w-5 text-[#AF8E41]" />
+                                    </div>
+                                    <div>
+                                        <h4 className="text-white text-sm font-medium mb-1">Telefone</h4>
+                                        <p className="text-gray-400 text-sm">(11) 99999-9999</p>
+                                    </div>
+                                </div>
+                                
+                                <div className="flex items-start">
+                                    <div className="bg-[#343941] p-2 rounded-md mr-4">
+                                        <Mail className="h-5 w-5 text-[#AF8E41]" />
+                                    </div>
+                                    <div>
+                                        <h4 className="text-white text-sm font-medium mb-1">E-mail</h4>
+                                        <p className="text-gray-400 text-sm">contato@lionsbank.com.br</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div className="mt-8 pt-6 border-t border-[#AF8E41]/20">
+                                <h4 className="text-white text-sm font-medium mb-3">Horário de Atendimento</h4>
+                                <p className="text-gray-400 text-sm mb-1">Segunda - Sexta: 9h às 18h</p>
+                                <p className="text-gray-400 text-sm">Sábado: 9h às 13h</p>
+                            </div>
+                        </div>
+                    </motion.div>
+
+                    {/* Contact Form */}
+                    <motion.div 
+                        className="w-full lg:w-2/3"
+                        initial={{ opacity: 0, x: 20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.5, delay: 0.3 }}
+                    >
+                        <div className="bg-[#2A2D31] p-6 sm:p-8 rounded-lg border border-[#AF8E41]/20 shadow-md">
+                            <h3 className="text-2xl text-[#AF8E41] font-['Cormorant_Garamond'] font-bold mb-6">
+                                Envie sua Mensagem
+                            </h3>
+                            
+                            <form onSubmit={handleSubmit} className="space-y-5">
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                                    <div>
+                                        <label htmlFor="name" className="block text-white text-sm mb-2">Nome Completo *</label>
+                                        <input
+                                            type="text"
+                                            id="name"
+                                            name="name"
+                                            value={formState.name}
+                                            onChange={handleChange}
+                                            required
+                                            className="w-full rounded-md bg-[#343941] border border-[#AF8E41]/20 p-3 text-white text-sm focus:outline-none focus:border-[#AF8E41]/50 transition-colors"
+                                            placeholder="Seu nome"
+                                        />
+                                    </div>
+                                    
+                                    <div>
+                                        <label htmlFor="email" className="block text-white text-sm mb-2">E-mail *</label>
+                                        <input
+                                            type="email"
+                                            id="email"
+                                            name="email"
+                                            value={formState.email}
+                                            onChange={handleChange}
+                                            required
+                                            className="w-full rounded-md bg-[#343941] border border-[#AF8E41]/20 p-3 text-white text-sm focus:outline-none focus:border-[#AF8E41]/50 transition-colors"
+                                            placeholder="seu@email.com"
+                                        />
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <label htmlFor="phone" className="block text-white text-sm mb-2">Telefone</label>
+                                    <input
+                                        type="tel"
+                                        id="phone"
+                                        name="phone"
+                                        value={formState.phone}
+                                        onChange={handleChange}
+                                        className="w-full rounded-md bg-[#343941] border border-[#AF8E41]/20 p-3 text-white text-sm focus:outline-none focus:border-[#AF8E41]/50 transition-colors"
+                                        placeholder="(11) 99999-9999"
+                                    />
+                                </div>
+                                
+                                <div>
+                                    <label htmlFor="message" className="block text-white text-sm mb-2">Mensagem *</label>
+                                    <textarea
+                                        id="message"
+                                        name="message"
+                                        value={formState.message}
+                                        onChange={handleChange}
+                                        required
+                                        rows={4}
+                                        className="w-full rounded-md bg-[#343941] border border-[#AF8E41]/20 p-3 text-white text-sm focus:outline-none focus:border-[#AF8E41]/50 resize-none transition-colors"
+                                        placeholder="Escreva sua mensagem aqui..."
+                                    />
+                                </div>
+                                
+                                <div>
+                                    <button
+                                        type="submit"
+                                        className="w-full sm:w-auto px-6 py-3 bg-gradient-to-r from-[#AF8E41] to-[#C6A052] hover:from-[#C6A052] hover:to-[#AF8E41] 
+                                                text-white rounded-md text-sm font-medium transition-all duration-300 
+                                                hover:shadow-[0_0_15px_rgba(175,142,65,0.25)] hover:-translate-y-0.5 flex items-center justify-center"
+                                    >
+                                        <Send className="h-4 w-4 mr-2" />
+                                        Enviar Mensagem
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </motion.div>
+                </div>
+            </div>
+        </section>
     );
 };
 

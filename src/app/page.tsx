@@ -9,7 +9,7 @@ import Contato from './_components/Contato/Contato';
 
 export default function Home() {
   return (
-     <>
+    <main className="flex min-h-screen flex-col pt-16"> {/* Add pt-16 to account for fixed navbar */}
       <Navbar />
       <Hero />
       <Sobre />
@@ -18,8 +18,6 @@ export default function Home() {
       <Testmonial/>
       <Contato/>
       <Footer/>
-    </>
-
-    
+    </main>
   );
 }
