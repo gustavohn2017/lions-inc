@@ -12,42 +12,14 @@ const config = {
   theme: {
     container: {
       center: true,
-      padding: {
-        DEFAULT: "1rem",
-        sm: "1.5rem",
-        lg: "2rem",
-      },
+      padding: "2rem",
       screens: {
-        xs: "475px",
-        sm: "640px",
-        md: "768px",
-        lg: "1024px",
-        xl: "1280px",
         "2xl": "1400px",
       },
     },
     extend: {
-      screens: {
-        'xs': '475px',
-      },
       fontFamily: {
-        'sans': ['var(--font-geist-sans)', 'system-ui', 'sans-serif'],
-        'mono': ['var(--font-geist-mono)', 'monospace'],
-        'cormorant': ['var(--font-cormorant)', 'serif'],
-        'inter': ['var(--font-inter)', 'sans-serif'],
         'capricho': ['Capricho', 'sans-serif'],
-      },
-      fontSize: {
-        'xxs': '0.625rem', // 10px
-        'xs': '0.75rem',   // 12px
-        'sm': '0.875rem',  // 14px
-        'base': '1rem',    // 16px
-        'lg': '1.125rem',  // 18px
-        'xl': '1.25rem',   // 20px
-        '2xl': '1.5rem',   // 24px
-        '3xl': '1.875rem', // 30px
-        '4xl': '2.25rem',  // 36px
-        '5xl': '3rem',     // 48px
       },
       colors: {
         border: "hsl(var(--border))",
@@ -135,10 +107,7 @@ const config = {
       },
     },
   },
-  plugins: [
-    require("tailwindcss-animate"),
-    require("tailwind-scrollbar-hide"),
-  ],
+  plugins: [require("tailwindcss-animate")],
 } satisfies Config
 
 export default config
