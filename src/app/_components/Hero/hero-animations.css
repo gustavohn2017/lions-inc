@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500&display=swap');
 
-/* Animações refinadas */
+/* Refined animations */
 @keyframes fadeInUp {
   0% {
     opacity: 0;
@@ -34,11 +34,14 @@
   }
 }
 
-/* Estilos base com controle de carregamento */
+/* Base styles with loading control */
 .hero-content-animate {
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  backface-visibility: hidden;
+  will-change: opacity, transform;
+  transform: translateZ(0);
 }
 
 .hero-content-animate.is-loaded {
@@ -49,51 +52,44 @@
 .hero-image-animate {
   opacity: 0;
   transition: opacity 0.8s ease-out 0.3s;
+  backface-visibility: hidden;
+  will-change: opacity, transform;
+  transform: translateZ(0);
 }
 
 .hero-image-wrapper.is-loaded .hero-image-animate {
   opacity: 1;
 }
 
-.hero-background-image {
-  opacity: 0;
-  transition: opacity 0.8s ease-out;
-}
-
-.hero-background-image.is-loaded {
-  opacity: 0.3;
-}
-
-/* Controle de opacidade responsivo */
-@media (min-width: 768px) {
-  .hero-background-image.is-loaded {
-    opacity: 0.15;
-  }
-}
-
-/* Estilo do título principal */
+/* Main title style */
 .hero-title {
   font-family: 'Cormorant Garamond', serif;
   font-weight: 700;
-  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-size: clamp(2.2rem, 8vw, 3.5rem);
   letter-spacing: 0.025em;
   background: linear-gradient(135deg, #AF8E41 0%, #C6A052 50%, #D4B978 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-  line-height: 1.15;
+  line-height: 1.1;
   position: relative;
-  margin-bottom: 0.6rem;
+  margin-bottom: 0.75rem;
   width: 100%;
   display: inline-block;
+  word-break: keep-all;
+  hyphens: none;
 }
 
 .hero-title::after {
   content: '';
   position: absolute;
-  bottom: -6px;
+  bottom: -8px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
   height: 3px;
+  width: 0;
   background: linear-gradient(90deg, #AF8E41, #C6A052, #AF8E41);
   opacity: 0;
   transition: width 0.8s ease-out, opacity 0.8s ease-out;
@@ -105,69 +101,47 @@
   width: 80px;
 }
 
-/* Responsividade para o título */
+/* Title responsiveness */
 @media (max-width: 639px) {
   .hero-title {
-    font-size: clamp(1.6rem, 7vw, 2.2rem);
-    margin-bottom: 0.5rem;
+    font-size: clamp(2rem, 10vw, 2.5rem);
   }
   
   .hero-title::after {
     left: 50%;
     transform: translateX(-50%);
-    width: 70px;
-    bottom: -4px;
+    width: 60px;
   }
 }
 
 @media (min-width: 640px) and (max-width: 767px) {
   .hero-title {
-    font-size: clamp(1.8rem, 6vw, 2.4rem);
-    margin-bottom: 0.6rem;
+    font-size: clamp(2.2rem, 8vw, 3rem);
   }
   
   .hero-title::after {
     left: 50%;
     transform: translateX(-50%);
-    width: 75px;
   }
 }
 
 @media (min-width: 768px) {
-  .hero-title {
-    font-size: clamp(2rem, 5vw, 2.8rem);
-    margin-bottom: 0.7rem;
-  }
-  
   .hero-title::after {
     left: 0;
-    width: 80px;
+    margin: 0;
+    transform: none;
   }
 }
 
-@media (min-width: 1280px) {
-  .hero-title {
-    font-size: clamp(2.2rem, 3.5vw, 3rem);
-    letter-spacing: 0.03em;
-  }
-}
-
-/* Configuração para usuários que preferem movimento reduzido */
+/* Reduced motion preference */
 @media (prefers-reduced-motion: reduce) {
   .hero-content-animate,
   .hero-image-animate,
-  .hero-background-image,
   .hero-content-animate.is-loaded .hero-title::after {
     transition: none !important;
     animation: none !important;
     opacity: 1 !important;
     transform: none !important;
-    width: 80px !important;
-  }
-  
-  .hero-image-wrapper.is-loaded .hero-image-animate,
-  .hero-background-image.is-loaded {
-    opacity: 1 !important;
   }
 }
 
@@ -177,11 +151,18 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 280px;
+  will-change: transform;
+  transform: translateZ(0);
+  height: auto;
 }
 
-@media (min-width: 1024px) {
-  .hero-image-wrapper {
-    height: 320px;
-  }
+/* Add subtle pulsating animation for the hero image */
+@keyframes subtle-pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+  100% { transform: scale(1); }
+}
+
+.hero-section .hero-image-animate {
+  animation: subtle-pulse 6s ease-in-out infinite;
 }

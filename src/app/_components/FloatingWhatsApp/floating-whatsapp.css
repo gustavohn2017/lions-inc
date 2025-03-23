@@ -1,0 +1,16 @@
+.whatsapp-message {
+  position: relative;
+  background-color: #d9fdd3;
+}
+
+.whatsapp-message:after {
+  content: "";
+  position: absolute;
+  right: -8px;
+  top: 0;
+  border: 10px solid transparent;
+  border-top-color: #d9fdd3;
+  border-right: 0;
+  border-left: 10px solid #d9fdd3;
+  transform: rotate(45deg);
+}

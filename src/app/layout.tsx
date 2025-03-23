@@ -1,37 +1,27 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter, Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
-import { Cormorant_Garamond, Inter } from 'next/font/google';
+import "./_components/shared/responsive-utils.css";
+import "./_components/shared/layout-fixes.css";
+import "./_components/text-utils.css";
 
-const cormorant = Cormorant_Garamond({
-  subsets: ['latin'],
-  variable: '--font-cormorant',
-  weight: ['600', '700'],
-  display: 'swap',
-});
-
-const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-inter',
-  display: 'swap',
-});
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({ 
   subsets: ["latin"],
-  display: 'swap',
+  variable: "--font-inter",
+  display: "swap" 
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const cormorant = Cormorant_Garamond({ 
   subsets: ["latin"],
-  display: 'swap',
+  weight: ["600", "700"],
+  variable: "--font-cormorant",
+  display: "swap"
 });
 
 export const metadata: Metadata = {
-  title: "Lions Bank - Soluções Financeiras",
-  description: "Soluções financeiras personalizadas para seus objetivos",
-  viewport: "width=device-width, initial-scale=1, maximum-scale=5",
+  title: "Lions Bank Invest | Investimentos Inteligentes para seu Futuro",
+  description: "Soluções financeiras personalizadas com garantia e qualidade superior. Investimentos, Consórcios, Consultoria Financeira e muito mais.",
+  keywords: "Lions Bank, Investimentos, Consórcios, Finanças, Planejamento Financeiro, Consultoria Financeira",
 };
 
 export default function RootLayout({
@@ -41,9 +31,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR" className="scroll-smooth">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} ${cormorant.variable} ${inter.variable} antialiased`}
-      >
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+      </head>
+      <body className={`${inter.variable} ${cormorant.variable} font-sans bg-gradient-to-b from-[#111214] to-[#1A1D20] text-white min-h-screen hide-scrollbar`}>
         {children}
       </body>
     </html>

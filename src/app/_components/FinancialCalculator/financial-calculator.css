@@ -1,0 +1,108 @@
+.calculator-container {
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: #2A2D31;
+  border-radius: 12px;
+  border: 1px solid rgba(175, 142, 65, 0.2);
+}
+
+.calculator-header {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1.5rem;
+}
+
+.calculator-body {
+  padding: 1.5rem;
+}
+
+.calculator-tabs {
+  display: flex;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 1.5rem;
+}
+
+.calculator-tab {
+  padding: 0.75rem 1rem;
+  font-weight: 500;
+  color: #e0e0e0;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.calculator-tab.active {
+  color: #AF8E41;
+  border-bottom-color: #AF8E41;
+}
+
+.calculator-input-group {
+  margin-bottom: 1rem;
+}
+
+.calculator-label {
+  display: block;
+  font-size: 0.875rem;
+  color: #e0e0e0;
+  margin-bottom: 0.5rem;
+}
+
+.calculator-input {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #343941;
+  border: 1px solid rgba(175, 142, 65, 0.2);
+  border-radius: 6px;
+  color: white;
+}
+
+.calculator-input:focus {
+  outline: none;
+  border-color: rgba(175, 142, 65, 0.5);
+}
+
+.calculator-button {
+  width: 100%;
+  padding: 0.75rem;
+  background: linear-gradient(to right, #AF8E41, #C6A052);
+  color: white;
+  font-weight: 500;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.calculator-button:hover {
+  background: linear-gradient(to right, #C6A052, #D6B062);
+}
+
+.calculator-result {
+  margin-top: 1.5rem;
+  background-color: #343941;
+  border: 1px solid rgba(175, 142, 65, 0.3);
+  border-radius: 6px;
+  padding: 1rem;
+  text-align: center;
+}
+
+.calculator-result-amount {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #C6A052;
+}
+
+.calculator-result-details {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-top: 0.75rem;
+}
+
+.calculator-result-label {
+  font-size: 0.75rem;
+  color: #a0a0a0;
+}
+
+.calculator-result-value {
+  font-size: 0.875rem;
+  color: white;
+}

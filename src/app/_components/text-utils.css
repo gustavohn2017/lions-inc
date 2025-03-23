@@ -1,0 +1,118 @@
+/**
+ * Text utilities for Lions Bank website
+ * Helps with responsive text handling and prevents text breaks
+ */
+
+/* Prevent text from breaking at awkward places */
+.text-no-break {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Force text to wrap properly */
+.text-force-wrap {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+/* Prevent hyphenation */
+.text-no-hyphens {
+  hyphens: none;
+}
+
+/* Apply hyphenation where needed */
+.text-hyphens {
+  hyphens: auto;
+}
+
+/* Keep words together when possible */
+.text-keep-words {
+  word-spacing: -0.15em;
+}
+
+/* Fluid typography for different screen sizes */
+.text-fluid-xs {
+  font-size: clamp(0.75rem, 1vw, 0.875rem);
+  line-height: 1.4;
+}
+
+.text-fluid-sm {
+  font-size: clamp(0.875rem, 1.5vw, 1rem);
+  line-height: 1.5;
+}
+
+.text-fluid-base {
+  font-size: clamp(1rem, 2vw, 1.125rem);
+  line-height: 1.5;
+}
+
+.text-fluid-lg {
+  font-size: clamp(1.125rem, 2.5vw, 1.25rem);
+  line-height: 1.4;
+}
+
+.text-fluid-xl {
+  font-size: clamp(1.25rem, 3vw, 1.5rem);
+  line-height: 1.3;
+}
+
+.text-fluid-2xl {
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  line-height: 1.2;
+}
+
+.text-fluid-3xl {
+  font-size: clamp(1.875rem, 5vw, 2.5rem);
+  line-height: 1.1;
+}
+
+.text-fluid-4xl {
+  font-size: clamp(2.25rem, 6vw, 3rem);
+  line-height: 1.1;
+}
+
+/* Gradient text - Gold theme */
+.text-gradient-gold {
+  background: linear-gradient(135deg, #AF8E41 0%, #C6A052 50%, #D4B978 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  display: inline-block;
+}
+
+/* Add a subtle text shadow for better readability */
+.text-shadow-sm {
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.text-shadow {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.text-shadow-lg {
+  text-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Special font classes */
+.font-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 700;
+}
+
+/* Ensure text is optimized for mobile viewing */
+@media (max-width: 640px) {
+  .mobile-text-center {
+    text-align: center;
+  }
+  
+  .mobile-text-compress {
+    letter-spacing: -0.01em;
+  }
+  
+  .mobile-text-smaller {
+    font-size: 0.9em;
+  }
+}

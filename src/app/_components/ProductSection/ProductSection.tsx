@@ -265,16 +265,28 @@ const ProductsSection = () => {
         <div className="p-4 flex flex-col h-full">
           <div className="flex flex-col mb-3">
             <div className="w-full mb-3">
-              <div className="rounded-md overflow-hidden border border-[#AF8E41]/20 relative" style={{minHeight: "140px"}}>
+              <div className="rounded-md overflow-hidden border border-[#AF8E41]/20 relative" 
+                   style={{
+                     minHeight: "140px", 
+                     transform: "translateZ(0)", // Force GPU acceleration
+                     willChange: "transform" // Hint to browser for optimization
+                   }}>
                 {imageLoading && (
-                  <div className="absolute inset-0 flex items-center justify-center bg-[#1A1D20]/50">
-                    <div className="w-8 h-8 border-2 border-[#AF8E41] border-t-transparent rounded-full animate-spin"></div>
+                  <div className="absolute inset-0 flex items-center justify-center bg-[#343941]/50">
+                    <div className="w-8 h-8 border-2 border-[#AF8E41]/30 border-t-[#AF8E41] rounded-full animate-spin"></div>
                   </div>
                 )}
                 <img
-                  src={imageError ? "/fallback-image.jpg" : product.image}
+                  src={imageError ? '/assets/placeholder.jpg' : product.image}
                   alt={product.title}
-                  className={`w-full h-full aspect-[3/2] object-cover ${imageLoading ? 'opacity-0' : 'opacity-100'} transition-opacity duration-300`}
+                  className={`w-full h-full object-cover transition-opacity duration-300 ${
+                    imageLoading ? 'opacity-0' : 'opacity-100'
+                  }`}
+                  style={{ 
+                    minHeight: "140px", 
+                    aspectRatio: "16/9",
+                    transform: "translateZ(0)" // Force GPU acceleration
+                  }}
                   onError={handleImageError}
                   onLoad={handleImageLoad}
                 />

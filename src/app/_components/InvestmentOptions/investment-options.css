@@ -1,0 +1,73 @@
+.tabs-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.tabs-list {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #343941;
+  border-radius: 8px;
+  padding: 4px;
+}
+
+.tab-trigger {
+  padding: 8px 16px;
+  font-size: 14px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.tab-trigger[data-state="active"] {
+  background-color: #AF8E41;
+  color: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.tab-trigger[data-state="inactive"] {
+  color: #e0e0e0;
+}
+
+.tab-trigger[data-state="inactive"]:hover {
+  color: white;
+}
+
+.tab-content {
+  margin-top: 24px;
+}
+
+.investment-card {
+  background-color: #2A2D31;
+  border: 1px solid rgba(175, 142, 65, 0.2);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.investment-card:hover {
+  border-color: rgba(175, 142, 65, 0.4);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.investment-card-header {
+  padding: 20px 24px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.investment-card-body {
+  padding: 20px 24px;
+}
+
+.investment-card-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background-color: #343941;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 16px;
+}

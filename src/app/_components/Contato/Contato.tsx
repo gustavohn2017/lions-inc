@@ -39,7 +39,10 @@ const Contato: React.FC = () => {
                     className="text-center mb-8 sm:mb-10"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5 }}
+                    transition={{ 
+                        duration: 0.5,
+                        ease: "easeOut" // Adding easing for smoother animation
+                    }}
                 >
                     <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-[#AF8E41] font-bold mb-3 font-['Cormorant_Garamond'] tracking-wider">
                         ENTRE EM CONTATO
@@ -56,7 +59,11 @@ const Contato: React.FC = () => {
                         className="w-full lg:w-1/3 space-y-6 sm:space-y-8"
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.5, delay: 0.2 }}
+                        transition={{ 
+                            duration: 0.4, // Slightly faster
+                            delay: 0.1, // Reduced delay
+                            ease: "easeOut" 
+                        }}
                     >
                         <div className="bg-[#2A2D31] p-5 sm:p-6 md:p-8 rounded-lg border border-[#AF8E41]/20 shadow-md">
                             <h3 className="text-xl sm:text-2xl text-[#AF8E41] font-['Cormorant_Garamond'] font-bold mb-5 sm:mb-6">

@@ -1,0 +1,65 @@
+.consortium-item {
+  background-color: #2A2D31;
+  border: 1px solid rgba(175, 142, 65, 0.2);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.consortium-item:hover {
+  border-color: rgba(175, 142, 65, 0.4);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transform: translateY(-3px);
+}
+
+.consortium-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 6px;
+  background-color: #343941;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 12px;
+  color: #AF8E41;
+}
+
+.benefit-list-item {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 6px;
+  transition: all 0.2s ease;
+}
+
+.benefit-list-item:hover {
+  transform: translateX(4px);
+}
+
+.benefit-check-icon {
+  color: #AF8E41;
+  margin-right: 6px;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.learn-more-button {
+  display: inline-flex;
+  align-items: center;
+  color: #AF8E41;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.learn-more-button:hover {
+  color: #C6A052;
+}
+
+.learn-more-button svg {
+  margin-left: 4px;
+  transition: transform 0.2s ease;
+}
+
+.learn-more-button:hover svg {
+  transform: translateX(4px);
+}

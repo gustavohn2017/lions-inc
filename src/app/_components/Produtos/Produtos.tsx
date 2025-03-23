@@ -68,6 +68,23 @@ const Produtos = () => {
         }
     };
 
+    const handleButtonClick = (type: string) => {
+        // You could add analytics tracking here
+        
+        // Scroll to contact section
+        const contactSection = document.getElementById('contato');
+        if (contactSection) {
+            const headerOffset = 80;
+            const elementPosition = contactSection.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+            
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
+            });
+        }
+    };
+
     return (
         <section className="bg-gradient-to-b from-[#1A1D20] to-[#242729] py-10 px-4 sm:px-6 lg:px-8">
             <motion.div
@@ -160,14 +177,20 @@ const Produtos = () => {
                                                 {conteudo.recursos.map((recurso, index) => (
                                                     <motion.li
                                                         key={index}
+                                                        variants={itemVariants}
                                                         initial={{ opacity: 0, x: -10 }}
                                                         animate={{ opacity: 1, x: 0 }}
                                                         transition={{ delay: index * 0.1 + 0.2 }}
                                                         className="flex items-start text-gray-300 text-sm sm:text-base md:text-lg group"
                                                     >
-                                                        <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-[#AF8E41] mt-0.5 mr-2 sm:mr-3 flex-shrink-0
-                                                                    group-hover:scale-110 transition-all duration-200" />
-                                                        <span className="group-hover:text-[#AF8E41] transition-colors duration-200">
+                                                        <CheckCircle 
+                                                            className="w-4 h-4 sm:w-5 sm:h-5 text-[#AF8E41] mt-0.5 mr-2 sm:mr-3 flex-shrink-0 group-hover:scale-110 transition-all duration-200" 
+                                                            onClick={() => handleButtonClick(recurso)}
+                                                        />
+                                                        <span 
+                                                            className="group-hover:text-[#AF8E41] transition-colors duration-200 cursor-pointer"
+                                                            onClick={() => handleButtonClick(recurso)}
+                                                        >
                                                             {recurso}
                                                         </span>
                                                     </motion.li>
@@ -231,8 +254,14 @@ const Produtos = () => {
                                             variants={itemVariants}
                                             className="flex items-start text-gray-300 text-base group"
                                         >
-                                            <CheckCircle className="w-5 h-5 text-[#AF8E41] mt-0.5 mr-3 flex-shrink-0" />
-                                            <span className="group-hover:text-[#AF8E41] transition-colors duration-200">
+                                            <CheckCircle 
+                                                className="w-5 h-5 text-[#AF8E41] mt-0.5 mr-3 flex-shrink-0" 
+                                                onClick={() => handleButtonClick(recurso)}
+                                            />
+                                            <span 
+                                                className="group-hover:text-[#AF8E41] transition-colors duration-200 cursor-pointer"
+                                                onClick={() => handleButtonClick(recurso)}
+                                            >
                                                 {recurso}
                                             </span>
                                         </motion.li>
