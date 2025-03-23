@@ -20,7 +20,7 @@ export function Hero() {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function (e) {
         e.preventDefault();
-        const href = this.getAttribute('href');
+        const href = ((e as MouseEvent).currentTarget as HTMLAnchorElement).getAttribute('href');
         if (!href) return;
         document.querySelector(href)?.scrollIntoView({
           behavior: 'smooth'
