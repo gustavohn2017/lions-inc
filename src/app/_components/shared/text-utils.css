@@ -1,0 +1,98 @@
+/**
+ * Utilitários CSS para controle de texto responsivo
+ * Este arquivo contém classes que ajudam a manter a integridade do texto
+ * em diferentes tamanhos de tela
+ */
+
+/* Controle de quebra de palavras */
+.text-break {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+  hyphens: auto;
+}
+
+/* Impede que o texto transborde do container */
+.text-contain {
+  max-width: 100%;
+  white-space: normal;
+}
+
+/* Trunca o texto com elipses quando necessário */
+.text-truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Limita o texto a um número específico de linhas */
+.text-line-1 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+}
+
+.text-line-2 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.text-line-3 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+
+/* Tamanhos de texto responsivos com fluid typography */
+.text-fluid-sm {
+  font-size: clamp(0.75rem, 2vw, 0.875rem);
+  line-height: 1.5;
+}
+
+.text-fluid-base {
+  font-size: clamp(0.875rem, 2.5vw, 1rem);
+  line-height: 1.6;
+}
+
+.text-fluid-lg {
+  font-size: clamp(1rem, 3vw, 1.125rem);
+  line-height: 1.6;
+}
+
+.text-fluid-xl {
+  font-size: clamp(1.125rem, 3.5vw, 1.25rem);
+  line-height: 1.5;
+}
+
+.text-fluid-2xl {
+  font-size: clamp(1.25rem, 4vw, 1.5rem);
+  line-height: 1.4;
+}
+
+/* Ajustes de espaçamento de texto para legibilidade */
+.text-spacing-tight {
+  letter-spacing: -0.01em;
+}
+
+.text-spacing-normal {
+  letter-spacing: normal;
+}
+
+.text-spacing-wide {
+  letter-spacing: 0.02em;
+}
+
+/* Containers de texto com padding responsivo */
+.text-container {
+  padding-left: clamp(1rem, 5vw, 2rem);
+  padding-right: clamp(1rem, 5vw, 2rem);
+}
+
+.text-container-sm {
+  padding-left: clamp(0.5rem, 3vw, 1rem);
+  padding-right: clamp(0.5rem, 3vw, 1rem);
+}

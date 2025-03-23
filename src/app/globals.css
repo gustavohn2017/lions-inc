@@ -303,3 +303,6 @@ img, video, iframe {
   max-width: 100%;
   height: auto;
 }
+
+/* Importação dos utilitários de texto */
+@import "./_components/shared/text-utils.css";
