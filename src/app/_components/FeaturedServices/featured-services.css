@@ -1,0 +1,118 @@
+.service-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.service-card:hover {
+  transform: translateY(-5px);
+}
+
+.service-icon-container {
+  width: 60px;
+  height: 60px;
+  border-radius: 12px;
+  background-color: rgba(175, 142, 65, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  transition: all 0.3s ease;
+}
+
+.service-icon {
+  width: 24px;
+  height: 24px;
+  color: #AF8E41;
+  transition: all 0.3s ease;
+}
+
+.service-card:hover .service-icon {
+  transform: scale(1.1);
+}
+
+/* Fancy overlay effect */
+.service-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(to right, #AF8E41, #C6A052);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.service-card:hover::before {
+  transform: scaleX(1);
+}
+
+/* Animation for card entrance */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.5s ease-out forwards;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .service-icon-container {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .service-icon {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+/* Create a staggered animation effect for grid items */
+@keyframes staggerFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Apply to grid of service cards */
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.service-grid > div {
+  animation: staggerFadeIn 0.5s ease-out forwards;
+  opacity: 0;
+}
+
+/* Apply staggered delay based on grid position */
+.service-grid > div:nth-child(1) { animation-delay: 0.1s; }
+.service-grid > div:nth-child(2) { animation-delay: 0.2s; }
+.service-grid > div:nth-child(3) { animation-delay: 0.3s; }
+.service-grid > div:nth-child(4) { animation-delay: 0.4s; }
+.service-grid > div:nth-child(5) { animation-delay: 0.5s; }
+.service-grid > div:nth-child(6) { animation-delay: 0.6s; }
+.service-grid > div:nth-child(7) { animation-delay: 0.7s; }
+.service-grid > div:nth-child(8) { animation-delay: 0.8s; }
+.service-grid > div:nth-child(9) { animation-delay: 0.9s; }
+.service-grid > div:nth-child(10) { animation-delay: 1.0s; }

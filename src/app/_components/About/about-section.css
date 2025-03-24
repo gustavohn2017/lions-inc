@@ -1,0 +1,128 @@
+.about-card {
+  height: 100%;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.about-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.about-icon-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background-color: rgba(175, 142, 65, 0.1);
+  margin-bottom: 16px;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.about-card:hover .about-icon-container {
+  background-color: rgba(175, 142, 65, 0.2);
+  transform: scale(1.05);
+}
+
+.about-icon-container::after {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -3px;
+  border-radius: 50%;
+  border: 1px solid rgba(175, 142, 65, 0.3);
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.about-card:hover .about-icon-container::after {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+/* Animation for card entrance */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.5s ease-out forwards;
+}
+
+/* Mobile carousel styles */
+.carousel-container {
+  position: relative;
+  overflow: hidden;
+  padding: 0 10px;
+}
+
+.carousel-track {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.carousel-slide {
+  flex: 0 0 100%;
+  padding: 0 10px;
+}
+
+.carousel-control {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: rgba(42, 45, 49, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  cursor: pointer;
+  z-index: 10;
+  border: 1px solid rgba(175, 142, 65, 0.2);
+}
+
+.carousel-control-left {
+  left: -10px;
+}
+
+.carousel-control-right {
+  right: -10px;
+}
+
+.dots-indicator {
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin: 0 4px;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+
+.dot.active {
+  background-color: #AF8E41;
+}
+
+.dot:not(.active) {
+  background-color: #555;
+}

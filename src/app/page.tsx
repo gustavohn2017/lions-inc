@@ -3,20 +3,19 @@
 import React, { useEffect } from 'react';
 import { Navbar } from './_components/Navbar/Navbar';
 import { Hero } from './_components/Hero/Hero';
-import About from './_components/Sobre/Sobre';
+import AboutSection from './_components/About/AboutSection';
 import InvestmentOptions from './_components/InvestmentOptions/InvestmentOptions';
-import FinancialCalculator from './_components/FinancialCalculator/FinancialCalculator';
-import ProductSection from './_components/ProductSection/ProductSection';
-import Testimonial from './_components/Testmonial/Testmonial';
+import BusinessCalculator from './_components/BusinessCalculator/BusinessCalculator';
+import ServiceTabs from './_components/ServiceTabs/ServiceTabs';
+import FeaturedServices from './_components/FeaturedServices/FeaturedServices';
 import ConsortiumSection from './_components/ConsortiumSection/ConsortiumSection';
-import FinancialEducation from './_components/FinancialEducation/FinancialEducation';
-import Contato from './_components/Contato/Contato';
+import ContactForm from './_components/ContactForm/ContactForm';
 import Footer from './_components/Footer/Footer';
 import FloatingWhatsApp from './_components/FloatingWhatsApp/FloatingWhatsApp';
 import BackToTop from './_components/BackToTop/BackToTop';
 
 export default function Home() {
-  // Initialize AOS animation library
+  // Initialize smooth scroll implementation
   useEffect(() => {
     // Smooth scroll implementation for hash links
     const handleHashLinkClick = (e: MouseEvent) => {
@@ -56,7 +55,7 @@ export default function Home() {
       </section>
       
       <section id="sobre" className="scroll-mt-20">
-        <About />
+        <AboutSection />
       </section>
       
       <section id="investimentos" className="scroll-mt-20">
@@ -64,27 +63,23 @@ export default function Home() {
       </section>
       
       <section id="calculadora" className="scroll-mt-20">
-        <FinancialCalculator />
+        <BusinessCalculator />
       </section>
       
       <section id="produtos" className="scroll-mt-20">
-        <ProductSection />
+        <ServiceTabs />
+      </section>
+      
+      <section id="servicos-destaque" className="scroll-mt-20">
+        <FeaturedServices />
       </section>
       
       <section id="consorcios" className="scroll-mt-20">
         <ConsortiumSection />
       </section>
       
-      <section id="educacao-financeira" className="scroll-mt-20">
-        <FinancialEducation />
-      </section>
-      
-      <section id="testimonial" className="scroll-mt-20">
-        <Testimonial />
-      </section>
-      
       <section id="contato" className="scroll-mt-20">
-        <Contato />
+        <ContactForm />
       </section>
       
       <Footer />

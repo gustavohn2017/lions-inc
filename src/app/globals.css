@@ -7,8 +7,8 @@
 
 @font-face {
   font-family: 'Capricho';
-  src: url('/fonts/Capricho-Bold.woff2') format('woff2'),
-       url('/fonts/Capricho-Bold.woff') format('woff');
+  src: url('/fonts/capricho/Capricho-Bold.woff2') format('woff2'),
+       url('/fonts/capricho/Capricho-Bold.woff') format('woff');
   font-weight: bold;
   font-style: normal;
   font-display: swap;
@@ -306,3 +306,30 @@ img, video, iframe {
 
 /* Importação dos utilitários de texto */
 @import "./_components/shared/text-utils.css";
+
+@tailwind base;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-capricho: 'Capricho', serif;
+  }
+  
+  h1, h2, h3, h4, h5 {
+    @apply font-capricho text-[#AF8E41];
+  }
+  
+  h1 {
+    @apply text-3xl sm:text-4xl md:text-5xl leading-tight;
+  }
+  
+  h2 {
+    @apply text-2xl sm:text-3xl md:text-4xl leading-tight;
+  }
+  
+  h3 {
+    @apply text-xl sm:text-2xl md:text-3xl leading-tight;
+  }
+  
+  /* ... rest of your global styles ... */
+}

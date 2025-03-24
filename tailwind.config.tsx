@@ -1,12 +1,11 @@
 import type { Config } from "tailwindcss"
 
-const config = {
+const config: Config = {
   darkMode: ["class", "[data-theme='dark']"],
   content: [
-    './pages/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
-    './src/**/*.{ts,tsx}',
+    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   prefix: "",
   theme: {
@@ -19,7 +18,9 @@ const config = {
     },
     extend: {
       fontFamily: {
-        'capricho': ['Capricho', 'sans-serif'],
+        sans: ['var(--font-inter)'],
+        cormorant: ['var(--font-cormorant)'],
+        capricho: ['var(--font-capricho)'],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -60,6 +61,11 @@ const config = {
           DEFAULT: '#AF8E41',
           dark: '#8B7134',
         },
+        'lions-gold': '#AF8E41',
+        'lions-gold-light': '#C6A052',
+        'lions-gold-lighter': '#D4B978',
+        'lions-dark': '#1A1A1E',
+        'lions-dark-light': '#2A2D31',
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -107,7 +113,7 @@ const config = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
-} satisfies Config
+  plugins: [],
+}
 
 export default config

@@ -4,6 +4,7 @@ import "./globals.css";
 import "./_components/shared/responsive-utils.css";
 import "./_components/shared/layout-fixes.css";
 import "./_components/text-utils.css";
+// Remover esta linha incorreta - os estilos da fonte estão no globals.css
 
 const inter = Inter({ 
   subsets: ["latin"],
@@ -19,7 +20,7 @@ const cormorant = Cormorant_Garamond({
 });
 
 export const metadata: Metadata = {
-  title: "Lions Bank Invest | Investimentos Inteligentes para seu Futuro",
+  title: "Lions Bank | Investimentos Inteligentes para seu Futuro",
   description: "Soluções financeiras personalizadas com garantia e qualidade superior. Investimentos, Consórcios, Consultoria Financeira e muito mais.",
   keywords: "Lions Bank, Investimentos, Consórcios, Finanças, Planejamento Financeiro, Consultoria Financeira",
 };

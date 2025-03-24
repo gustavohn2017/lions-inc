@@ -29,7 +29,8 @@
   left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  background-size: cover;
+  background-position: center;
   transition: transform 0.5s ease;
 }
 
@@ -114,7 +115,7 @@
 }
 
 /* Focus styles for accessibility */
-.education-card:focus {
+.education-card:focus-visible {
   outline: 2px solid #AF8E41;
   outline-offset: 2px;
 }
@@ -125,21 +126,36 @@
   background-color: #2A2D31;
   border-radius: 8px;
   padding: 4px;
-  margin-bottom: 24px;
+  min-width: max-content;
+  position: relative;
+  z-index: 1;
 }
 
 .category-button {
-  padding: 6px 12px;
+  padding: 8px 16px;
   font-size: 13px;
   border-radius: 6px;
   transition: all 0.2s ease;
   display: flex;
   align-items: center;
+  position: relative;
+  white-space: nowrap;
+}
+
+.category-button .tab-icon {
+  margin-right: 6px;
+  transition: transform 0.2s ease;
 }
 
 .category-button.active {
   background-color: #AF8E41;
   color: white;
+  font-weight: 500;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.category-button.active .tab-icon {
+  transform: scale(1.1);
 }
 
 .category-button:not(.active) {
@@ -148,8 +164,49 @@
 
 .category-button:not(.active):hover {
   color: white;
+  background-color: rgba(175, 142, 65, 0.15);
 }
 
-.category-button svg {
-  margin-right: 4px;
+.category-button:focus-visible {
+  outline: 2px solid #AF8E41;
+  outline-offset: 2px;
+}
+
+/* Tabbed navigation container - Improved for scrolling on mobile */
+.edu-tabs-container {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+.edu-tabs-container::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+.edu-tabs-wrapper {
+  min-width: max-content;
+  padding: 0 8px;
+}
+
+/* Tab content transitions */
+.tab-content {
+  transition: opacity 0.3s ease;
+}
+
+/* Responsive adjustments for mobile */
+@media (max-width: 639px) {
+  .category-button {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+  
+  .education-title {
+    font-size: 15px;
+  }
+  
+  .education-description {
+    font-size: 12px;
+  }
 }

@@ -1,368 +1,262 @@
 "use client";
 
-import React, { useState, useEffect, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import logo_lions_bank from '@assets/logo_lions_bank.png';
-import { User, Menu, X, ChevronDown } from 'lucide-react';
+import { Menu, X, ChevronDown, User } from 'lucide-react';
+import './navbar.css';
 
-// Definição de tipos
-type NavItem = {
-  id: string;
-  label: string;
-  href: string;
-  isPrimary?: boolean;
-  subItems?: {id: string, label: string, href: string}[];
-};
-
-export const Navbar: React.FC = () => {
-  // Estados
+export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState<string>('home');
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [openSubMenu, setOpenSubMenu] = useState<string | null>(null);
+  const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState('home');
+  const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false);
 
-  // Itens de navegação
-  const navItems: NavItem[] = [
-    { id: 'home', label: 'Home', href: '#home' },
-    { id: 'sobre', label: 'Quem Somos', href: '#sobre' },
-    { 
-      id: 'produtos', 
-      label: 'Soluções', 
-      href: '#produtos',
-      subItems: [
-        {id: 'investimentos', label: 'Investimentos', href: '#investimentos'},
-        {id: 'consorcios', label: 'Consórcios', href: '#consorcios'},
-        {id: 'produtos-financeiros', label: 'Produtos Financeiros', href: '#produtos'},
-      ]
-    },
-    { id: 'educacao-financeira', label: 'Educação Financeira', href: '#educacao-financeira' },
-    { id: 'testimonial', label: 'Depoimentos', href: '#testimonial' },
-    { id: 'contato', label: 'Contato', href: '#contato', isPrimary: true },
-  ];
+  // Handle scroll events
+  useEffect(() => {
+    const handleScroll = () => {
+      // Check if page has scrolled to add background
+      if (window.scrollY > 80) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
 
-  // Detectar seção ativa durante a rolagem
-  const detectActiveSection = useCallback(() => {
-    const sections = [
-      'home', 'sobre', 'investimentos', 'calculadora', 'produtos', 
-      'consorcios', 'educacao-financeira', 'testimonial', 'contato'
-    ];
-    
-    // Verificar qual seção está mais visível
-    let currentSection = activeSection;
-    
-    for (const section of sections) {
-      const element = document.getElementById(section);
-      if (element) {
-        const rect = element.getBoundingClientRect();
-        const visiblePercentage = Math.min(
-          Math.max(0, rect.bottom) - Math.max(0, rect.top), 
-          window.innerHeight
-        ) / window.innerHeight;
-        
-        if (visiblePercentage > 0.3) {
-          currentSection = section;
+      // Determine active section based on scroll position
+      const sections = [
+        'home',
+        'sobre',
+        'investimentos',
+        'calculadora',
+        'produtos',
+        'consorcios',
+        'testimonial',
+        'contato'
+      ];
+
+      const scrollPosition = window.scrollY + 200;
+
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const section = document.getElementById(sections[i]);
+        if (section && section.offsetTop <= scrollPosition) {
+          setActiveSection(sections[i]);
           break;
         }
       }
-    }
-    
-    setActiveSection(currentSection);
-    
-    // Detectar se a página foi rolada
-    setIsScrolled(window.scrollY > 10);
-  }, [activeSection]);
-
-  // Efeito para detectar a seção ativa e rolagem
-  useEffect(() => {
-    window.addEventListener('scroll', detectActiveSection);
-    detectActiveSection(); // Verificar inicialmente
-    
-    return () => {
-      window.removeEventListener('scroll', detectActiveSection);
     };
-  }, [detectActiveSection]);
 
-  // Efeito para fechar o menu mobile ao clicar fora
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      const target = event.target as HTMLElement;
-      const menuButton = document.getElementById('mobile-menu-button');
-      const mobileMenu = document.getElementById('mobile-menu');
-      
-      if (
-        menuButton && menuButton.contains(target) || 
-        mobileMenu && mobileMenu.contains(target)
-      ) {
-        return;
-      }
-      
-      if (isMenuOpen) setIsMenuOpen(false);
-    };
-    
-    document.addEventListener('click', handleClickOutside);
-    return () => document.removeEventListener('click', handleClickOutside);
-  }, [isMenuOpen]);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
-  // Função para navegação suave
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
+  // Scroll to section handler
+  const handleNavigation = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+    e.preventDefault();
+    setIsMenuOpen(false);
+
+    const element = document.getElementById(id);
     if (element) {
       const headerOffset = 80;
       const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+      const offsetPosition = elementPosition + window.scrollY - headerOffset;
 
       window.scrollTo({
         top: offsetPosition,
         behavior: 'smooth'
       });
-      
-      setIsMenuOpen(false);
-      setOpenSubMenu(null);
     }
   };
 
-  // Handler para toggle do menu mobile
-  const toggleMenu = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    setIsMenuOpen(!isMenuOpen);
-  };
-
-  const toggleSubMenu = (id: string) => {
-    setOpenSubMenu(openSubMenu === id ? null : id);
-  };
-
   return (
-    <header 
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 prevent-flicker ${
-        isScrolled 
-          ? 'bg-[#1A1A1E]/90 backdrop-blur-md shadow-lg' 
-          : 'bg-[#1A1A1E]'
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16 md:h-20">
-          {/* Logo */}
+    <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-[#1A1A1E]/95 backdrop-blur-md shadow-md' : 'bg-transparent'}`}>
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-20">
+          {/* Logo - Removed "INVEST" text */}
           <div className="flex-shrink-0">
-            <a href="#home" onClick={() => scrollToSection('home')} aria-label="Home">
-              <Image 
-                src={logo_lions_bank} 
-                alt="Lions Bank" 
-                className="h-8 sm:h-9 w-auto"
-                height={36}
+            <a href="#home" onClick={(e) => handleNavigation(e, 'home')} className="flex items-center">
+              <Image
+                src={logo_lions_bank}
+                alt="Lions Bank"
                 width={120}
+                height={40}
                 priority
+                className="h-auto"
               />
             </a>
           </div>
-          
-          {/* Desktop menu */}
-          <nav className="hidden md:flex items-center space-x-1.5 lg:space-x-2">
-            {navItems.map((item) => (
-              <div key={item.id} className="relative group">
-                {item.subItems ? (
-                  <div className="inline-block">
-                    <button
-                      onClick={() => toggleSubMenu(item.id)}
-                      className={`
-                        px-2 lg:px-3 py-2 rounded-md text-xs lg:text-sm font-medium transition-all duration-200 inline-flex items-center
-                        ${activeSection === item.id 
-                          ? 'text-[#C6A052] bg-[#28282E]'
-                          : 'text-gray-300 hover:text-[#C6A052] hover:bg-[#28282E]/70'
-                        }
-                      `}
-                    >
-                      {item.label}
-                      <ChevronDown size={14} className="ml-1 transition-transform duration-200" />
-                      {activeSection === item.id && (
-                        <span className="absolute bottom-1 left-1/2 transform -translate-x-1/2 h-0.5 w-2/3 bg-[#AF8E41] rounded-full" />
-                      )}
-                    </button>
-                    
-                    <div className="absolute top-full left-0 mt-1 w-48 rounded-md shadow-lg bg-[#222228] ring-1 ring-black ring-opacity-5 transition-all duration-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible">
-                      <div className="py-1">
-                        {item.subItems.map(subItem => (
-                          <a
-                            key={subItem.id}
-                            href={subItem.href}
-                            onClick={(e) => {
-                              e.preventDefault();
-                              scrollToSection(subItem.id);
-                            }}
-                            className={`
-                              block px-4 py-2 text-xs lg:text-sm transition-colors duration-200
-                              ${activeSection === subItem.id 
-                                ? 'text-[#C6A052] bg-[#2A2D31]'
-                                : 'text-gray-300 hover:text-[#C6A052] hover:bg-[#2A2D31]/70'
-                              }
-                            `}
-                          >
-                            {subItem.label}
-                          </a>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                ) : (
-                  <a
-                    href={item.href}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      scrollToSection(item.id);
-                    }}
-                    className={`
-                      px-2 lg:px-3 py-2 rounded-md text-xs lg:text-sm font-medium transition-all duration-200 inline-block relative
-                      ${item.isPrimary 
-                        ? `bg-gradient-to-r from-[#AF8E41] to-[#C6A052] text-white shadow-sm 
-                          hover:shadow-md hover:from-[#C6A052] hover:to-[#D6B062]` 
-                        : activeSection === item.id
-                          ? 'text-[#C6A052] bg-[#28282E]'
-                          : 'text-gray-300 hover:text-[#C6A052] hover:bg-[#28282E]/70'
-                      }
-                    `}
+
+          {/* Desktop Navigation */}
+          <div className="hidden lg:block">
+            <div className="flex space-x-6 items-center">
+              <a
+                href="#home"
+                onClick={(e) => handleNavigation(e, 'home')}
+                className={`nav-link ${activeSection === 'home' ? 'active' : ''}`}
+              >
+                Home
+              </a>
+              <a
+                href="#sobre"
+                onClick={(e) => handleNavigation(e, 'sobre')}
+                className={`nav-link ${activeSection === 'sobre' ? 'active' : ''}`}
+              >
+                Sobre
+              </a>
+              
+              {/* Services Dropdown */}
+              <div className="relative">
+                <button
+                  className={`nav-link group flex items-center ${
+                    ['produtos', 'investimentos', 'consorcios'].includes(activeSection) ? 'active' : ''
+                  }`}
+                  onMouseEnter={() => setServicesDropdownOpen(true)}
+                  onMouseLeave={() => setServicesDropdownOpen(false)}
+                  onClick={() => setServicesDropdownOpen(!servicesDropdownOpen)}
+                >
+                  Serviços
+                  <ChevronDown size={16} className="ml-1 transition-transform group-hover:rotate-180" />
+                </button>
+                {servicesDropdownOpen && (
+                  <div
+                    className="dropdown-menu"
+                    onMouseEnter={() => setServicesDropdownOpen(true)}
+                    onMouseLeave={() => setServicesDropdownOpen(false)}
                   >
-                    {item.label}
-                    {!item.isPrimary && activeSection === item.id && (
-                      <span className="absolute bottom-1 left-1/2 transform -translate-x-1/2 h-0.5 w-2/3 bg-[#AF8E41] rounded-full" />
-                    )}
-                  </a>
+                    <a
+                      href="#produtos"
+                      onClick={(e) => handleNavigation(e, 'produtos')}
+                      className="dropdown-item"
+                    >
+                      Nossos Serviços
+                    </a>
+                    <a
+                      href="#investimentos"
+                      onClick={(e) => handleNavigation(e, 'investimentos')}
+                      className="dropdown-item"
+                    >
+                      Investimentos
+                    </a>
+                    <a
+                      href="#consorcios"
+                      onClick={(e) => handleNavigation(e, 'consorcios')}
+                      className="dropdown-item"
+                    >
+                      Consórcios
+                    </a>
+                  </div>
                 )}
               </div>
-            ))}
-            
-            {/* Client Login Button */}
-            <a 
-              href="#" 
-              className="ml-2 flex items-center px-3 py-2 rounded-md text-xs lg:text-sm text-white bg-[#343941] hover:bg-[#3A4149] transition-all duration-200"
+              
+              <a
+                href="#calculadora"
+                onClick={(e) => handleNavigation(e, 'calculadora')}
+                className={`nav-link ${activeSection === 'calculadora' ? 'active' : ''}`}
+              >
+                Calculadoras
+              </a>
+              <a
+                href="#contato"
+                onClick={(e) => handleNavigation(e, 'contato')}
+                className={`nav-link ${activeSection === 'contato' ? 'active' : ''}`}
+              >
+                Contato
+              </a>
+            </div>
+          </div>
+
+          {/* Client Area Button */}
+          <div className="hidden sm:block">
+            <a
+              href="/cliente"
+              className="client-area-btn"
             >
-              <User size={14} className="mr-1.5" />
+              <User size={16} className="mr-2" />
               Área do Cliente
             </a>
-          </nav>
-          
+          </div>
+
           {/* Mobile menu button */}
-          <div className="md:hidden">
+          <div className="lg:hidden">
             <button
-              id="mobile-menu-button"
-              type="button"
-              className="inline-flex items-center justify-center p-2 rounded-md text-[#AF8E41] hover:bg-[#28282E]/30 focus:outline-none"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="inline-flex items-center justify-center rounded-md p-2 text-gray-300 hover:bg-gray-800 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-[#AF8E41]"
               aria-expanded={isMenuOpen}
-              onClick={toggleMenu}
             >
-              <span className="sr-only">Abrir menu</span>
+              <span className="sr-only">Abrir menu principal</span>
               {isMenuOpen ? (
-                <X className="h-6 w-6" />
+                <X className="block h-6 w-6" aria-hidden="true" />
               ) : (
-                <Menu className="h-6 w-6" />
+                <Menu className="block h-6 w-6" aria-hidden="true" />
               )}
             </button>
           </div>
         </div>
       </div>
-      
-      {/* Mobile menu */}
-      <AnimatePresence>
-        {isMenuOpen && (
-          <motion.div
-            id="mobile-menu"
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.2 }}
-            className="md:hidden prevent-flicker"
-          >
-            <div className="px-3 pt-2 pb-3 space-y-1 bg-[#1E1E22] border-t border-[#333]/30">
-              {navItems.map((item) => (
-                <div key={item.id}>
-                  {item.subItems ? (
-                    <>
-                      <button
-                        onClick={() => toggleSubMenu(item.id)}
-                        className={`
-                          w-full flex justify-between items-center px-3 py-2.5 rounded-md text-sm font-medium transition-all duration-200
-                          ${activeSection === item.id 
-                            ? 'text-[#C6A052] bg-[#28282E]'
-                            : 'text-gray-300 hover:text-[#C6A052] hover:bg-[#28282E]/70'
-                          }
-                        `}
-                      >
-                        {item.label}
-                        <ChevronDown 
-                          size={16} 
-                          className={`transition-transform duration-200 ${
-                            openSubMenu === item.id ? 'transform rotate-180' : ''
-                          }`} 
-                        />
-                      </button>
-                      
-                      <AnimatePresence>
-                        {openSubMenu === item.id && (
-                          <motion.div
-                            initial={{ opacity: 0, height: 0 }}
-                            animate={{ opacity: 1, height: 'auto' }}
-                            exit={{ opacity: 0, height: 0 }}
-                            transition={{ duration: 0.2 }}
-                            className="pl-4 space-y-1 mt-1"
-                          >
-                            {item.subItems.map(subItem => (
-                              <a
-                                key={subItem.id}
-                                href={subItem.href}
-                                onClick={(e) => {
-                                  e.preventDefault();
-                                  scrollToSection(subItem.id);
-                                }}
-                                className={`
-                                  block px-3 py-2 rounded-md text-sm transition-colors duration-200
-                                  ${activeSection === subItem.id 
-                                    ? 'text-[#C6A052] bg-[#2A2D31]'
-                                    : 'text-gray-300 hover:text-[#C6A052] hover:bg-[#2A2D31]/70'
-                                  }
-                                `}
-                              >
-                                {subItem.label}
-                              </a>
-                            ))}
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
-                    </>
-                  ) : (
-                    <a
-                      href={item.href}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        scrollToSection(item.id);
-                      }}
-                      className={`
-                        block px-3 py-2.5 rounded-md text-sm font-medium transition-all duration-200
-                        ${item.isPrimary 
-                          ? `bg-gradient-to-r from-[#AF8E41] to-[#C6A052] text-white shadow-sm 
-                            hover:shadow-md hover:from-[#C6A052] hover:to-[#D6B062]` 
-                          : activeSection === item.id
-                            ? 'text-[#C6A052] bg-[#28282E]'
-                            : 'text-gray-300 hover:text-[#C6A052] hover:bg-[#28282E]/70'
-                        }
-                      `}
-                    >
-                      {item.label}
-                    </a>
-                  )}
-                </div>
-              ))}
 
-              {/* Client Login in Mobile Menu */}
-              <a 
-                href="#" 
-                className="flex items-center px-3 py-2.5 rounded-md text-sm font-medium text-white bg-[#343941] hover:bg-[#3A4149] transition-all duration-200"
-              >
-                <User size={16} className="mr-2" />
-                Área do Cliente
-              </a>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </header>
+      {/* Mobile menu */}
+      <div className={`lg:hidden mobile-menu ${isMenuOpen ? 'open' : ''}`}>
+        <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+          <a
+            href="#home"
+            onClick={(e) => handleNavigation(e, 'home')}
+            className={`mobile-nav-link ${activeSection === 'home' ? 'active' : ''}`}
+          >
+            Home
+          </a>
+          <a
+            href="#sobre"
+            onClick={(e) => handleNavigation(e, 'sobre')}
+            className={`mobile-nav-link ${activeSection === 'sobre' ? 'active' : ''}`}
+          >
+            Sobre
+          </a>
+          <a
+            href="#produtos"
+            onClick={(e) => handleNavigation(e, 'produtos')}
+            className={`mobile-nav-link ${activeSection === 'produtos' ? 'active' : ''}`}
+          >
+            Serviços
+          </a>
+          <a
+            href="#investimentos"
+            onClick={(e) => handleNavigation(e, 'investimentos')}
+            className={`mobile-nav-link ${activeSection === 'investimentos' ? 'active' : ''}`}
+          >
+            Investimentos
+          </a>
+          <a
+            href="#consorcios"
+            onClick={(e) => handleNavigation(e, 'consorcios')}
+            className={`mobile-nav-link ${activeSection === 'consorcios' ? 'active' : ''}`}
+          >
+            Consórcios
+          </a>
+          <a
+            href="#calculadora"
+            onClick={(e) => handleNavigation(e, 'calculadora')}
+            className={`mobile-nav-link ${activeSection === 'calculadora' ? 'active' : ''}`}
+          >
+            Calculadoras
+          </a>
+          <a
+            href="#contato"
+            onClick={(e) => handleNavigation(e, 'contato')}
+            className={`mobile-nav-link ${activeSection === 'contato' ? 'active' : ''}`}
+          >
+            Contato
+          </a>
+          
+          <div className="pt-4 pb-3 border-t border-gray-700">
+            <a
+              href="/cliente"
+              className="mobile-client-btn"
+            >
+              <User size={16} className="mr-2" />
+              Área do Cliente
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
   );
-};
+}

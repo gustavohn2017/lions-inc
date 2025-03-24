@@ -1,0 +1,17 @@
+@font-face {
+  font-family: 'Capricho';
+  src: url('./Capricho-Bold.woff2') format('woff2'),
+       url('./Capricho-Bold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --font-capricho: 'Capricho', serif;
+}
+
+.font-capricho {
+  font-family: var(--font-capricho);
+  font-weight: bold;
+}

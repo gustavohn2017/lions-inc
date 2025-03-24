@@ -106,15 +106,6 @@ const FinancialEducation: React.FC = () => {
     }
   };
 
-  // Get category icon component
-  const getCategoryIcon = (category: ResourceCategory) => {
-    switch (category) {
-      case 'article': return <FileText size={16} className="mr-1.5" />;
-      case 'video': return <Video size={16} className="mr-1.5" />;
-      case 'ebook': return <BookOpen size={16} className="mr-1.5" />;
-    }
-  };
-
   // Get category info text
   const getCategoryInfo = (resource: ResourceType) => {
     switch (resource.category) {
@@ -142,6 +133,11 @@ const FinancialEducation: React.FC = () => {
     }
   };
 
+  // Improved tab selection
+  const handleTabClick = (category: string) => {
+    setActiveCategory(category);
+  };
+
   return (
     <section id="educacao-financeira" className="py-12 md:py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-[#1A1D20] to-[#232527]">
       <div className="max-w-6xl mx-auto">
@@ -161,108 +157,150 @@ const FinancialEducation: React.FC = () => {
           </p>
         </motion.div>
 
-        {/* Category filter */}
-        <div className="flex justify-center mb-6">
-          <div className="inline-flex bg-[#2A2D31] rounded-lg p-1">
-            <button
-              onClick={() => setActiveCategory('all')}
-              className={`px-3 py-1.5 text-xs sm:text-sm rounded-md transition-all ${
-                activeCategory === 'all'
-                  ? 'bg-[#AF8E41] text-white'
-                  : 'text-gray-300 hover:text-white'
-              }`}
+        {/* Improved Category filter with swipeable tabs on mobile */}
+        <div className="edu-tabs-container mb-6 overflow-x-auto">
+          <div className="edu-tabs-wrapper flex justify-center min-w-max">
+            <div 
+              className="category-filter inline-flex bg-[#2A2D31] rounded-lg p-1 min-w-max"
+              role="tablist"
+              aria-label="Filtro de categorias"
             >
-              Todos
-            </button>
-            <button
-              onClick={() => setActiveCategory('article')}
-              className={`px-3 py-1.5 text-xs sm:text-sm rounded-md transition-all flex items-center ${
-                activeCategory === 'article'
-                  ? 'bg-[#AF8E41] text-white'
-                  : 'text-gray-300 hover:text-white'
-              }`}
-            >
-              <FileText size={14} className="mr-1" />
-              Artigos
-            </button>
-            <button
-              onClick={() => setActiveCategory('video')}
-              className={`px-3 py-1.5 text-xs sm:text-sm rounded-md transition-all flex items-center ${
-                activeCategory === 'video'
-                  ? 'bg-[#AF8E41] text-white'
-                  : 'text-gray-300 hover:text-white'
-              }`}
-            >
-              <Video size={14} className="mr-1" />
-              Vídeos
-            </button>
-            <button
-              onClick={() => setActiveCategory('ebook')}
-              className={`px-3 py-1.5 text-xs sm:text-sm rounded-md transition-all flex items-center ${
-                activeCategory === 'ebook'
-                  ? 'bg-[#AF8E41] text-white'
-                  : 'text-gray-300 hover:text-white'
-              }`}
-            >
-              <BookOpen size={14} className="mr-1" />
-              E-books
-            </button>
+              <button
+                role="tab"
+                aria-selected={activeCategory === 'all'}
+                aria-controls="panel-all"
+                id="tab-all"
+                onClick={() => handleTabClick('all')}
+                className={`category-button ${
+                  activeCategory === 'all' ? 'active' : ''
+                }`}
+              >
+                Todos
+              </button>
+              
+              <button
+                role="tab"
+                aria-selected={activeCategory === 'article'}
+                aria-controls="panel-article"
+                id="tab-article"
+                onClick={() => handleTabClick('article')}
+                className={`category-button ${
+                  activeCategory === 'article' ? 'active' : ''
+                }`}
+              >
+                <FileText size={14} className="tab-icon" />
+                Artigos
+              </button>
+              
+              <button
+                role="tab"
+                aria-selected={activeCategory === 'video'}
+                aria-controls="panel-video"
+                id="tab-video"
+                onClick={() => handleTabClick('video')}
+                className={`category-button ${
+                  activeCategory === 'video' ? 'active' : ''
+                }`}
+              >
+                <Video size={14} className="tab-icon" />
+                Vídeos
+              </button>
+              
+              <button
+                role="tab"
+                aria-selected={activeCategory === 'ebook'}
+                aria-controls="panel-ebook"
+                id="tab-ebook"
+                onClick={() => handleTabClick('ebook')}
+                className={`category-button ${
+                  activeCategory === 'ebook' ? 'active' : ''
+                }`}
+              >
+                <BookOpen size={14} className="tab-icon" />
+                E-books
+              </button>
+            </div>
           </div>
         </div>
 
-        {/* Content cards */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.1 }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6"
+        {/* Content cards with proper ARIA roles */}
+        <div
+          id={`panel-${activeCategory}`}
+          role="tabpanel"
+          aria-labelledby={`tab-${activeCategory}`}
+          className="tab-content"
         >
-          {filteredResources.map((resource) => (
-            <motion.div
-              key={resource.id}
-              variants={itemVariants}
-              className="bg-[#2A2D31] border border-[#AF8E41]/20 rounded-lg overflow-hidden hover:border-[#AF8E41]/40 transition-all duration-300 shadow-md hover:shadow-lg group flex flex-col h-full"
-              onClick={(e) => handleResourceAction(resource, e)}
-              role="button"
-              tabIndex={0}
-              aria-label={`Ver ${resource.title}`}
-            >
-              <div className="relative w-full pt-[60%] overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-t from-[#1A1A1E]/80 to-transparent z-10"></div>
-                <div 
-                  className="absolute inset-0 bg-cover bg-center transition-transform duration-600 group-hover:scale-105"
-                  style={{ backgroundImage: `url(${resource.image})` }}
-                ></div>
-                <div className="absolute bottom-3 left-3 z-20">
-                  {getCategoryInfo(resource)}
-                </div>
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6"
+          >
+            {filteredResources.length > 0 ? (
+              filteredResources.map((resource) => (
+                <motion.div
+                  key={resource.id}
+                  variants={itemVariants}
+                  className="education-card bg-[#2A2D31] border border-[#AF8E41]/20 rounded-lg overflow-hidden transition-all duration-300 shadow-md hover:shadow-lg group"
+                  onClick={(e) => handleResourceAction(resource, e)}
+                  role="button"
+                  tabIndex={0}
+                  aria-label={`Ver ${resource.title}`}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      handleResourceAction(resource, e as unknown as React.MouseEvent);
+                    }
+                  }}
+                >
+                  <div className="education-image-container">
+                    <div className="education-image-overlay"></div>
+                    <div 
+                      className="education-image"
+                      style={{ backgroundImage: `url(${resource.image})` }}
+                    ></div>
+                    <div className="education-category-badge">
+                      {getCategoryInfo(resource)}
+                    </div>
+                  </div>
+                  
+                  <div className="education-content">
+                    <p className="education-date">{resource.date}</p>
+                    <h3 className="education-title">
+                      {resource.title}
+                    </h3>
+                    <p className="education-description">
+                      {resource.description}
+                    </p>
+                    
+                    <div className="education-cta">
+                      {resource.category === 'ebook' ? (
+                        <>
+                          <Download size={14} />
+                          <span>Baixar E-book</span>
+                        </>
+                      ) : (
+                        <>
+                          <ExternalLink size={14} />
+                          <span>Ler mais</span>
+                        </>
+                      )}
+                    </div>
+                  </div>
+                </motion.div>
+              ))
+            ) : (
+              <div className="col-span-full text-center py-8">
+                <p className="text-gray-400">Nenhum conteúdo encontrado nesta categoria.</p>
+                <button 
+                  onClick={() => setActiveCategory('all')}
+                  className="mt-3 text-[#AF8E41] hover:underline focus:outline-none focus:underline"
+                >
+                  Ver todos os conteúdos
+                </button>
               </div>
-              <div className="p-4 flex flex-col flex-grow">
-                <div className="text-gray-400 text-xs mb-2">{resource.date}</div>
-                <h3 className="text-base sm:text-lg font-semibold text-white mb-2 group-hover:text-[#C6A052] transition-colors line-clamp-2">
-                  {resource.title}
-                </h3>
-                <p className="text-gray-300 text-xs sm:text-sm mb-3 line-clamp-2 flex-grow">
-                  {resource.description}
-                </p>
-                <div className="flex items-center mt-auto text-[#AF8E41] text-xs sm:text-sm group-hover:text-[#C6A052] transition-colors">
-                  {resource.category === 'ebook' ? (
-                    <>
-                      <Download size={14} className="mr-1" />
-                      <span>Baixar E-book</span>
-                    </>
-                  ) : (
-                    <>
-                      <ExternalLink size={14} className="mr-1" />
-                      <span>Ler mais</span>
-                    </>
-                  )}
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
+            )}
+          </motion.div>
+        </div>
 
         {/* View all button */}
         <div className="text-center mt-8">
