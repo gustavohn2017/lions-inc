@@ -58,14 +58,6 @@ export default function Home() {
         <AboutSection />
       </section>
       
-      <section id="investimentos" className="scroll-mt-20">
-        <InvestmentOptions />
-      </section>
-      
-      <section id="calculadora" className="scroll-mt-20">
-        <BusinessCalculator />
-      </section>
-      
       <section id="produtos" className="scroll-mt-20">
         <ServiceTabs />
       </section>
@@ -77,6 +69,15 @@ export default function Home() {
       <section id="consorcios" className="scroll-mt-20">
         <ConsortiumSection />
       </section>
+      
+      <section id="investimentos" className="scroll-mt-20">
+        <InvestmentOptions />
+      </section>
+      
+      <section id="calculadora" className="scroll-mt-20">
+        <BusinessCalculator />
+      </section>
+      
       
       <section id="contato" className="scroll-mt-20">
         <ContactForm />
