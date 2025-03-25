@@ -1,15 +1,15 @@
 "use client";
 
-import React from 'react';
-import { motion } from 'framer-motion';
-import { CheckCircle, ArrowRight, Home, Car, BuildingIcon, Briefcase } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { CheckCircle, ArrowRight, Home, Car, BuildingIcon, Briefcase, ChevronLeft, ChevronRight } from 'lucide-react';
 import './consortium-section.css';
 
 // Consortium types data
 const consortiumTypes = [
   {
     id: 'real-estate',
-    icon: <Home className="h-8 w-8 text-[#AF8E41]" />,
+    icon: <Home className="consortium-icon-svg" />,
     title: 'Consórcio Imobiliário',
     description: 'Realize o sonho da casa própria com parcelas que cabem no seu orçamento.',
     benefits: [
@@ -20,7 +20,7 @@ const consortiumTypes = [
   },
   {
     id: 'auto',
-    icon: <Car className="h-8 w-8 text-[#AF8E41]" />,
+    icon: <Car className="consortium-icon-svg" />,
     title: 'Consórcio de Veículos',
     description: 'Adquira veículos sem comprometer seu orçamento com juros altos.',
     benefits: [
@@ -31,7 +31,7 @@ const consortiumTypes = [
   },
   {
     id: 'business',
-    icon: <BuildingIcon className="h-8 w-8 text-[#AF8E41]" />,
+    icon: <BuildingIcon className="consortium-icon-svg" />,
     title: 'Consórcio Empresarial',
     description: 'Soluções para expandir sua empresa sem impactar o capital de giro.',
     benefits: [
@@ -42,7 +42,7 @@ const consortiumTypes = [
   },
   {
     id: 'heavy',
-    icon: <Briefcase className="h-8 w-8 text-[#AF8E41]" />,
+    icon: <Briefcase className="consortium-icon-svg" />,
     title: 'Consórcio de Maquinário',
     description: 'Equipamentos e maquinário para impulsionar sua produção e eficiência.',
     benefits: [
@@ -54,21 +54,33 @@ const consortiumTypes = [
 ];
 
 const ConsortiumSection: React.FC = () => {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.1 }
-    }
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+  
+  // Check screen size on mount and resize
+  useEffect(() => {
+    const checkIfMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkIfMobile();
+    window.addEventListener('resize', checkIfMobile);
+    
+    return () => {
+      window.removeEventListener('resize', checkIfMobile);
+    };
+  }, []);
+
+  const handleNavClick = (index: number) => {
+    setActiveIndex(index);
   };
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.5 }
-    }
+  const nextSlide = () => {
+    setActiveIndex((prev) => (prev === consortiumTypes.length - 1 ? 0 : prev + 1));
+  };
+  
+  const prevSlide = () => {
+    setActiveIndex((prev) => (prev === 0 ? consortiumTypes.length - 1 : prev - 1));
   };
 
   const handleContactClick = (e: React.MouseEvent) => {
@@ -102,82 +114,173 @@ const ConsortiumSection: React.FC = () => {
   };
 
   return (
-    <section id="consorcios" className="py-14 md:py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-[#262A34] to-[#1E2028]">
-      <div className="max-w-6xl mx-auto">
+    <section id="consorcios" className="consortium-section">
+      <div className="consortium-container">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-8 md:mb-10"
+          className="section-header"
         >
-          <h2 className="text-2xl sm:text-3xl md:text-4xl text-[#AF8E41] font-['Cormorant_Garamond'] font-bold tracking-wide mb-2">
-            CONSÓRCIOS PERSONALIZADOS
-          </h2>
-          <div className="w-16 sm:w-20 h-0.5 bg-gradient-to-r from-transparent via-[#AF8E41] to-transparent mx-auto mb-3"></div>
-          <p className="text-gray-300 text-sm sm:text-base max-w-2xl mx-auto">
+          <h2 className="section-title">CONSÓRCIOS PERSONALIZADOS</h2>
+          <div className="title-underline"></div>
+          <p className="section-subtitle">
             Planeje suas conquistas sem comprometer seu orçamento com os juros de financiamentos tradicionais.
           </p>
         </motion.div>
-
-        <motion.div 
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.1 }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6"
-        >
-          {consortiumTypes.map((type) => (
+        
+        {/* Mobile Design */}
+        <div className="consortium-mobile-view">
+          <AnimatePresence mode="wait">
             <motion.div
-              key={type.id}
-              variants={itemVariants}
-              className="bg-[#2A2D31] border border-[#AF8E41]/20 rounded-lg overflow-hidden hover:border-[#AF8E41]/40 transition-all duration-300 shadow-md hover:shadow-lg flex flex-col h-full"
+              key={activeIndex}
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -50 }}
+              transition={{ duration: 0.3 }}
+              className="mobile-card"
             >
-              <div className="p-5 flex flex-col h-full">
-                <div className="flex items-center mb-3">
-                  <div className="bg-[#343941] p-2 rounded-md mr-3 flex-shrink-0">
-                    {type.icon}
-                  </div>
-                  <h3 className="text-base font-bold text-white">{type.title}</h3>
+              <div className="mobile-card-header">
+                <div className="mobile-icon-wrapper">
+                  {consortiumTypes[activeIndex].icon}
                 </div>
-                
-                <p className="text-gray-300 text-sm mb-4">{type.description}</p>
-                
-                <div className="mt-auto">
-                  <ul className="space-y-2 mb-4">
-                    {type.benefits.map((benefit, index) => (
-                      <li
-                        key={index}
-                        className="flex items-start text-gray-300 text-xs sm:text-sm group"
-                      >
-                        <CheckCircle className="w-3.5 h-3.5 text-[#AF8E41] mt-0.5 mr-2 flex-shrink-0 group-hover:scale-110 transition-all duration-200" />
-                        <span>{benefit}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  
+                <h3 className="mobile-card-title">
+                  {consortiumTypes[activeIndex].title}
+                </h3>
+              </div>
+              
+              <p className="mobile-card-description">
+                {consortiumTypes[activeIndex].description}
+              </p>
+              
+              <div className="mobile-benefits-list">
+                {consortiumTypes[activeIndex].benefits.map((benefit, idx) => (
+                  <div key={idx} className="mobile-benefit-item">
+                    <CheckCircle className="benefit-check" />
+                    <span>{benefit}</span>
+                  </div>
+                ))}
+              </div>
+              
+              <button 
+                onClick={handleContactClick}
+                className="mobile-learn-more"
+              >
+                Quero saber mais
+                <ArrowRight size={14} />
+              </button>
+            </motion.div>
+          </AnimatePresence>
+          
+          <div className="mobile-navigation">
+            <button 
+              onClick={prevSlide}
+              className="mobile-nav-button prev"
+              aria-label="Consórcio anterior"
+            >
+              <ChevronLeft size={20} />
+            </button>
+            
+            <div className="mobile-dots">
+              {consortiumTypes.map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => handleNavClick(idx)}
+                  className={`mobile-dot ${activeIndex === idx ? 'active' : ''}`}
+                  aria-label={`Ir para ${consortiumTypes[idx].title}`}
+                />
+              ))}
+            </div>
+            
+            <button 
+              onClick={nextSlide}
+              className="mobile-nav-button next"
+              aria-label="Próximo consórcio"
+            >
+              <ChevronRight size={20} />
+            </button>
+          </div>
+        </div>
+        
+        {/* Desktop Design */}
+        <div className="consortium-desktop-view">
+          {/* Navigation Tabs */}
+          <div className="desktop-navigation">
+            {consortiumTypes.map((type, idx) => (
+              <button
+                key={type.id}
+                onClick={() => handleNavClick(idx)}
+                className={`desktop-tab ${activeIndex === idx ? 'active' : ''}`}
+                aria-selected={activeIndex === idx}
+              >
+                <div className="desktop-tab-icon">
+                  {type.icon}
+                </div>
+                <span>{type.title}</span>
+                {activeIndex === idx && <div className="active-indicator" />}
+              </button>
+            ))}
+          </div>
+          
+          {/* Content */}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeIndex}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="desktop-content-area"
+            >
+              <div className="desktop-content-grid">
+                <div className="desktop-content-left">
+                  <h3 className="desktop-content-title">
+                    {consortiumTypes[activeIndex].title}
+                  </h3>
+                  <p className="desktop-content-description">
+                    {consortiumTypes[activeIndex].description}
+                  </p>
                   <button 
                     onClick={handleContactClick}
-                    className="inline-flex items-center text-[#AF8E41] hover:text-[#C6A052] text-xs sm:text-sm font-medium transition-colors group"
+                    className="desktop-learn-more"
                   >
                     Quero saber mais
-                    <ArrowRight size={12} className="ml-1 group-hover:translate-x-1 transition-transform" />
+                    <ArrowRight size={16} />
                   </button>
+                </div>
+                
+                <div className="desktop-content-right">
+                  <h4 className="benefits-title">Principais vantagens</h4>
+                  <div className="desktop-benefits-list">
+                    {consortiumTypes[activeIndex].benefits.map((benefit, idx) => (
+                      <motion.div 
+                        key={idx} 
+                        className="desktop-benefit-item"
+                        initial={{ opacity: 0, x: -10 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: idx * 0.1 }}
+                      >
+                        <CheckCircle className="benefit-check" />
+                        <span>{benefit}</span>
+                      </motion.div>
+                    ))}
+                  </div>
                 </div>
               </div>
             </motion.div>
-          ))}
-        </motion.div>
-
-        <div className="text-center mt-8 lg:mt-10">
+          </AnimatePresence>
+        </div>
+        
+        <div className="action-button-container">
           <button 
             onClick={handleCalculationClick}
-            className="inline-flex items-center justify-center px-5 py-2.5 bg-gradient-to-r from-[#AF8E41] to-[#C6A052] text-white rounded-lg transition-all duration-300 text-sm font-medium hover:from-[#C6A052] hover:to-[#D6B062] hover:shadow-lg hover:shadow-[#AF8E41]/10"
+            className="simulation-button"
           >
             Simular seu consórcio agora
-            <ArrowRight size={14} className="ml-2" />
+            <ArrowRight className="arrow-icon" />
           </button>
-          <p className="text-gray-400 text-xs mt-3">
+          <p className="disclaimer-text">
             *Consulte nossos especialistas para uma simulação personalizada sem compromisso.
           </p>
         </div>

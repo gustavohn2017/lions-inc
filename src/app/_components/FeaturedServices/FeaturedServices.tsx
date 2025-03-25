@@ -1,11 +1,11 @@
 "use client";
 
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { 
   CreditCard, Shield, TrendingUp, FileText, 
   RefreshCw, Landmark, BarChart2, HardHat, 
-  Home, Users
+  Home, Users, ChevronLeft, ChevronRight
 } from 'lucide-react';
 import './featured-services.css';
 
@@ -101,6 +101,52 @@ const FeaturedServices: React.FC = () => {
       }
     }
   };
+
+  // State to track if we're on mobile
+  const [isMobile, setIsMobile] = useState(false);
+  const [activeGroup, setActiveGroup] = useState(0);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  
+  // Group services into chunks of 4
+  const serviceGroups = [];
+  for (let i = 0; i < services.length; i += 4) {
+    serviceGroups.push(services.slice(i, i + 4));
+  }
+  
+  // Check if device is mobile
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 640);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+  
+  // Navigate to a specific group
+  const navigateToGroup = (index: number) => {
+    setActiveGroup(index);
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollTo({
+        left: index * scrollContainerRef.current.clientWidth,
+        behavior: 'smooth'
+      });
+    }
+  };
+  
+  // Handle scroll event to update active group
+  const handleScroll = () => {
+    if (scrollContainerRef.current) {
+      const containerWidth = scrollContainerRef.current.clientWidth;
+      const scrollPosition = scrollContainerRef.current.scrollLeft;
+      const newActiveGroup = Math.round(scrollPosition / containerWidth);
+      
+      if (newActiveGroup !== activeGroup) {
+        setActiveGroup(newActiveGroup);
+      }
+    }
+  };
   
   return (
     <section className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-[#242729] to-[#1E1F23]">
@@ -121,31 +167,98 @@ const FeaturedServices: React.FC = () => {
           </p>
         </motion.div>
 
-        <motion.div 
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.1 }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5 sm:gap-6"
-        >
-          {services.map((service) => (
-            <motion.div
-              key={service.id}
-              variants={itemVariants}
-              className="service-card bg-[#2A2D31] border border-[#AF8E41]/20 rounded-lg p-5 shadow-md hover:shadow-lg transition-all duration-300 hover:border-[#AF8E41]/40 group"
+        {isMobile ? (
+          <div className="mobile-cards-wrapper">
+            <div 
+              className="mobile-cards-scroll-container"
+              ref={scrollContainerRef}
+              onScroll={handleScroll}
             >
-              <div className="service-icon-container mb-4 group-hover:bg-[#AF8E41]/20">
-                {service.icon}
+              {serviceGroups.map((group, groupIndex) => (
+                <div 
+                  key={`group-${groupIndex}`} 
+                  className="mobile-cards-group"
+                >
+                  {group.map((service) => (
+                    <div
+                      key={service.id}
+                      className="service-card bg-[#2A2D31] border border-[#AF8E41]/20 rounded-lg p-4 shadow-md hover:shadow-lg transition-all duration-300 hover:border-[#AF8E41]/40 group"
+                    >
+                      <div className="service-icon-container mb-3 group-hover:bg-[#AF8E41]/20">
+                        {service.icon}
+                      </div>
+                      <h3 className="font-capricho text-[#AF8E41] mb-1">
+                        {service.title}
+                      </h3>
+                      <p className="text-gray-300 mobile-card-description">
+                        {service.description}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              ))}
+            </div>
+            
+            {serviceGroups.length > 1 && (
+              <div className="mobile-pagination-controls">
+                <button 
+                  onClick={() => navigateToGroup((activeGroup - 1 + serviceGroups.length) % serviceGroups.length)}
+                  className="mobile-pagination-arrow left"
+                  disabled={activeGroup === 0}
+                  aria-label="Previous group"
+                >
+                  <ChevronLeft size={20} />
+                </button>
+                
+                <div className="mobile-pagination-dots">
+                  {serviceGroups.map((_, index) => (
+                    <button
+                      key={index}
+                      onClick={() => navigateToGroup(index)}
+                      className={`pagination-dot ${activeGroup === index ? 'active' : ''}`}
+                      aria-label={`Go to group ${index + 1}`}
+                    />
+                  ))}
+                </div>
+                
+                <button 
+                  onClick={() => navigateToGroup((activeGroup + 1) % serviceGroups.length)}
+                  className="mobile-pagination-arrow right"
+                  disabled={activeGroup === serviceGroups.length - 1}
+                  aria-label="Next group"
+                >
+                  <ChevronRight size={20} />
+                </button>
               </div>
-              <h3 className="font-capricho text-lg text-[#AF8E41] mb-2">
-                {service.title}
-              </h3>
-              <p className="text-gray-300 text-sm">
-                {service.description}
-              </p>
-            </motion.div>
-          ))}
-        </motion.div>
+            )}
+          </div>
+        ) : (
+          <motion.div 
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.1 }}
+            className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 sm:gap-6"
+          >
+            {services.map((service) => (
+              <motion.div
+                key={service.id}
+                variants={itemVariants}
+                className="service-card bg-[#2A2D31] border border-[#AF8E41]/20 rounded-lg p-5 shadow-md hover:shadow-lg transition-all duration-300 hover:border-[#AF8E41]/40 group"
+              >
+                <div className="service-icon-container mb-4 group-hover:bg-[#AF8E41]/20">
+                  {service.icon}
+                </div>
+                <h3 className="font-capricho text-lg text-[#AF8E41] mb-2">
+                  {service.title}
+                </h3>
+                <p className="text-gray-300 text-sm">
+                  {service.description}
+                </p>
+              </motion.div>
+            ))}
+          </motion.div>
+        )}
       </div>
     </section>
   );

@@ -1,3 +1,4 @@
+/* Desktop/Tablet Tab Styling */
 .service-tab {
   position: relative;
   overflow: hidden;
@@ -43,7 +44,6 @@
 .benefit-item {
   display: flex;
   align-items: start;
-  margin-bottom: 8px;
   transition: all 0.2s ease;
 }
 
@@ -52,7 +52,6 @@
 }
 
 .benefit-icon {
-  margin-right: 10px;
   flex-shrink: 0;
   color: #AF8E41;
 }
@@ -106,6 +105,37 @@
   transform: translateX(3px);
 }
 
+/* Mobile specific styling */
+.mobile-services-tabs .mobile-tab-button {
+  background-color: rgba(42, 45, 49, 0.8);
+  border: 1px solid rgba(175, 142, 65, 0.2);
+  transition: all 0.3s ease;
+}
+
+.mobile-services-tabs .mobile-tab-button.active {
+  background-color: #2A2D31;
+  border-color: #AF8E41;
+}
+
+.mobile-services-tabs .mobile-tab-button.active svg {
+  color: #AF8E41;
+}
+
+.mobile-services-tabs .mobile-tab-button svg {
+  color: #e0e0e0;
+  width: 20px;
+  height: 20px;
+  transition: color 0.3s ease;
+}
+
+.mobile-services-tabs .mobile-accordion button {
+  transition: all 0.3s ease;
+}
+
+.mobile-services-tabs .mobile-accordion button:active {
+  background-color: rgba(175, 142, 65, 0.1);
+}
+
 /* Animation for content appearance */
 @keyframes fadeIn {
   from {
@@ -118,14 +148,41 @@
   }
 }
 
-/* Responsive adjustments */
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
+/* Responsive styling refinements */
 @media (max-width: 640px) {
+  .service-button {
+    width: 100%;
+    justify-content: center;
+    padding: 12px;
+  }
+  
+  /* Improved loading of images on mobile */
+  .mobile-services-tabs img {
+    transition: opacity 0.3s ease;
+  }
+  
+  .mobile-services-tabs img[loading] {
+    opacity: 0.6;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1023px) {
   .service-tab {
     padding: 8px 12px;
-    font-size: 12px;
   }
   
   .service-content {
-    padding: 16px;
+    padding: 20px;
   }
 }

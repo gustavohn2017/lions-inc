@@ -71,13 +71,39 @@
 /* Responsive adjustments */
 @media (max-width: 640px) {
   .service-icon-container {
-    width: 50px;
-    height: 50px;
+    width: 45px;
+    height: 45px;
   }
   
   .service-icon {
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
+  }
+
+  .service-card {
+    padding: 12px;
+  }
+
+  .service-card h3 {
+    font-size: 0.95rem;
+  }
+
+  .service-card p {
+    font-size: 0.8rem;
+    line-height: 1.3;
+  }
+}
+
+/* Make sure the grid works well on small screens */
+@media (max-width: 375px) {
+  .service-icon-container {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .service-icon {
+    width: 16px;
+    height: 16px;
   }
 }
 
@@ -116,3 +142,116 @@
 .service-grid > div:nth-child(8) { animation-delay: 0.8s; }
 .service-grid > div:nth-child(9) { animation-delay: 0.9s; }
 .service-grid > div:nth-child(10) { animation-delay: 1.0s; }
+
+/* Mobile horizontal scroll view for 4 cards at a time */
+.mobile-cards-wrapper {
+  position: relative;
+  padding: 0 0 2rem;
+}
+
+.mobile-cards-scroll-container {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+.mobile-cards-scroll-container::-webkit-scrollbar {
+  display: none; /* Chrome, Safari and Opera */
+}
+
+.mobile-cards-group {
+  min-width: 100%;
+  scroll-snap-align: start;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, auto);
+  gap: 12px;
+  padding: 4px;
+}
+
+.mobile-card-description {
+  font-size: 0.75rem;
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Mobile pagination controls */
+.mobile-pagination-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 16px;
+}
+
+.mobile-pagination-dots {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin: 0 10px;
+}
+
+.pagination-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: rgba(175, 142, 65, 0.3);
+  transition: all 0.3s ease;
+}
+
+.pagination-dot.active {
+  width: 20px;
+  border-radius: 4px;
+  background-color: #AF8E41;
+}
+
+.mobile-pagination-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: rgba(175, 142, 65, 0.1);
+  color: #AF8E41;
+  transition: all 0.3s ease;
+}
+
+.mobile-pagination-arrow:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.mobile-pagination-arrow:not(:disabled):hover {
+  background-color: rgba(175, 142, 65, 0.2);
+  transform: scale(1.1);
+}
+
+@media (max-width: 640px) {
+  .service-card {
+    padding: 12px;
+  }
+  
+  .service-card h3 {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 374px) {
+  .mobile-cards-group {
+    gap: 8px;
+  }
+  
+  .service-card {
+    padding: 10px;
+  }
+  
+  .service-icon-container {
+    margin-bottom: 8px;
+  }
+}
