@@ -121,7 +121,7 @@
 .mobile-menu {
   height: 0;
   overflow: hidden;
-  transition: height 0.3s ease;
+  transition: height 0.4s cubic-bezier(0.33, 1, 0.68, 1);
   border-top: 1px solid rgba(175, 142, 65, 0.1);
   background-color: #1A1A1E;
 }
@@ -138,17 +138,72 @@
   color: #e0e0e0;
   font-size: 0.9375rem;
   transition: all 0.2s ease;
+  transform: translateX(-10px);
+  opacity: 0;
 }
 
-.mobile-nav-link:hover {
-  background-color: rgba(175, 142, 65, 0.1);
-  color: #C6A052;
+/* Animation for menu items */
+.mobile-menu.open .mobile-nav-link {
+  animation: slideInRight 0.3s forwards;
 }
 
-.mobile-nav-link.active {
-  background-color: rgba(175, 142, 65, 0.15);
-  color: #C6A052;
-  font-weight: 500;
+.mobile-menu.open .mobile-nav-link:nth-child(1) { animation-delay: 0.05s; }
+.mobile-menu.open .mobile-nav-link:nth-child(2) { animation-delay: 0.1s; }
+.mobile-menu.open .mobile-nav-link:nth-child(3) { animation-delay: 0.15s; }
+.mobile-menu.open .mobile-nav-link:nth-child(4) { animation-delay: 0.2s; }
+.mobile-menu.open .mobile-nav-link:nth-child(5) { animation-delay: 0.25s; }
+.mobile-menu.open .mobile-nav-link:nth-child(6) { animation-delay: 0.3s; }
+.mobile-menu.open .mobile-nav-link:nth-child(7) { animation-delay: 0.35s; }
+
+.mobile-menu.open .pt-4 {
+  animation: slideInRight 0.3s forwards;
+  animation-delay: 0.4s;
+  transform: translateX(-10px);
+  opacity: 0;
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Hamburger menu animation */
+.hamburger-button {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 24px;
+  height: 18px;
+}
+
+.hamburger-line {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: #e0e0e0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  border-radius: 2px;
+}
+
+.hamburger-button.active .hamburger-line:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+  background-color: #C6A052;
+}
+
+.hamburger-button.active .hamburger-line:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger-button.active .hamburger-line:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+  background-color: #C6A052;
 }
 
 .mobile-client-btn {

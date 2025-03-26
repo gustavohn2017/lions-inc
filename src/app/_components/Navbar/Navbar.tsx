@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import logo_lions_bank from '@assets/logo_lions_bank.png';
-import { Menu, X, ChevronDown, User } from 'lucide-react';
+import { ChevronDown, User } from 'lucide-react';
 import './navbar.css';
 
 export function Navbar() {
@@ -11,6 +11,8 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
   const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false);
+  const dropdownTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
 
   // Handle scroll events
   useEffect(() => {
@@ -48,6 +50,43 @@ export function Navbar() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Dropdown hover handlers with delay
+  const handleDropdownEnter = () => {
+    if (dropdownTimeoutRef.current) {
+      clearTimeout(dropdownTimeoutRef.current);
+      dropdownTimeoutRef.current = null;
+    }
+    setServicesDropdownOpen(true);
+  };
+
+  const handleDropdownLeave = () => {
+    // Set a timeout to close the dropdown after 500ms
+    dropdownTimeoutRef.current = setTimeout(() => {
+      setServicesDropdownOpen(false);
+    }, 500); // 500ms delay before closing
+  };
+
+  // Clean up timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (dropdownTimeoutRef.current) {
+        clearTimeout(dropdownTimeoutRef.current);
+      }
+    };
+  }, []);
+
+  // Update mobile menu height when opened/closed
+  useEffect(() => {
+    if (mobileMenuRef.current) {
+      if (isMenuOpen) {
+        const height = mobileMenuRef.current.scrollHeight;
+        mobileMenuRef.current.style.height = `${height}px`;
+      } else {
+        mobileMenuRef.current.style.height = '0px';
+      }
+    }
+  }, [isMenuOpen]);
 
   // Scroll to section handler
   const handleNavigation = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
@@ -109,8 +148,8 @@ export function Navbar() {
                   className={`nav-link group flex items-center ${
                     ['produtos', 'investimentos', 'consorcios'].includes(activeSection) ? 'active' : ''
                   }`}
-                  onMouseEnter={() => setServicesDropdownOpen(true)}
-                  onMouseLeave={() => setServicesDropdownOpen(false)}
+                  onMouseEnter={handleDropdownEnter}
+                  onMouseLeave={handleDropdownLeave}
                   onClick={() => setServicesDropdownOpen(!servicesDropdownOpen)}
                 >
                   Serviços
@@ -119,8 +158,8 @@ export function Navbar() {
                 {servicesDropdownOpen && (
                   <div
                     className="dropdown-menu"
-                    onMouseEnter={() => setServicesDropdownOpen(true)}
-                    onMouseLeave={() => setServicesDropdownOpen(false)}
+                    onMouseEnter={handleDropdownEnter}
+                    onMouseLeave={handleDropdownLeave}
                   >
                     <a
                       href="#produtos"
@@ -175,26 +214,29 @@ export function Navbar() {
             </a>
           </div>
 
-          {/* Mobile menu button */}
+          {/* Mobile menu button - Custom hamburger icon */}
           <div className="lg:hidden">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="inline-flex items-center justify-center rounded-md p-2 text-gray-300 hover:bg-gray-800 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-[#AF8E41]"
+              className="inline-flex items-center justify-center p-2 rounded-md text-gray-300 hover:bg-gray-800/30 hover:text-white focus:outline-none"
               aria-expanded={isMenuOpen}
             >
               <span className="sr-only">Abrir menu principal</span>
-              {isMenuOpen ? (
-                <X className="block h-6 w-6" aria-hidden="true" />
-              ) : (
-                <Menu className="block h-6 w-6" aria-hidden="true" />
-              )}
+              <div className={`hamburger-button ${isMenuOpen ? 'active' : ''}`}>
+                <span className="hamburger-line"></span>
+                <span className="hamburger-line"></span>
+                <span className="hamburger-line"></span>
+              </div>
             </button>
           </div>
         </div>
       </div>
 
-      {/* Mobile menu */}
-      <div className={`lg:hidden mobile-menu ${isMenuOpen ? 'open' : ''}`}>
+      {/* Mobile menu with animation */}
+      <div 
+        ref={mobileMenuRef}
+        className={`lg:hidden mobile-menu ${isMenuOpen ? 'open' : ''}`}
+      >
         <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
           <a
             href="#home"
