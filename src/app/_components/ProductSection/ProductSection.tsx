@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import Link from "next/link";
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, Search, ChevronLeft, ChevronRight, Filter } from "lucide-react";
 
 // Categorias de soluções
