@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import Link from "next/link";
 import { motion } from 'framer-motion';
-import { ArrowRight, Search, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowRight, Search, ChevronLeft, ChevronRight, Filter } from "lucide-react";
 
 // Categorias de soluções
 const categories = [
@@ -118,19 +118,22 @@ const products = [
 
 const ProductsSection = () => {
   const [isMobile, setIsMobile] = useState(false);
+  const [isTablet, setIsTablet] = useState(false);
   const [activeCategory, setActiveCategory] = useState("all");
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const productsPerPage = isMobile ? 2 : 4; // Changed from 6 to 4 cards per page
+  const [showFilters, setShowFilters] = useState(false);
+  const productsPerPage = isMobile ? 2 : isTablet ? 3 : 4;
 
   useEffect(() => {
-    const checkIsMobile = () => {
-      setIsMobile(window.innerWidth < 768);
+    const checkScreenSize = () => {
+      setIsMobile(window.innerWidth < 640);
+      setIsTablet(window.innerWidth >= 640 && window.innerWidth < 1024);
     };
     
-    checkIsMobile();
-    window.addEventListener('resize', checkIsMobile);
-    return () => window.removeEventListener('resize', checkIsMobile);
+    checkScreenSize();
+    window.addEventListener('resize', checkScreenSize);
+    return () => window.removeEventListener('resize', checkScreenSize);
   }, []);
 
   useEffect(() => {
@@ -175,6 +178,10 @@ const ProductsSection = () => {
   const paginate = (pageNumber: number): void => setCurrentPage(pageNumber);
   const nextPage = () => setCurrentPage(prev => Math.min(prev + 1, totalPages));
   const prevPage = () => setCurrentPage(prev => Math.max(prev - 1, 1));
+
+  const toggleFilters = () => {
+    setShowFilters(!showFilters);
+  };
 
   // Função para renderizar uma paginação limitada com elipses
   const renderPaginationButtons = () => {
@@ -330,44 +337,118 @@ const ProductsSection = () => {
           </p>
         </motion.div>
 
-        {/* Search and Filter Controls - Improved responsive layout */}
-        <motion.div className="mb-6 flex flex-col md:flex-row justify-between items-center gap-3 md:gap-4" variants={itemVariants}>
-          {/* Category Filters - Scrollable on mobile */}
-          <div className="flex flex-nowrap overflow-x-auto md:flex-wrap justify-start md:justify-start gap-2 w-full md:w-auto pb-2 md:pb-0 hide-scrollbar">
-            {categories.map(category => (
-              <button
-                key={category.id}
-                onClick={() => setActiveCategory(category.id)}
-                className={`px-3 py-1 rounded-full text-xs sm:text-sm transition-all duration-200 whitespace-nowrap flex-shrink-0 ${
-                  activeCategory === category.id
-                    ? "bg-[#AF8E41] text-black font-medium"
-                    : "bg-[#2A2D31] text-gray-300 hover:bg-[#AF8E41]/20"
+        {/* Tablet-specific Search and Filter Controls */}
+        {isTablet && (
+          <motion.div className="mb-6 space-y-4" variants={itemVariants}>
+            {/* Search bar and filter toggle button */}
+            <div className="flex items-center gap-2">
+              <div className="relative flex-grow">
+                <input
+                  type="text"
+                  placeholder="Buscar soluções..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="py-2 pl-9 pr-3 w-full bg-[#2A2D31] border border-[#AF8E41]/20 rounded-md text-gray-200 
+                           focus:outline-none focus:border-[#AF8E41]/50 text-sm"
+                />
+                <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-gray-400" />
+              </div>
+              
+              <button 
+                onClick={toggleFilters}
+                className={`flex items-center gap-2 px-3 py-2 rounded-md text-sm border ${
+                  showFilters 
+                    ? "bg-[#AF8E41]/20 border-[#AF8E41]/30 text-[#AF8E41]" 
+                    : "bg-[#2A2D31] border-[#AF8E41]/20 text-gray-300"
                 }`}
               >
-                {category.name}
+                <Filter size={16} />
+                <span>Filtros</span>
               </button>
-            ))}
-          </div>
-          
-          {/* Search Input */}
-          <div className="relative w-full md:w-auto mt-3 md:mt-0">
-            <input
-              type="text"
-              placeholder="Buscar soluções..." /* Changed from produtos to soluções */
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="py-2 pl-9 pr-3 w-full md:w-64 bg-[#2A2D31] border border-[#AF8E41]/20 rounded-md text-gray-200 
-                       focus:outline-none focus:border-[#AF8E41]/50 text-sm"
-            />
-            <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-gray-400" />
-          </div>
-        </motion.div>
+            </div>
+            
+            {/* Expandable category filters */}
+            <AnimatePresence>
+              {showFilters && (
+                <motion.div 
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: 'auto' }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="overflow-hidden"
+                >
+                  <div className="bg-[#2A2D31]/80 p-3 rounded-md border border-[#AF8E41]/20">
+                    <div className="flex flex-wrap justify-center gap-2">
+                      {categories.map(category => (
+                        <button
+                          key={category.id}
+                          onClick={() => {
+                            setActiveCategory(category.id);
+                            setCurrentPage(1);
+                          }}
+                          className={`px-3 py-1 rounded-full text-sm transition-all duration-200 ${
+                            activeCategory === category.id
+                              ? "bg-[#AF8E41] text-black font-medium"
+                              : "bg-[#343941] text-gray-300 hover:bg-[#AF8E41]/20"
+                          }`}
+                        >
+                          {category.name}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </motion.div>
+        )}
 
-        {/* Products Grid */}
+        {/* Non-tablet Search and Filter Controls */}
+        {!isTablet && (
+          <motion.div className="mb-6 flex flex-col md:flex-row justify-between items-center gap-3 md:gap-4" variants={itemVariants}>
+            {/* Category Filters - Scrollable on mobile */}
+            <div className="flex flex-nowrap overflow-x-auto md:flex-wrap justify-start md:justify-start gap-2 w-full md:w-auto pb-2 md:pb-0 hide-scrollbar">
+              {categories.map(category => (
+                <button
+                  key={category.id}
+                  onClick={() => setActiveCategory(category.id)}
+                  className={`px-3 py-1 rounded-full text-xs sm:text-sm transition-all duration-200 whitespace-nowrap flex-shrink-0 ${
+                    activeCategory === category.id
+                      ? "bg-[#AF8E41] text-black font-medium"
+                      : "bg-[#2A2D31] text-gray-300 hover:bg-[#AF8E41]/20"
+                  }`}
+                >
+                  {category.name}
+                </button>
+              ))}
+            </div>
+            
+            {/* Search Input */}
+            <div className="relative w-full md:w-auto mt-3 md:mt-0">
+              <input
+                type="text"
+                placeholder="Buscar soluções..." /* Changed from produtos to soluções */
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="py-2 pl-9 pr-3 w-full md:w-64 bg-[#2A2D31] border border-[#AF8E41]/20 rounded-md text-gray-200 
+                         focus:outline-none focus:border-[#AF8E41]/50 text-sm"
+              />
+              <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-gray-400" />
+            </div>
+          </motion.div>
+        )}
+
+        {/* Products Grid with adjusted columns for tablet */}
         {filteredProducts.length > 0 ? (
           <>
             <motion.div 
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5" /* Changed to 4 columns and increased gap */
+              className={`grid gap-5 ${
+                isMobile 
+                  ? "grid-cols-1"
+                  : isTablet
+                    ? "grid-cols-2 sm:grid-cols-3"
+                    : "grid-cols-1 md:grid-cols-2 lg:grid-cols-4"
+              }`}
               variants={containerVariants}
             >
               {currentProducts.map(product => (
@@ -375,8 +456,45 @@ const ProductsSection = () => {
               ))}
             </motion.div>
             
-            {/* Pagination Controls - Updated for mobile responsiveness */}
-            {totalPages > 1 && (
+            {/* Simplified Pagination for Tablet */}
+            {totalPages > 1 && isTablet && (
+              <motion.div className="mt-8 flex justify-center items-center" variants={itemVariants}>
+                <div className="flex items-center">
+                  <button 
+                    onClick={prevPage}
+                    disabled={currentPage === 1}
+                    aria-label="Página anterior"
+                    className={`w-10 h-10 flex items-center justify-center rounded-l-md border-y border-l ${
+                      currentPage === 1 
+                        ? "border-gray-600 text-gray-600 cursor-not-allowed" 
+                        : "border-[#AF8E41]/30 text-[#AF8E41] hover:bg-[#AF8E41]/10"
+                    }`}
+                  >
+                    <ChevronLeft className="h-5 w-5" />
+                  </button>
+                  
+                  <div className="h-10 px-4 flex items-center justify-center border-y border-[#AF8E41]/30 bg-[#2A2D31] text-white">
+                    <span className="text-sm">{currentPage} de {totalPages}</span>
+                  </div>
+                  
+                  <button 
+                    onClick={nextPage}
+                    disabled={currentPage === totalPages}
+                    aria-label="Próxima página"
+                    className={`w-10 h-10 flex items-center justify-center rounded-r-md border-y border-r ${
+                      currentPage === totalPages 
+                        ? "border-gray-600 text-gray-600 cursor-not-allowed" 
+                        : "border-[#AF8E41]/30 text-[#AF8E41] hover:bg-[#AF8E41]/10"
+                    }`}
+                  >
+                    <ChevronRight className="h-5 w-5" />
+                  </button>
+                </div>
+              </motion.div>
+            )}
+            
+            {/* Regular Pagination for Desktop/Mobile */}
+            {totalPages > 1 && !isTablet && (
               <motion.div className="mt-8 flex justify-center items-center" variants={itemVariants}>
                 <div className="flex items-center space-x-1 sm:space-x-2">
                   <button 

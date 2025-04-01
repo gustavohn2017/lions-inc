@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import logo_lions_bank from '@assets/logo_lions_bank.png';
 import { ChevronDown, User } from 'lucide-react';
 import './navbar.css';
@@ -205,13 +206,13 @@ export function Navbar() {
 
           {/* Client Area Button */}
           <div className="hidden sm:block">
-            <a
-              href="/cliente"
+            <Link
+              href="/cliente/login"
               className="client-area-btn"
             >
               <User size={16} className="mr-2" />
               Área do Cliente
-            </a>
+            </Link>
           </div>
 
           {/* Mobile menu button - Custom hamburger icon */}
@@ -289,13 +290,13 @@ export function Navbar() {
           </a>
           
           <div className="pt-4 pb-3 border-t border-gray-700">
-            <a
-              href="/cliente"
+            <Link
+              href="/cliente/login"
               className="mobile-client-btn"
             >
               <User size={16} className="mr-2" />
               Área do Cliente
-            </a>
+            </Link>
           </div>
         </div>
       </div>

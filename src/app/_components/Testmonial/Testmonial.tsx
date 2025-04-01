@@ -51,6 +51,7 @@ export default function Testimonial() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [direction, setDirection] = useState(0);
   const [width, setWidth] = useState(0);
+  const [isTablet, setIsTablet] = useState(false);
   const carouselRef = useRef<HTMLDivElement>(null);
   const autoplayTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -60,6 +61,7 @@ export default function Testimonial() {
       if (carouselRef.current) {
         setWidth(carouselRef.current.offsetWidth);
       }
+      setIsTablet(window.innerWidth >= 640 && window.innerWidth < 1024);
     };
 
     handleResize(); // Inicializa
@@ -141,7 +143,7 @@ export default function Testimonial() {
         </div>
 
         {/* Desktop View - Grid Layout */}
-        <div className="hidden md:block">
+        <div className="hidden lg:block">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -210,6 +212,176 @@ export default function Testimonial() {
               </motion.div>
             ))}
           </motion.div>
+        </div>
+
+        {/* Tablet View - Two-column layout */}
+        <div className="hidden md:block lg:hidden">
+          <div className="grid grid-cols-2 gap-4">
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4 }}
+              className="col-span-2 bg-white/5 backdrop-blur-sm p-5 rounded-lg shadow-md flex flex-col sm:flex-row items-center border border-gray-700/30 hover:border-[#AF8E41]/30 transition-all duration-300"
+            >
+              <div className="sm:w-1/4 flex flex-col items-center text-center mb-4 sm:mb-0">
+                <img
+                  src={testimonials[currentSlide].avatar}
+                  alt={testimonials[currentSlide].name}
+                  className="w-16 h-16 rounded-full mb-2 border-2 border-[#AF8E41] object-cover"
+                />
+                <h3 className="text-xl font-cormorant font-bold text-[#C6A052]">
+                  {testimonials[currentSlide].name}
+                </h3>
+                <div className="flex my-1">
+                  {Array.from({ length: 5 }).map((_, index) => (
+                    <Star
+                      key={index}
+                      size={16}
+                      className={`text-yellow-500 ${
+                        index < testimonials[currentSlide].rating ? "fill-yellow-500" : "fill-transparent opacity-30"
+                      }`}
+                    />
+                  ))}
+                </div>
+              </div>
+              
+              <div className="sm:w-3/4 sm:pl-5 sm:border-l border-gray-700/30">
+                <p className="text-gray-300 text-center sm:text-left mb-4">
+                  {testimonials[currentSlide].comment}
+                </p>
+                
+                {testimonials[currentSlide].mediaType !== "none" && (
+                  <div className="w-full mt-4">
+                    {testimonials[currentSlide].mediaType === "video" ? (
+                      <div className="aspect-video rounded-lg overflow-hidden">
+                        <iframe
+                          className="w-full h-full"
+                          src={testimonials[currentSlide].media}
+                          title={`Vídeo de ${testimonials[currentSlide].name}`}
+                          allowFullScreen
+                          loading="lazy"
+                        />
+                      </div>
+                    ) : testimonials[currentSlide].mediaType === "image" ? (
+                      <img
+                        className="w-full h-auto rounded-lg object-cover aspect-[16/9]"
+                        src={testimonials[currentSlide].media}
+                        alt={`Imagem de ${testimonials[currentSlide].name}`}
+                        loading="lazy"
+                      />
+                    ) : null}
+                  </div>
+                )}
+              </div>
+            </motion.div>
+            
+            <div className="col-span-2 flex justify-between items-center mt-6">
+              <button 
+                onClick={prevSlide}
+                className="flex items-center justify-center bg-[#2A2D31]/80 text-[#AF8E41] p-2 rounded-full backdrop-blur-sm hover:bg-[#AF8E41]/20 transition-colors duration-300"
+              >
+                <ChevronLeft size={20} />
+                <span className="ml-1 text-sm">Anterior</span>
+              </button>
+              
+              <div className="flex space-x-2">
+                {testimonials.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => {
+                      setDirection(index > currentSlide ? 1 : -1);
+                      setCurrentSlide(index);
+                      resetAutoplay();
+                    }}
+                    className={`h-2 rounded-full transition-all duration-300 ${
+                      index === currentSlide ? "w-6 bg-[#AF8E41]" : "w-2 bg-gray-500/50"
+                    }`}
+                    aria-label={`Ir para depoimento ${index + 1}`}
+                  />
+                ))}
+              </div>
+              
+              <button 
+                onClick={nextSlide}
+                className="flex items-center justify-center bg-[#2A2D31]/80 text-[#AF8E41] p-2 rounded-full backdrop-blur-sm hover:bg-[#AF8E41]/20 transition-colors duration-300"
+              >
+                <span className="mr-1 text-sm">Próximo</span>
+                <ChevronRight size={20} />
+              </button>
+            </div>
+            
+            <div className="col-span-1">
+              {testimonials[(currentSlide + 1) % testimonials.length] && (
+                <motion.div 
+                  initial={{ opacity: 0.7 }}
+                  whileHover={{ opacity: 1, scale: 1.02 }}
+                  onClick={() => {
+                    setDirection(1);
+                    setCurrentSlide((currentSlide + 1) % testimonials.length);
+                    resetAutoplay();
+                  }}
+                  className="bg-white/5 backdrop-blur-sm p-4 rounded-lg shadow-md border border-gray-700/30 hover:border-[#AF8E41]/30 transition-all duration-300 cursor-pointer h-full"
+                >
+                  <div className="flex items-center mb-3">
+                    <img
+                      src={testimonials[(currentSlide + 1) % testimonials.length].avatar}
+                      alt={testimonials[(currentSlide + 1) % testimonials.length].name}
+                      className="w-10 h-10 rounded-full border border-[#AF8E41] object-cover"
+                    />
+                    <div className="ml-2">
+                      <h3 className="text-sm font-medium text-[#C6A052]">
+                        {testimonials[(currentSlide + 1) % testimonials.length].name}
+                      </h3>
+                      <div className="flex">
+                        {Array.from({ length: testimonials[(currentSlide + 1) % testimonials.length].rating }).map((_, i) => (
+                          <Star key={i} size={12} className="text-yellow-500 fill-yellow-500" />
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                  <p className="text-gray-300 text-sm line-clamp-3">
+                    {testimonials[(currentSlide + 1) % testimonials.length].comment}
+                  </p>
+                </motion.div>
+              )}
+            </div>
+            
+            <div className="col-span-1">
+              {testimonials[(currentSlide + 2) % testimonials.length] && (
+                <motion.div 
+                  initial={{ opacity: 0.7 }}
+                  whileHover={{ opacity: 1, scale: 1.02 }}
+                  onClick={() => {
+                    setDirection(1);
+                    setCurrentSlide((currentSlide + 2) % testimonials.length);
+                    resetAutoplay();
+                  }}
+                  className="bg-white/5 backdrop-blur-sm p-4 rounded-lg shadow-md border border-gray-700/30 hover:border-[#AF8E41]/30 transition-all duration-300 cursor-pointer h-full"
+                >
+                  <div className="flex items-center mb-3">
+                    <img
+                      src={testimonials[(currentSlide + 2) % testimonials.length].avatar}
+                      alt={testimonials[(currentSlide + 2) % testimonials.length].name}
+                      className="w-10 h-10 rounded-full border border-[#AF8E41] object-cover"
+                    />
+                    <div className="ml-2">
+                      <h3 className="text-sm font-medium text-[#C6A052]">
+                        {testimonials[(currentSlide + 2) % testimonials.length].name}
+                      </h3>
+                      <div className="flex">
+                        {Array.from({ length: testimonials[(currentSlide + 2) % testimonials.length].rating }).map((_, i) => (
+                          <Star key={i} size={12} className="text-yellow-500 fill-yellow-500" />
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                  <p className="text-gray-300 text-sm line-clamp-3">
+                    {testimonials[(currentSlide + 2) % testimonials.length].comment}
+                  </p>
+                </motion.div>
+              )}
+            </div>
+          </div>
         </div>
 
         {/* Mobile View - Carrossel */}
