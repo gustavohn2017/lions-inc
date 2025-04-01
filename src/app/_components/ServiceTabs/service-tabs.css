@@ -136,7 +136,17 @@
   background-color: rgba(175, 142, 65, 0.1);
 }
 
-/* Animation for content appearance */
+/* Tablet-specific styles */
+.tablet-service-tabs .service-tab-dropdown {
+  position: relative;
+  z-index: 10;
+}
+
+.tablet-service-tabs button:focus {
+  outline: 2px solid rgba(175, 142, 65, 0.5);
+  outline-offset: 2px;
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -184,5 +194,41 @@
   
   .service-content {
     padding: 20px;
+  }
+  
+  .tablet-service-tabs .service-icon-container {
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.5rem;
+    background-color: rgba(175, 142, 65, 0.1);
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+  }
+  
+  .tablet-service-tabs .service-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    color: #AF8E41;
+  }
+  
+  .tablet-service-tabs .benefit-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 0.75rem;
+  }
+  
+  .tablet-service-tabs .benefit-icon {
+    color: #AF8E41;
+    margin-right: 0.5rem;
+    flex-shrink: 0;
+  }
+  
+  .tablet-service-tabs .benefit-text {
+    color: #d1d5db;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
   }
 }

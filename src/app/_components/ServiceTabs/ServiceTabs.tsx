@@ -21,6 +21,7 @@ const ServiceTabs: React.FC = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [isTablet, setIsTablet] = useState(false);
   const [showMobileDetails, setShowMobileDetails] = useState(false);
+  const [showTabletMenu, setShowTabletMenu] = useState(false);
   
   // Check screen size on mount and resize
   useEffect(() => {
@@ -122,6 +123,25 @@ const ServiceTabs: React.FC = () => {
     collapsed: { height: "auto", overflow: "hidden" },
     expanded: { height: "auto", overflow: "visible" }
   };
+
+  const tabletMenuVariants = {
+    closed: { 
+      opacity: 0,
+      height: 0,
+      transition: { 
+        duration: 0.3,
+        ease: "easeInOut" 
+      }
+    },
+    open: { 
+      opacity: 1,
+      height: "auto",
+      transition: { 
+        duration: 0.3,
+        ease: "easeInOut"
+      }
+    }
+  };
   
   const handleContactClick = () => {
     const contactSection = document.getElementById('contato');
@@ -144,6 +164,11 @@ const ServiceTabs: React.FC = () => {
   const toggleMobileDetails = () => {
     setShowMobileDetails(!showMobileDetails);
   };
+
+  // Tablet menu toggle
+  const toggleTabletMenu = () => {
+    setShowTabletMenu(!showTabletMenu);
+  };
   
   return (
     <section id="produtos" className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-[#1E1F23] to-[#242729]">
@@ -164,15 +189,15 @@ const ServiceTabs: React.FC = () => {
           </p>
         </motion.div>
 
-        {/* Desktop and Tablet View */}
-        {!isMobile && (
+        {/* Desktop View */}
+        {!isMobile && !isTablet && (
           <Tabs 
             defaultValue="consortium" 
             value={activeTab}
             onValueChange={setActiveTab} 
-            className="w-full service-tabs hidden sm:block"
+            className="w-full service-tabs hidden lg:block"
           >
-            <TabsList className="grid w-full grid-cols-2 lg:grid-cols-4 p-1 bg-[#2A2D31] rounded-lg mb-6 md:mb-8">
+            <TabsList className="grid w-full grid-cols-4 p-1 bg-[#2A2D31] rounded-lg mb-6 md:mb-8">
               {services.map((service) => (
                 <TabsTrigger 
                   key={service.id} 
@@ -180,7 +205,7 @@ const ServiceTabs: React.FC = () => {
                   className="service-tab flex items-center gap-2 py-3"
                 >
                   {service.icon}
-                  <span className={`${isTablet ? 'text-xs' : 'text-sm'}`}>{service.name}</span>
+                  <span className="text-sm">{service.name}</span>
                 </TabsTrigger>
               ))}
             </TabsList>
@@ -259,6 +284,126 @@ const ServiceTabs: React.FC = () => {
               ))}
             </AnimatePresence>
           </Tabs>
+        )}
+
+        {/* Tablet View - New Design */}
+        {isTablet && (
+          <div className="w-full tablet-service-tabs">
+            {/* Tablet dropdown selector */}
+            <div className="mb-6">
+              <button 
+                onClick={toggleTabletMenu}
+                className="w-full flex items-center justify-between p-4 bg-[#2A2D31] border border-[#AF8E41]/20 rounded-lg text-white font-medium transition-all"
+              >
+                <div className="flex items-center gap-3">
+                  {activeService?.icon}
+                  <span className="text-base">{activeService?.name}</span>
+                </div>
+                <ChevronDown 
+                  className={`h-5 w-5 text-[#AF8E41] transition-transform duration-300 ${
+                    showTabletMenu ? 'rotate-180' : ''
+                  }`} 
+                />
+              </button>
+              
+              <AnimatePresence>
+                {showTabletMenu && (
+                  <motion.div
+                    variants={tabletMenuVariants}
+                    initial="closed"
+                    animate="open"
+                    exit="closed"
+                    className="bg-[#2A2D31] border-x border-b border-[#AF8E41]/20 rounded-b-lg overflow-hidden shadow-lg"
+                  >
+                    {services.map((service) => (
+                      service.id !== activeTab && (
+                        <button
+                          key={service.id}
+                          onClick={() => {
+                            setActiveTab(service.id);
+                            setShowTabletMenu(false);
+                          }}
+                          className="flex items-center gap-3 w-full p-4 text-left text-gray-300 hover:bg-[#343941] hover:text-white transition-colors border-t border-[#343941]/30"
+                        >
+                          {service.icon}
+                          <span className="text-base">{service.name}</span>
+                        </button>
+                      )
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+            
+            {/* Tablet content display */}
+            <AnimatePresence mode="wait">
+              {activeService && (
+                <motion.div
+                  key={activeService.id}
+                  variants={containerVariants}
+                  initial="hidden"
+                  animate="visible"
+                  exit="exit"
+                  className="bg-[#2A2D31] border border-[#AF8E41]/20 rounded-lg p-6 shadow-lg"
+                >
+                  <div className="flex flex-col gap-6">
+                    <div className="flex items-start justify-between">
+                      <div className="flex-1">
+                        <h3 className="font-capricho text-xl text-[#AF8E41] mb-3">{activeService.title}</h3>
+                        <p className="text-gray-300 text-sm mb-4">{activeService.description}</p>
+                      </div>
+                      
+                      <div className="w-1/3 ml-5 hidden sm:block">
+                        <div className="rounded-lg overflow-hidden border border-[#AF8E41]/20 shadow-md">
+                          <img 
+                            src={activeService.imageSrc} 
+                            alt={activeService.title}
+                            className="w-full h-auto object-cover"
+                            loading="lazy"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div className="sm:hidden w-full">
+                      <div className="rounded-lg overflow-hidden border border-[#AF8E41]/20 shadow-md">
+                        <img 
+                          src={activeService.imageSrc} 
+                          alt={activeService.title}
+                          className="w-full h-auto object-cover"
+                          loading="lazy"
+                        />
+                      </div>
+                    </div>
+                    
+                    <div className="border-t border-[#AF8E41]/20 pt-4">
+                      <h4 className="font-semibold text-white text-sm mb-3">Principais benefícios:</h4>
+                      <ul className="grid sm:grid-cols-2 gap-2 sm:gap-3 mb-5">
+                        {activeService.benefits.map((benefit, index) => (
+                          <motion.li 
+                            key={index}
+                            variants={itemVariants}
+                            className="flex items-start"
+                          >
+                            <Check className="text-[#AF8E41] mt-0.5 mr-2 h-4 w-4 flex-shrink-0" />
+                            <span className="text-gray-300 text-sm">{benefit}</span>
+                          </motion.li>
+                        ))}
+                      </ul>
+                      
+                      <button
+                        onClick={handleContactClick}
+                        className="inline-flex items-center justify-center px-4 py-2 bg-gradient-to-r from-[#AF8E41] to-[#C6A052] text-white rounded-md transition-all duration-300 text-sm font-medium"
+                      >
+                        Saiba mais sobre {activeService.name}
+                        <ArrowRight className="h-4 w-4 ml-2" />
+                      </button>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
         )}
 
         {/* Mobile View */}
