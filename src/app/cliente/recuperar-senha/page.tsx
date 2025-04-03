@@ -4,8 +4,8 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, AlertCircle, ArrowLeft, Check } from 'lucide-react';
 import Link from 'next/link';
-import '../../../_components/LoginForm/login-form.css';
-import './recuperar-senha.css';
+import '@_components/LoginForm/login-form.css';
+import '@recuperar-senha.css';
 
 export default function RecuperarSenhaPage() {
   const [email, setEmail] = useState('');
