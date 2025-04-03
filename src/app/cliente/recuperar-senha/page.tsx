@@ -4,8 +4,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, AlertCircle, ArrowLeft, Check } from 'lucide-react';
 import Link from 'next/link';
-import '@/components/LoginForm/login-form.css';
-import '@/components/recuperar-senha.css';
+import './recuperar-senha.css';
 
 export default function RecuperarSenhaPage() {
   const [email, setEmail] = useState('');
@@ -60,7 +59,7 @@ export default function RecuperarSenhaPage() {
         transition={{ duration: 0.5 }}
         className="login-form-card password-reset-card"
       >
-        <Link href="/cliente/login" className="back-link">
+        <Link href="/cliente/login" className="back-to-home">
           <ArrowLeft size={16} />
           <span>Voltar para o login</span>
         </Link>
